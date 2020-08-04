@@ -1,0 +1,44 @@
+{
+  "name": "daogarden-js",
+  "version": "1.0.0",
+  "description": "DAOGarden Javascript wrapper.",
+  "main": "lib/daogarden.js",
+  "types": "lib/daogarden.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run buildNpm && node build.js",
+    "buildNpm": "tsc",
+    "watch": "node watch.js",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest --config jestconfig.json --detectOpenHandles",
+    "docs": "typedoc --excludePrivate --out ./docs ./src",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && npm run docs && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "^26.0.5",
+    "esbuild": "^0.6.5",
+    "jest": "^26.1.0",
+    "node-watch": "^0.6.4",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.3",
+    "ts-node": "^8.10.2",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typedoc": "^0.17.8",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "arweave": "^1.8.0",
+    "promises-tho": "^1.1.0",
+    "smartweave": "https://arweave.net/AM-u4X2po-3Tx7fma3lRonCfLwrjI42IALwDL_YFXBs"
+  }
+}
