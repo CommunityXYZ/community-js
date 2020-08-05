@@ -2,7 +2,7 @@ import Arweave from 'arweave/web';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface } from './faces';
 export default class DAOGarden {
-    private readonly srcTxId;
+    private readonly contractSrc;
     private readonly mainContract;
     private readonly txFee;
     private readonly createFee;
@@ -13,6 +13,7 @@ export default class DAOGarden {
     private state;
     private lastStateCall;
     private cacheRefreshInterval;
+    private stateCallInProgress;
     /**
      * Before interacting with DAOGarden you need to have at least Arweave initialized.
      * @param arweave - Arweave instance
@@ -108,7 +109,22 @@ export default class DAOGarden {
      * @param lockLength - Length of the lock, in blocks
      */
     increaseVault(vaultId: number, lockLength: number): Promise<string>;
+    /**
+     * Create a new vote
+     * @param params VoteInterface without the "function"
+     */
     proposeVote(params: VoteInterface): Promise<string>;
+    /**
+     * Cast a vote on an existing, and active, vote proposal.
+     * @param id - The vote ID, this is the index of the vote in votes
+     * @param cast - Cast your vote with 'yay' (for yes) or 'nay' (for no)
+     */
+    vote(id: number, cast: 'yay' | 'nay'): Promise<string>;
+    /**
+     * Finalize a vote, to run the desired vote details if approved, or reject it and close.
+     * @param id - The vote ID, this is the index of the vote in votes
+     */
+    finalize(id: number): Promise<string>;
     /**
      * Charge a fee for each DAOGarden's interactions.
      * @param action - Current action name. Usually the same as the method name.

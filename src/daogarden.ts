@@ -6,8 +6,8 @@ import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateI
 import Utils from './utils';
 
 export default class DAOGarden {
-  private readonly srcTxId: string = '3JnnzXKiWctcu4_5OJoUZ21fn21MTqbESwX6cixhpb4';
-  private readonly mainContract: string = 'BAfcKVhykkup_onxxgzj3T0fMhp33bY82OK23Rruy-Q';
+  private readonly contractSrc: string = 'CR8a4s4VuhCV__tDAzzjc5d_UgL-dlgtVdWXp7L5Aic';
+  private readonly mainContract: string = 'dlKReXkvj7Af-mc_0DiY_2OQIVot_mUcc6YAzH9vo3s';
   private readonly txFee: number = 400000000;
   private readonly createFee: number = 9500000000;
 
@@ -20,6 +20,7 @@ export default class DAOGarden {
   private state!: StateInterface;
   private lastStateCall: number = 0;
   private cacheRefreshInterval: number = 1000 * 60 * 2; // 2 minutes
+  private stateCallInProgress: boolean = false;
 
   /**
    * Before interacting with DAOGarden you need to have at least Arweave initialized.
@@ -45,10 +46,19 @@ export default class DAOGarden {
    * @param cached - Wether to return the cached version or reload
    */
   public async getState(cached = true): Promise<StateInterface> {
+    // Only call the state from server once even if multiple calls at once.
+    if(this.stateCallInProgress) {
+      console.log('Waiting on state...');
+      return new Promise(resolve => setTimeout(() => resolve(this.getState(cached)), 1000));
+    }
+
     if(!cached || ((new Date()).getTime() - this.lastStateCall) > this.cacheRefreshInterval) {
+      this.stateCallInProgress = true;
       // @ts-ignore
       this.state = await readContract(this.arweave, this.daoContract);
       this.lastStateCall = (new Date()).getTime();
+      
+      this.stateCallInProgress = false;
     }
 
     return this.state;
@@ -164,7 +174,7 @@ export default class DAOGarden {
     // Create the new DAO.
     await this.chargeFee('CreateDAO', this.createFee);
     // @ts-ignore
-    const daoID = await createContractFromTx(this.arweave, this.wallet, this.srcTxId, JSON.stringify(this.state));
+    const daoID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(this.state));
     this.daoContract = daoID;
 
     return daoID;
@@ -279,11 +289,57 @@ export default class DAOGarden {
     return this.interact({function: 'increaseVault', id: vaultId, lockLength });
   }
 
-  public async proposeVote(params: VoteInterface) {
-    await this.chargeFee('proposeVote');
+  /**
+   * Create a new vote
+   * @param params VoteInterface without the "function"
+   */
+  public async proposeVote(params: VoteInterface): Promise<string> {
+    const pCopy: VoteInterface = JSON.parse(JSON.stringify(params));
 
-    const input: InputInterface = {function: 'propose', ...params};
+    if(pCopy.type === 'set') {
+      if(pCopy.key === 'quorum' || pCopy.key === 'support' || pCopy.key === 'lockMinLength' || pCopy.key === 'lockMaxLength') {
+        pCopy.value = +pCopy.value;
+      }
+
+      if(pCopy.key === 'quorum' || pCopy.key === 'support') {
+        if(pCopy.value > 0 && pCopy.value < 100) {
+          pCopy.value = pCopy.value / 100;
+        } else if(pCopy.value <= 0 || pCopy.value >= 100) {
+          throw new Error('Invalid value.');
+        }
+      }
+
+      if(pCopy.key === 'lockMinLength' && (pCopy.value < 1 || pCopy.value > this.state.lockMaxLength)) {
+        throw new Error('Invalid minimum lock length.');
+      }
+      if(pCopy.key === 'lockMaxLength' && (pCopy.value < 1 || pCopy.value < this.state.lockMinLength)) {
+        throw new Error('Invalid maximum lock length.');
+      }
+    }
+
+    await this.chargeFee('proposeVote');
+    const input: InputInterface = {...pCopy, function: 'propose'};
+
     return this.interact(input);
+  }
+
+  /**
+   * Cast a vote on an existing, and active, vote proposal.
+   * @param id - The vote ID, this is the index of the vote in votes
+   * @param cast - Cast your vote with 'yay' (for yes) or 'nay' (for no)
+   */
+  public async vote(id: number, cast: 'yay' | 'nay'): Promise<string> {
+    await this.chargeFee('vote');
+    return this.interact({function: 'vote', id, cast});
+  }
+
+  /**
+   * Finalize a vote, to run the desired vote details if approved, or reject it and close.
+   * @param id - The vote ID, this is the index of the vote in votes
+   */
+  public async finalize(id: number) {
+    await this.chargeFee('finalize');
+    return this.interact({function: 'finalize', id});
   }
 
   /**
