@@ -1,4 +1,4 @@
-import Arweave from 'arweave/web';
+import Arweave from 'arweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface } from './faces';
 export default class DAOGarden {

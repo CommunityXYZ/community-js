@@ -1,4 +1,4 @@
-import Arweave from 'arweave/web';
+import Arweave from 'arweave';
 import { interactWrite, createContractFromTx, selectWeightedPstHolder, readContract, interactWriteDryRun, interactRead } from 'smartweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import Transaction from 'arweave/web/lib/transaction';
@@ -54,7 +54,7 @@ export default class DAOGarden {
 
     if(!cached || ((new Date()).getTime() - this.lastStateCall) > this.cacheRefreshInterval) {
       this.stateCallInProgress = true;
-      // @ts-ignore
+      
       this.state = await readContract(this.arweave, this.daoContract);
       this.lastStateCall = (new Date()).getTime();
       
@@ -173,6 +173,7 @@ export default class DAOGarden {
   public async create(): Promise<string> {
     // Create the new DAO.
     await this.chargeFee('CreateDAO', this.createFee);
+    
     // @ts-ignore
     const daoID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(this.state));
     this.daoContract = daoID;
