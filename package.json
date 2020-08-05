@@ -1,10 +1,14 @@
 {
-  "name": "daogarden-js",
+  "name": "community-js",
   "version": "1.0.0",
-  "description": "DAOGarden Javascript wrapper.",
-  "main": "lib/daogarden.js",
-  "types": "lib/daogarden.d.ts",
+  "description": "Community Javascript wrapper.",
+  "main": "lib/community.js",
+  "types": "lib/community.d.ts",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/CommunityXYZ/community-js.git"
+  },
   "scripts": {
     "build": "npm run buildNpm && node build.js",
     "buildNpm": "tsc",

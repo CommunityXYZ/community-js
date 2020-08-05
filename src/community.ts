@@ -5,7 +5,7 @@ import Transaction from 'arweave/web/lib/transaction';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, GetFunctionType, ResultInterface, VoteType } from './faces';
 import Utils from './utils';
 
-export default class DAOGarden {
+export default class Community {
   private readonly contractSrc: string = 'CR8a4s4VuhCV__tDAzzjc5d_UgL-dlgtVdWXp7L5Aic';
   private readonly mainContract: string = 'dlKReXkvj7Af-mc_0DiY_2OQIVot_mUcc6YAzH9vo3s';
   private readonly txFee: number = 400000000;
@@ -15,15 +15,15 @@ export default class DAOGarden {
   private wallet!: JWKInterface;
   private walletAddress!: string;
 
-  // DAO specific variables
-  private daoContract = '';
+  // Community specific variables
+  private communityContract = '';
   private state!: StateInterface;
   private lastStateCall: number = 0;
   private cacheRefreshInterval: number = 1000 * 60 * 2; // 2 minutes
   private stateCallInProgress: boolean = false;
 
   /**
-   * Before interacting with DAOGarden you need to have at least Arweave initialized.
+   * Before interacting with Community you need to have at least Arweave initialized.
    * @param arweave - Arweave instance
    * @param wallet - JWK wallet file data
    * @param cacheRefreshInterval - Refresh interval in milliseconds for the cached state
@@ -42,7 +42,7 @@ export default class DAOGarden {
   }
 
   /**
-   * Get the current DAO state.
+   * Get the current Community state.
    * @param cached - Wether to return the cached version or reload
    */
   public async getState(cached = true): Promise<StateInterface> {
@@ -55,7 +55,8 @@ export default class DAOGarden {
     if(!cached || ((new Date()).getTime() - this.lastStateCall) > this.cacheRefreshInterval) {
       this.stateCallInProgress = true;
       
-      this.state = await readContract(this.arweave, this.daoContract);
+      // @ts-ignore
+      this.state = await readContract(this.arweave, this.communityContract);
       this.lastStateCall = (new Date()).getTime();
       
       this.stateCallInProgress = false;
@@ -77,8 +78,8 @@ export default class DAOGarden {
   }
 
   /**
-   * Set the states for a new DAO using the DAOGarden contract.
-   * @param name - The DAO name
+   * Set the states for a new Community using the Community contract.
+   * @param name - The Community name
    * @param ticker - Currency ticker, ex: TICK
    * @param balances - an object of wallet addresses and their token balances
    * @param quorum - % of votes weight, for a proposal to be valid
@@ -109,7 +110,7 @@ export default class DAOGarden {
 
     // Validations
     if(name.length < 3) {
-      throw new Error('DAO Name must be at least 3 characters.');
+      throw new Error('Community Name must be at least 3 characters.');
     }
     if(ticker.length < 3) {
       throw new Error('Ticker must be at least 3 characters.');
@@ -168,17 +169,17 @@ export default class DAOGarden {
   }
 
   /**
-   * Create a new DAO with the current, previously saved using `setState`, state.
+   * Create a new Community with the current, previously saved using `setState`, state.
    */
   public async create(): Promise<string> {
-    // Create the new DAO.
-    await this.chargeFee('CreateDAO', this.createFee);
+    // Create the new Community.
+    await this.chargeFee('CreateCommunity', this.createFee);
     
     // @ts-ignore
-    const daoID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(this.state));
-    this.daoContract = daoID;
+    const communityID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(this.state));
+    this.communityContract = communityID;
 
-    return daoID;
+    return communityID;
   }
 
   /**
@@ -206,11 +207,11 @@ export default class DAOGarden {
   }
 
   /**
-   * Set the DAO interactions to this transaction ID.
-   * @param txId DAO's Transaction ID
+   * Set the Community interactions to this transaction ID.
+   * @param txId Community's Transaction ID
    */
-  public async setDAOTx(txId: string): Promise<void> {
-    this.daoContract = txId;
+  public async setCommunityTx(txId: string): Promise<void> {
+    this.communityContract = txId;
   }
 
   /**
@@ -220,7 +221,7 @@ export default class DAOGarden {
    */
   public async get(params: InputInterface = {function: 'balance'}): Promise<ResultInterface> {
     // @ts-ignore
-    return interactRead(this.arweave, this.wallet, this.daoContract, params);
+    return interactRead(this.arweave, this.wallet, this.communityContract, params);
   }
 
   /**
@@ -344,7 +345,7 @@ export default class DAOGarden {
   }
 
   /**
-   * Charge a fee for each DAOGarden's interactions.
+   * Charge a fee for each Community's interactions.
    * @param action - Current action name. Usually the same as the method name.
    * @param fee - Fee to charge
    */
@@ -391,26 +392,26 @@ export default class DAOGarden {
   }
 
   private async setDefaultTags(tx: Transaction): Promise<void> {
-    tx.addTag('App-Name', 'DAOGarden');
+    tx.addTag('App-Name', 'Community');
     tx.addTag('App-Version', '0.0.1');
-    tx.addTag('Dao-Contract', this.daoContract);
-    tx.addTag('Dao-Ticker', this.state.ticker);
+    tx.addTag('Community-Contract', this.communityContract);
+    tx.addTag('Community-Ticker', this.state.ticker);
   }
 
   private async checkWallet(): Promise<void> {
     if (!this.wallet) {
-      throw new Error('You first need to set the user wallet, you can do this while on new DAOGarden(..., wallet) or using setWallet(wallet).');
+      throw new Error('You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).');
     }
   }
 
   private async interact(input: InputInterface): Promise<string> {
     // @ts-ignore
-    const res = await interactWriteDryRun(this.arweave, this.wallet, this.daoContract, input);
+    const res = await interactWriteDryRun(this.arweave, this.wallet, this.communityContract, input);
     if(res.type === 'error') { //  || res.type === 'exception'
       throw new Error(res.result);
     }
 
     // @ts-ignore
-    return interactWrite(this.arweave, this.wallet, this.daoContract, input);
+    return interactWrite(this.arweave, this.wallet, this.communityContract, input);
   }
 }

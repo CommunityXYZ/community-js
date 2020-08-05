@@ -13,10 +13,10 @@ const runBuild = async (doClean = false) => {
  
   // Build to browser js
   build({
-    entryPoints: ['./src/daogarden.ts'],
+    entryPoints: ['./src/community.ts'],
     minify: false,
     bundle: true,
-    outfile: './dist/daogarden.js'
+    outfile: './dist/community.js'
   }).catch((e) => {
     console.log(e);
     process.exit(1)
@@ -24,10 +24,10 @@ const runBuild = async (doClean = false) => {
 
   // Minified version
   build({
-    entryPoints: ['./src/daogarden.ts'],
+    entryPoints: ['./src/community.ts'],
     minify: true,
     bundle: true,
-    outfile: './dist/daogarden.min.js'
+    outfile: './dist/community.min.js'
   }).catch((e) => {
     console.log(e);
     process.exit(1)
