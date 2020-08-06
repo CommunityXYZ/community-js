@@ -6,8 +6,8 @@
   "types": "lib/community.d.ts",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/CommunityXYZ/community-js.git"
+    "type": "git",
+    "url": "https://github.com/CommunityXYZ/community-js.git"
   },
   "scripts": {
     "build": "npm run buildNpm && node build.js",
@@ -16,7 +16,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "test": "jest --config jestconfig.json --detectOpenHandles",
-    "docs": "typedoc --excludePrivate --out ./docs ./src",
+    "docs": "rimraf ./docs && typedoc --plugin typedoc-plugin-markdown --excludePrivate --out ./docs ./src",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
@@ -38,6 +38,7 @@
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typedoc": "^0.17.8",
+    "typedoc-plugin-markdown": "^2.4.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {
