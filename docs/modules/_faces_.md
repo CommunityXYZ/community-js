@@ -29,7 +29,7 @@
 
 Ƭ **GetFunctionType**: *"balance" | "unlockedBalance" | "vaultBalance" | "role"*
 
-*Defined in [faces.ts:69](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L69)*
+*Defined in [faces.ts:65](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L65)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 Ƭ **SetFunctionType**: *"transfer" | "vote" | "propose" | "finalize" | "lock" | "increaseVault" | "unlock"*
 
-*Defined in [faces.ts:70](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L70)*
+*Defined in [faces.ts:66](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L66)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 Ƭ **VoteStatus**: *"active" | "quorumFailed" | "passed" | "failed"*
 
-*Defined in [faces.ts:67](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L67)*
+*Defined in [faces.ts:63](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L63)*
 
 ___
 
@@ -53,4 +53,4 @@ ___
 
 Ƭ **VoteType**: *"mint" | "mintLocked" | "burnVault" | "indicative" | "set"*
 
-*Defined in [faces.ts:68](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L68)*
+*Defined in [faces.ts:64](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L64)*

@@ -20,7 +20,7 @@
 
 • **balance**: *number*
 
-*Defined in [faces.ts:28](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L28)*
+*Defined in [faces.ts:24](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L24)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **end**: *number*
 
-*Defined in [faces.ts:30](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L30)*
+*Defined in [faces.ts:26](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L26)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **start**: *number*
 
-*Defined in [faces.ts:29](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L29)*
+*Defined in [faces.ts:25](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L25)*

@@ -20,7 +20,7 @@
 
 • **balance**: *number*
 
-*Defined in [faces.ts:63](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L63)*
+*Defined in [faces.ts:59](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L59)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **role**: *string*
 
-*Defined in [faces.ts:64](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L64)*
+*Defined in [faces.ts:60](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L60)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **target**: *string*
 
-*Defined in [faces.ts:62](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L62)*
+*Defined in [faces.ts:58](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L58)*

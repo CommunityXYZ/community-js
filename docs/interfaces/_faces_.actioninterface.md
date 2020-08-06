@@ -19,7 +19,7 @@
 
 • **caller**: *string*
 
-*Defined in [faces.ts:35](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L35)*
+*Defined in [faces.ts:31](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L31)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **input**: *[InputInterface](_faces_.inputinterface.md)*
 
-*Defined in [faces.ts:34](https://github.com/CommunityXYZ/community-js/blob/e1a78cd/src/faces.ts#L34)*
+*Defined in [faces.ts:30](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/faces.ts#L30)*
