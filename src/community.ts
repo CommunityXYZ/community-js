@@ -6,8 +6,8 @@ import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateI
 import Utils from './utils';
 
 export default class Community {
-  private readonly contractSrc: string = 'CR8a4s4VuhCV__tDAzzjc5d_UgL-dlgtVdWXp7L5Aic';
-  private readonly mainContract: string = 'dlKReXkvj7Af-mc_0DiY_2OQIVot_mUcc6YAzH9vo3s';
+  private readonly contractSrc: string = '3mWXKTbV0bANr9mcYv4Iicy2clsHBfpgXWqQpnqrVYM';
+  private readonly mainContract: string = 'n_X3YTN7Wqxz5shER97Q6coFXGLdjFV1OVqhF_lIW78';
   private readonly txFee: number = 400000000;
   private readonly createFee: number = 9500000000;
 
@@ -18,7 +18,7 @@ export default class Community {
   // Community specific variables
   private communityContract = '';
   private state!: StateInterface;
-  private lastStateCall: number = 0;
+  private firstCall: boolean = true;
   private cacheRefreshInterval: number = 1000 * 60 * 2; // 2 minutes
   private stateCallInProgress: boolean = false;
 
@@ -51,36 +51,13 @@ export default class Community {
       throw new Error("No community set. Use setCommunityTx to get your current state.");
     }
 
-    // Only call the state from server once even if multiple calls at once.
-    if(this.stateCallInProgress) {
-      if(this.state) {
-        return this.state;
-      } else {
-        return new Promise(resolve => setTimeout(() => resolve(this.getState(cached)), 1000));
-      }
+    if(this.firstCall) {
+      this.firstCall = false;
+      return this.update(true);
     }
 
-    if(!cached || ((new Date()).getTime() - this.lastStateCall) > this.cacheRefreshInterval) {
-      this.stateCallInProgress = true;
-
-      // first call
-      if(!this.state) {
-        // @ts-ignore
-        this.state = await readContract(this.arweave, this.communityContract);
-        this.lastStateCall = (new Date()).getTime();
-        this.stateCallInProgress = false;
-      }
-      
-      // @ts-ignore
-      readContract(this.arweave, this.communityContract).then(state => {
-        this.state = state;
-        this.lastStateCall = (new Date()).getTime();
-        
-        this.stateCallInProgress = false;
-      }).catch((e) => {
-        console.log(e);
-        this.stateCallInProgress = false;
-      });
+    if(!cached || !this.state) {
+      return this.update(false);
     }
 
     return this.state;
@@ -462,6 +439,35 @@ export default class Community {
     if (!this.wallet) {
       throw new Error('You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).');
     }
+  }
+
+  private async update(recall = false): Promise<StateInterface> {
+    if(!this.communityContract.length) {
+      setTimeout(() => this.update(), this.cacheRefreshInterval);
+      return;
+    }
+
+    if(this.stateCallInProgress) {
+      const getLastState = async (): Promise<StateInterface> => {
+        if(this.stateCallInProgress) {
+          return new Promise(resolve => setTimeout(() => resolve(getLastState()), 1000));
+        }
+
+        return this.state;
+      };
+      return getLastState();
+    }
+
+    this.stateCallInProgress = true;
+
+    // @ts-ignore
+    this.state = await readContract(this.arweave, this.communityContract);
+    this.stateCallInProgress = false;
+    
+    if(recall) {
+      setTimeout(() => this.update(true), this.cacheRefreshInterval);
+    }
+    return this.state;
   }
 
   /**
