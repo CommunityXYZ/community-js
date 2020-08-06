@@ -24,6 +24,7 @@ export default class Community {
     /**
      * Get the current Community state.
      * @param cached - Wether to return the cached version or reload
+     * @returns - The current state and sync afterwards if needed.
      */
     getState(cached?: boolean): Promise<StateInterface>;
     /**
@@ -45,20 +46,30 @@ export default class Community {
      * @param vault - Vault object, optional
      * @param votes - Votes, optional
      * @param roles - Roles, optional
+     *
+     * @returns - The created state
      */
     setState(name: string, ticker: string, balances: BalancesInterface, quorum?: number, support?: number, voteLength?: number, lockMinLength?: number, lockMaxLength?: number, vault?: VaultInterface, votes?: VoteInterface[], roles?: RoleInterface): Promise<StateInterface>;
     /**
-     * Create a new Community with the current, previously saved using `setState`, state.
+     * Create a new Community with the current, previously saved (with `setState`) state.
+     * @returns The created community transaction ID.
      */
     create(): Promise<string>;
     /**
-     * Returns the current create cost as a winston string.
+     * Get the current create cost of a community.
+     * @param inAr - Return in winston or AR
+     * @param options - If return inAr is set to true, these options are used to format the returned AR value.
      */
     getCreateCost(inAr?: boolean, options?: {
         formatted: boolean;
         decimals: number;
         trim: boolean;
     }): Promise<string>;
+    /**
+     * Get the current action (post interaction) cost of a community.
+     * @param inAr - Return in winston or AR
+     * @param options - If return inAr is set to true, these options are used to format the returned AR value.
+     */
     getActionCost(inAr?: boolean, options?: {
         formatted: boolean;
         decimals: number;
@@ -76,13 +87,28 @@ export default class Community {
      */
     get(params?: InputInterface): Promise<ResultInterface>;
     /**
-     * Get the target or current wallet balance
-     * @param target
-     * @returns - Current target token balance
+     * Get the target or current wallet token balance
+     * @param target The target wallet address
+     * @returns Current target token balance
      */
     getBalance(target?: string): Promise<number>;
+    /**
+     * Get the target or current wallet unlocked token balance
+     * @param target The target wallet address
+     * @returns Current target token balance
+     */
     getUnlockedBalance(target?: string): Promise<number>;
+    /**
+     * Get the target or current wallet vault balance
+     * @param target The target wallet address
+     * @returns Current target token balance
+     */
     getVaultBalance(target?: string): Promise<number>;
+    /**
+     * Get the target or current wallet role
+     * @param target The target wallet address
+     * @returns Current target role
+     */
     getRole(target?: string): Promise<string>;
     /** Setters **/
     /**
@@ -106,32 +132,48 @@ export default class Community {
     unlockVault(): Promise<string>;
     /**
      * Increase the lock time (in blocks) of a vault.
+     * @param vaultId - The vault index position to increase
      * @param lockLength - Length of the lock, in blocks
+     * @returns The transaction ID for this action
      */
     increaseVault(vaultId: number, lockLength: number): Promise<string>;
     /**
      * Create a new vote
      * @param params VoteInterface without the "function"
+     * @returns The transaction ID for this action
      */
     proposeVote(params: VoteInterface): Promise<string>;
     /**
      * Cast a vote on an existing, and active, vote proposal.
      * @param id - The vote ID, this is the index of the vote in votes
      * @param cast - Cast your vote with 'yay' (for yes) or 'nay' (for no)
+     * @returns The transaction ID for this action
      */
     vote(id: number, cast: 'yay' | 'nay'): Promise<string>;
     /**
      * Finalize a vote, to run the desired vote details if approved, or reject it and close.
      * @param id - The vote ID, this is the index of the vote in votes
+     * @returns The transaction ID for this action
      */
     finalize(id: number): Promise<string>;
     /**
      * Charge a fee for each Community's interactions.
-     * @param action - Current action name. Usually the same as the method name.
-     * @param fee - Fee to charge
+     * @param action - Current action name. Usually the same as the method name
+     * @param bytes - Bytes to get it's price to charge
      */
     private chargeFee;
+    /**
+     * Set default tags to each transaction sent from CommunityJS.
+     * @param tx - Transaction to set the defaults.
+     */
     private setDefaultTags;
+    /**
+     * Function used to check if the user is already logged in
+     */
     private checkWallet;
+    /**
+     * The most important function, it writes to the contract.
+     * @param input - InputInterface
+     */
     private interact;
 }

@@ -126,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L23">community.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L23">community.ts:23</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -178,15 +178,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L174">community.ts:174</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L198">community.ts:198</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create a new Community with the current, previously saved using <code>setState</code>, state.</p>
+									<p>Create a new Community with the current, previously saved (with <code>setState</code>) state.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The created community transaction ID.</p>
 						</li>
 					</ul>
 				</section>
@@ -200,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L342">community.ts:342</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L395">community.ts:395</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -218,6 +219,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The transaction ID for this action</p>
 						</li>
 					</ul>
 				</section>
@@ -231,7 +233,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L222">community.ts:222</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L255">community.ts:255</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -263,16 +265,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L199">community.ts:199</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L230">community.ts:230</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the current action (post interaction) cost of a community.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> inAr: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Return in winston or AR</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-symbol">{ </span>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>formatted<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>trim<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>If return inAr is set to true, these options are used to format the returned AR value.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
@@ -300,24 +313,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L232">community.ts:232</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L265">community.ts:265</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the target or current wallet balance</p>
+									<p>Get the target or current wallet token balance</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> target: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = this.walletAddress</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The target wallet address</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<ul>
-								<li>Current target token balance</li>
-							</ul>
+							<p>Current target token balance</p>
 						</li>
 					</ul>
 				</section>
@@ -331,21 +345,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L188">community.ts:188</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L214">community.ts:214</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns the current create cost as a winston string.</p>
+									<p>Get the current create cost of a community.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> inAr: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Return in winston or AR</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-symbol">{ </span>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>formatted<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>trim<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>If return inAr is set to true, these options are used to format the returned AR value.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
@@ -373,16 +393,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L247">community.ts:247</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L295">community.ts:295</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the target or current wallet role</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> target: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = this.walletAddress</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The target wallet address</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Current target role</p>
 						</li>
 					</ul>
 				</section>
@@ -396,7 +425,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L48">community.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L49">community.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -414,6 +443,9 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_faces_.stateinterface.html" class="tsd-signature-type">StateInterface</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>The current state and sync afterwards if needed.</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -427,16 +459,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L237">community.ts:237</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L275">community.ts:275</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the target or current wallet unlocked token balance</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> target: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = this.walletAddress</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The target wallet address</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Current target token balance</p>
 						</li>
 					</ul>
 				</section>
@@ -450,16 +491,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L242">community.ts:242</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L285">community.ts:285</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the target or current wallet vault balance</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> target: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = this.walletAddress</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The target wallet address</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Current target token balance</p>
 						</li>
 					</ul>
 				</section>
@@ -473,7 +523,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L289">community.ts:289</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L339">community.ts:339</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -485,6 +535,9 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>vaultId: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The vault index position to increase</p>
+									</div>
 								</li>
 								<li>
 									<h5>lockLength: <span class="tsd-signature-type">number</span></h5>
@@ -494,6 +547,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The transaction ID for this action</p>
 						</li>
 					</ul>
 				</section>
@@ -507,7 +561,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L271">community.ts:271</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L319">community.ts:319</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -545,7 +599,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L298">community.ts:298</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L349">community.ts:349</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -563,6 +617,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The transaction ID for this action</p>
 						</li>
 					</ul>
 				</section>
@@ -576,7 +631,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L213">community.ts:213</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L244">community.ts:244</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -607,7 +662,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L94">community.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L117">community.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -685,6 +740,9 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_faces_.stateinterface.html" class="tsd-signature-type">StateInterface</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>The created state</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -698,7 +756,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L73">community.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L94">community.ts:94</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -730,7 +788,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L260">community.ts:260</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L308">community.ts:308</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -765,7 +823,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L280">community.ts:280</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L328">community.ts:328</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -788,7 +846,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/6c07ea7/src/community.ts#L333">community.ts:333</a></li>
+									<li>Defined in <a href="https://github.com/CommunityXYZ/community-js/blob/df058d7/src/community.ts#L385">community.ts:385</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -812,6 +870,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The transaction ID for this action</p>
 						</li>
 					</ul>
 				</section>
