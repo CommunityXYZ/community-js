@@ -5,11 +5,7 @@ export interface StateInterface {
   vault: VaultInterface;
   votes: VoteInterface[];
   roles: RoleInterface;
-  quorum: number;
-  support: number;
-  voteLength: number;
-  lockMinLength: number;
-  lockMaxLength: number;
+  settings: Map<string, any>;
 }
 
 export interface RoleInterface {

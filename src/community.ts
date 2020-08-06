@@ -6,8 +6,8 @@ import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateI
 import Utils from './utils';
 
 export default class Community {
-  private readonly contractSrc: string = '3mWXKTbV0bANr9mcYv4Iicy2clsHBfpgXWqQpnqrVYM';
-  private readonly mainContract: string = 'n_X3YTN7Wqxz5shER97Q6coFXGLdjFV1OVqhF_lIW78';
+  private readonly contractSrc: string = 'uXzF8mHxUdePWrYEAUFj8I_BJwhZgJmVnTsKcUo52YQ';
+  private readonly mainContract: string = 'QIa535saTE2QBSKwAdV1ChxoH--t4liW49twzZAW7JM';
   private readonly txFee: number = 400000000;
   private readonly createFee: number = 9500000000;
 
@@ -150,19 +150,23 @@ export default class Community {
       }
     }
 
+    const settings: [string, any][] = [
+      ["quorum", quorum],
+      ["support", support],
+      ["voteLength", voteLength],
+      ["lockMinLength", lockMinLength],
+      ["lockMaxLength", lockMaxLength]
+    ];
+
     // Set the state
     this.state = {
       name,
       ticker,
       balances,
-      quorum,
-      support,
-      voteLength,
-      lockMinLength,
-      lockMaxLength,
       vault,
       votes,
-      roles
+      roles,
+      settings: new Map(settings)
     };
 
     return this.state;
@@ -175,9 +179,12 @@ export default class Community {
   public async create(): Promise<string> {
     // Create the new Community.
     await this.chargeFee('CreateCommunity', this.createFee);
+
+    const toSubmit: any = this.state;
+    toSubmit.settings = Array.from(this.state.settings);
     
     // @ts-ignore
-    const communityID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(this.state));
+    const communityID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(toSubmit));
     this.communityContract = communityID;
 
     return communityID;
@@ -339,10 +346,10 @@ export default class Community {
         }
       }
 
-      if(pCopy.key === 'lockMinLength' && (pCopy.value < 1 || pCopy.value > this.state.lockMaxLength)) {
+      if(pCopy.key === 'lockMinLength' && (pCopy.value < 1 || pCopy.value > this.state.settings.get('lockMaxLength'))) {
         throw new Error('Invalid minimum lock length.');
       }
-      if(pCopy.key === 'lockMaxLength' && (pCopy.value < 1 || pCopy.value < this.state.lockMinLength)) {
+      if(pCopy.key === 'lockMaxLength' && (pCopy.value < 1 || pCopy.value < this.state.settings.get('lockMinLength'))) {
         throw new Error('Invalid maximum lock length.');
       }
     }
@@ -461,7 +468,10 @@ export default class Community {
     this.stateCallInProgress = true;
 
     // @ts-ignore
-    this.state = await readContract(this.arweave, this.communityContract);
+    const res: StateInterface = await readContract(this.arweave, this.communityContract);
+    res.settings = new Map(res.settings);
+    this.state = res;
+
     this.stateCallInProgress = false;
     
     if(recall) {

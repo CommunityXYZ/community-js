@@ -11,7 +11,7 @@ export default class Community {
     private walletAddress;
     private communityContract;
     private state;
-    private lastStateCall;
+    private firstCall;
     private cacheRefreshInterval;
     private stateCallInProgress;
     /**
@@ -171,6 +171,7 @@ export default class Community {
      * Function used to check if the user is already logged in
      */
     private checkWallet;
+    private update;
     /**
      * The most important function, it writes to the contract.
      * @param input - InputInterface
