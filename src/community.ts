@@ -1,3 +1,9 @@
+/*!
+  * CommunityJS v1.0.0 (https://community.xyz/)
+  * Copyright 2020-2021 CommunityXYZ (https://github.com/CommunityXYZ)
+  * Licensed under MIT (https://github.com/CommunityXYZ/community-js/blob/master/LICENSE)
+  */
+
 import Arweave from 'arweave';
 import { interactWrite, createContractFromTx, selectWeightedPstHolder, readContract, interactWriteDryRun, interactRead } from 'smartweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
