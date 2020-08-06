@@ -392,11 +392,11 @@ export default class Community {
         const balances = state.balances;
         for(let addy in state.vault) {
           if(addy in balances) {
-            if(balances[addy]) {
+            if(balances[addy] && state.vault[addy].length) {
               balances[addy] += state.vault[addy].map(a => a.balance).reduce((a, b) => {
                 return a + b;
               });
-            } else {
+            } else if(state.vault[addy].length) {
               balances[addy] = state.vault[addy].map(a => a.balance).reduce((a, b) => {
                 return a + b;
               });
