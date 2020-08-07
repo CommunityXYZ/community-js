@@ -1,6 +1,11 @@
 {
   "name": "community-js",
   "version": "1.0.0",
+  "author": {
+    "name": "Cedrik Boudreau",
+    "email": "cedrik.git@tryninja.io",
+    "website": "https://community.xyz"
+  },
   "description": "Community Javascript wrapper.",
   "main": "lib/community.js",
   "types": "lib/community.d.ts",
