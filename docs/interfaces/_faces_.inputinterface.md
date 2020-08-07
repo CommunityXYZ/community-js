@@ -36,7 +36,7 @@
 
 • **cast**? : *string*
 
-*Defined in [faces.ts:36](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L36)*
+*Defined in [faces.ts:36](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L36)*
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • **function**: *[GetFunctionType](../modules/_faces_.md#getfunctiontype) | [SetFunctionType](../modules/_faces_.md#setfunctiontype)*
 
-*Defined in [faces.ts:35](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L35)*
+*Defined in [faces.ts:35](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L35)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[id](_faces_.inputinterface.md#optional-id)*
 
-*Defined in [faces.ts:42](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L42)*
+*Defined in [faces.ts:42](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L42)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[key](_faces_.inputinterface.md#optional-key)*
 
-*Defined in [faces.ts:47](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L47)*
+*Defined in [faces.ts:47](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L47)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[lockLength](_faces_.inputinterface.md#optional-locklength)*
 
-*Defined in [faces.ts:54](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L54)*
+*Defined in [faces.ts:54](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L54)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[nays](_faces_.inputinterface.md#optional-nays)*
 
-*Defined in [faces.ts:51](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L51)*
+*Defined in [faces.ts:51](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L51)*
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[note](_faces_.inputinterface.md#optional-note)*
 
-*Defined in [faces.ts:49](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L49)*
+*Defined in [faces.ts:49](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L49)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[qty](_faces_.inputinterface.md#optional-qty)*
 
-*Defined in [faces.ts:46](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L46)*
+*Defined in [faces.ts:46](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L46)*
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[recipient](_faces_.inputinterface.md#optional-recipient)*
 
-*Defined in [faces.ts:44](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L44)*
+*Defined in [faces.ts:44](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L44)*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[start](_faces_.inputinterface.md#optional-start)*
 
-*Defined in [faces.ts:53](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L53)*
+*Defined in [faces.ts:53](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L53)*
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[status](_faces_.inputinterface.md#optional-status)*
 
-*Defined in [faces.ts:40](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L40)*
+*Defined in [faces.ts:40](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L40)*
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[target](_faces_.inputinterface.md#optional-target)*
 
-*Defined in [faces.ts:45](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L45)*
+*Defined in [faces.ts:45](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L45)*
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[totalWeight](_faces_.inputinterface.md#optional-totalweight)*
 
-*Defined in [faces.ts:43](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L43)*
+*Defined in [faces.ts:43](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L43)*
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[type](_faces_.inputinterface.md#optional-type)*
 
-*Defined in [faces.ts:41](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L41)*
+*Defined in [faces.ts:41](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L41)*
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[value](_faces_.inputinterface.md#optional-value)*
 
-*Defined in [faces.ts:48](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L48)*
+*Defined in [faces.ts:48](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L48)*
 
 ___
 
@@ -184,7 +184,7 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[voted](_faces_.inputinterface.md#optional-voted)*
 
-*Defined in [faces.ts:52](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L52)*
+*Defined in [faces.ts:52](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L52)*
 
 ___
 
@@ -194,4 +194,4 @@ ___
 
 *Inherited from [InputInterface](_faces_.inputinterface.md).[yays](_faces_.inputinterface.md#optional-yays)*
 
-*Defined in [faces.ts:50](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L50)*
+*Defined in [faces.ts:50](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L50)*

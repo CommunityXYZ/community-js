@@ -2,7 +2,7 @@
 
 # community-js
 
-![Community](https://raw.githubusercontent.com/CommunityXYZ/website/master/src/assets/images/logo.png?token=AH4RIP2CLL3LR4NWJJ6CHCS7FXDPM)
+![Community](https://raw.githubusercontent.com/CommunityXYZ/website/master/src/assets/images/logo.png)
 # CommunityJS
 
 ## About
