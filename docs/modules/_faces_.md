@@ -1,4 +1,4 @@
-[community-js](../globals.md) › ["faces"](_faces_.md)
+[community-js](../README.md) › [Globals](../globals.md) › ["faces"](_faces_.md)
 
 # Module: "faces"
 
@@ -29,7 +29,7 @@
 
 Ƭ **GetFunctionType**: *"balance" | "unlockedBalance" | "vaultBalance" | "role"*
 
-*Defined in [faces.ts:65](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L65)*
+*Defined in [faces.ts:65](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L65)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 Ƭ **SetFunctionType**: *"transfer" | "vote" | "propose" | "finalize" | "lock" | "increaseVault" | "unlock"*
 
-*Defined in [faces.ts:66](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L66)*
+*Defined in [faces.ts:66](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L66)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 Ƭ **VoteStatus**: *"active" | "quorumFailed" | "passed" | "failed"*
 
-*Defined in [faces.ts:63](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L63)*
+*Defined in [faces.ts:63](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L63)*
 
 ___
 
@@ -53,4 +53,4 @@ ___
 
 Ƭ **VoteType**: *"mint" | "mintLocked" | "burnVault" | "indicative" | "set"*
 
-*Defined in [faces.ts:64](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L64)*
+*Defined in [faces.ts:64](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L64)*

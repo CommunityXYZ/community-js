@@ -1,4 +1,4 @@
-[community-js](../globals.md) › ["faces"](../modules/_faces_.md) › [ResultInterface](_faces_.resultinterface.md)
+[community-js](../README.md) › [Globals](../globals.md) › ["faces"](../modules/_faces_.md) › [ResultInterface](_faces_.resultinterface.md)
 
 # Interface: ResultInterface
 
@@ -20,7 +20,7 @@
 
 • **balance**: *number*
 
-*Defined in [faces.ts:59](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L59)*
+*Defined in [faces.ts:59](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L59)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **role**: *string*
 
-*Defined in [faces.ts:60](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L60)*
+*Defined in [faces.ts:60](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L60)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **target**: *string*
 
-*Defined in [faces.ts:58](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L58)*
+*Defined in [faces.ts:58](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L58)*

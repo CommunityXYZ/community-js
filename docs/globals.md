@@ -1,4 +1,4 @@
-[community-js](globals.md)
+[community-js](README.md) › [Globals](globals.md)
 
 # community-js
 

@@ -1,4 +1,4 @@
-[community-js](../globals.md) › ["faces"](../modules/_faces_.md) › [VaultParamsInterface](_faces_.vaultparamsinterface.md)
+[community-js](../README.md) › [Globals](../globals.md) › ["faces"](../modules/_faces_.md) › [VaultParamsInterface](_faces_.vaultparamsinterface.md)
 
 # Interface: VaultParamsInterface
 
@@ -20,7 +20,7 @@
 
 • **balance**: *number*
 
-*Defined in [faces.ts:24](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L24)*
+*Defined in [faces.ts:24](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L24)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **end**: *number*
 
-*Defined in [faces.ts:26](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L26)*
+*Defined in [faces.ts:26](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L26)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **start**: *number*
 
-*Defined in [faces.ts:25](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/faces.ts#L25)*
+*Defined in [faces.ts:25](https://github.com/CommunityXYZ/community-js/blob/5b18796/src/faces.ts#L25)*

@@ -1,4 +1,4 @@
-[community-js](../globals.md) › ["utils"](_utils_.md)
+[community-js](../README.md) › [Globals](../globals.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 

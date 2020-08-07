@@ -1,7 +1,3 @@
-[community-js](README.md) › [Globals](globals.md)
-
-# community-js
-
 ![Community](https://raw.githubusercontent.com/CommunityXYZ/website/master/src/assets/images/logo.png?token=AH4RIP2CLL3LR4NWJJ6CHCS7FXDPM)
 # CommunityJS
 

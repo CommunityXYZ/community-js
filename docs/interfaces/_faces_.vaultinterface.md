@@ -1,4 +1,4 @@
-[community-js](../globals.md) › ["faces"](../modules/_faces_.md) › [VaultInterface](_faces_.vaultinterface.md)
+[community-js](../README.md) › [Globals](../globals.md) › ["faces"](../modules/_faces_.md) › [VaultInterface](_faces_.vaultinterface.md)
 
 # Interface: VaultInterface
 
