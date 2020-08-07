@@ -1,9 +1,3 @@
-/*!
-  * CommunityJS v1.0.0 (https://community.xyz/)
-  * Copyright 2020-2021 CommunityXYZ (https://github.com/CommunityXYZ)
-  * Licensed under MIT (https://github.com/CommunityXYZ/community-js/blob/master/LICENSE)
-  */
-
 import Arweave from 'arweave';
 import { interactWrite, createContractFromTx, selectWeightedPstHolder, readContract, interactWriteDryRun, interactRead } from 'smartweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
@@ -12,8 +6,8 @@ import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateI
 import Utils from './utils';
 
 export default class Community {
-  private readonly contractSrc: string = 'uXzF8mHxUdePWrYEAUFj8I_BJwhZgJmVnTsKcUo52YQ';
-  private readonly mainContract: string = 'QIa535saTE2QBSKwAdV1ChxoH--t4liW49twzZAW7JM';
+  private readonly contractSrc: string = '2QYcBH4omIYNgri2jOdVmVxR9oPSOqVyhR6xbPmTidI';
+  private readonly mainContract: string = 'FcM-QQpfcD0xTTzr8u4Su9QCgcvRx_JH4JSCQoFi6Ck';
   private readonly txFee: number = 400000000;
   private readonly createFee: number = 9500000000;
 
@@ -393,6 +387,16 @@ export default class Community {
    * @param bytes - Bytes to get it's price to charge
    */
   private async chargeFee(action: string, bytes: number = this.txFee): Promise<void> {
+    // TODO: Check if the user has enough balance for this action
+    const fee = (await this.arweave.api.get(`/price/${bytes}`)).data;
+    const balance = await this.arweave.wallets.getBalance(this.walletAddress);
+
+    console.log(balance, fee);
+
+    if((+balance) < (+fee)) {
+      throw new Error('Not enough balance.');
+    }
+
     // @ts-ignore
     const target = await readContract(this.arweave, this.mainContract).then((state: StateInterface) => {
         const balances = state.balances;
@@ -412,7 +416,7 @@ export default class Community {
         return selectWeightedPstHolder(balances);
     });
 
-    const fee = (await this.arweave.api.get(`/price/${bytes}`)).data;
+    
 
     const tx = await this.arweave.createTransaction(
       {
