@@ -15,8 +15,8 @@
     "url": "https://github.com/CommunityXYZ/community-js.git"
   },
   "scripts": {
-    "build": "npm run buildNpm && node build.js",
-    "buildNpm": "tsc",
+    "build": "npm run buildnpm && node build.js",
+    "buildnpm": "tsc",
     "watch": "node watch.js",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",

@@ -40,7 +40,7 @@
 
 \+ **new Community**(`arweave`: Arweave, `wallet?`: JWKInterface, `cacheRefreshInterval`: number): *[Community](_community_.community.md)*
 
-*Defined in [community.ts:23](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L23)*
+*Defined in [community.ts:23](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L23)*
 
 Before interacting with Community you need to have at least Arweave initialized.
 
@@ -60,7 +60,7 @@ Name | Type | Default | Description |
 
 ▸ **create**(): *Promise‹string›*
 
-*Defined in [community.ts:179](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L179)*
+*Defined in [community.ts:179](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L179)*
 
 Create a new Community with the current, previously saved (with `setState`) state.
 
@@ -74,7 +74,7 @@ ___
 
 ▸ **finalize**(`id`: number): *Promise‹string›*
 
-*Defined in [community.ts:379](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L379)*
+*Defined in [community.ts:379](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L379)*
 
 Finalize a vote, to run the desired vote details if approved, or reject it and close.
 
@@ -94,7 +94,7 @@ ___
 
 ▸ **get**(`params`: [InputInterface](../interfaces/_faces_.inputinterface.md)): *Promise‹[ResultInterface](../interfaces/_faces_.resultinterface.md)›*
 
-*Defined in [community.ts:239](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L239)*
+*Defined in [community.ts:239](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L239)*
 
 Do a GET call to any function on the contract.
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **getActionCost**(`inAr`: boolean, `options?`: object): *Promise‹string›*
 
-*Defined in [community.ts:214](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L214)*
+*Defined in [community.ts:214](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L214)*
 
 Get the current action (post interaction) cost of a community.
 
@@ -142,7 +142,7 @@ ___
 
 ▸ **getBalance**(`target`: string): *Promise‹number›*
 
-*Defined in [community.ts:249](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L249)*
+*Defined in [community.ts:249](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L249)*
 
 Get the target or current wallet token balance
 
@@ -162,7 +162,7 @@ ___
 
 ▸ **getCreateCost**(`inAr`: boolean, `options?`: object): *Promise‹string›*
 
-*Defined in [community.ts:198](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L198)*
+*Defined in [community.ts:198](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L198)*
 
 Get the current create cost of a community.
 
@@ -190,7 +190,7 @@ ___
 
 ▸ **getRole**(`target`: string): *Promise‹string›*
 
-*Defined in [community.ts:279](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L279)*
+*Defined in [community.ts:279](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L279)*
 
 Get the target or current wallet role
 
@@ -210,7 +210,7 @@ ___
 
 ▸ **getState**(`cached`: boolean): *Promise‹[StateInterface](../interfaces/_faces_.stateinterface.md)›*
 
-*Defined in [community.ts:49](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L49)*
+*Defined in [community.ts:49](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L49)*
 
 Get the current Community state.
 
@@ -230,7 +230,7 @@ ___
 
 ▸ **getUnlockedBalance**(`target`: string): *Promise‹number›*
 
-*Defined in [community.ts:259](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L259)*
+*Defined in [community.ts:259](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L259)*
 
 Get the target or current wallet unlocked token balance
 
@@ -250,7 +250,7 @@ ___
 
 ▸ **getVaultBalance**(`target`: string): *Promise‹number›*
 
-*Defined in [community.ts:269](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L269)*
+*Defined in [community.ts:269](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L269)*
 
 Get the target or current wallet vault balance
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **increaseVault**(`vaultId`: number, `lockLength`: number): *Promise‹string›*
 
-*Defined in [community.ts:323](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L323)*
+*Defined in [community.ts:323](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L323)*
 
 Increase the lock time (in blocks) of a vault.
 
@@ -291,7 +291,7 @@ ___
 
 ▸ **lockBalance**(`qty`: number, `lockLength`: number): *Promise‹string›*
 
-*Defined in [community.ts:303](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L303)*
+*Defined in [community.ts:303](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L303)*
 
 Lock your balances in a vault to earn voting weight.
 
@@ -312,7 +312,7 @@ ___
 
 ▸ **proposeVote**(`params`: [VoteInterface](../interfaces/_faces_.voteinterface.md)): *Promise‹string›*
 
-*Defined in [community.ts:333](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L333)*
+*Defined in [community.ts:333](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L333)*
 
 Create a new vote
 
@@ -332,7 +332,7 @@ ___
 
 ▸ **setCommunityTx**(`txId`: string): *Promise‹void›*
 
-*Defined in [community.ts:228](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L228)*
+*Defined in [community.ts:228](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L228)*
 
 Set the Community interactions to this transaction ID.
 
@@ -350,7 +350,7 @@ ___
 
 ▸ **setState**(`name`: string, `ticker`: string, `balances`: [BalancesInterface](../interfaces/_faces_.balancesinterface.md), `quorum`: number, `support`: number, `voteLength`: number, `lockMinLength`: number, `lockMaxLength`: number, `vault`: [VaultInterface](../interfaces/_faces_.vaultinterface.md), `votes`: [VoteInterface](../interfaces/_faces_.voteinterface.md)[], `roles`: [RoleInterface](../interfaces/_faces_.roleinterface.md)): *Promise‹[StateInterface](../interfaces/_faces_.stateinterface.md)›*
 
-*Defined in [community.ts:94](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L94)*
+*Defined in [community.ts:94](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L94)*
 
 Set the states for a new Community using the Community contract.
 
@@ -380,7 +380,7 @@ ___
 
 ▸ **setWallet**(`wallet`: JWKInterface): *Promise‹string›*
 
-*Defined in [community.ts:71](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L71)*
+*Defined in [community.ts:71](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L71)*
 
 Set the user wallet data.
 
@@ -400,7 +400,7 @@ ___
 
 ▸ **transfer**(`target`: string, `qty`: number): *Promise‹string›*
 
-*Defined in [community.ts:292](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L292)*
+*Defined in [community.ts:292](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L292)*
 
 **Parameters:**
 
@@ -419,7 +419,7 @@ ___
 
 ▸ **unlockVault**(): *Promise‹string›*
 
-*Defined in [community.ts:312](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L312)*
+*Defined in [community.ts:312](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L312)*
 
 Unlock all your locked balances that are over the lock period.
 
@@ -433,7 +433,7 @@ ___
 
 ▸ **vote**(`id`: number, `cast`: "yay" | "nay"): *Promise‹string›*
 
-*Defined in [community.ts:369](https://github.com/CommunityXYZ/community-js/blob/57c27a2/src/community.ts#L369)*
+*Defined in [community.ts:369](https://github.com/CommunityXYZ/community-js/blob/4238cca/src/community.ts#L369)*
 
 Cast a vote on an existing, and active, vote proposal.
 

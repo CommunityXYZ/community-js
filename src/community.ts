@@ -33,7 +33,7 @@ export default class Community {
 
     if (wallet) {
       this.wallet = wallet;
-      arweave.wallets.jwkToAddress(wallet).then(addy => this.walletAddress = addy).catch(console.error);
+      arweave.wallets.jwkToAddress(wallet).then(addy => this.walletAddress = addy).catch(console.log);
     }
 
     if(cacheRefreshInterval) {
@@ -118,7 +118,7 @@ export default class Community {
     if(!Object.keys(balances).length) {
       throw new Error('At least one account need to be specified.');
     }
-    for(let bal in balances) {
+    for(const bal in balances) {
       if(isNaN(balances[bal]) || !Number.isInteger(balances[bal]) || balances[bal] < 1) {
         throw new Error('Address balances must be a positive integer.');
       }
@@ -141,8 +141,8 @@ export default class Community {
       throw new Error('Lock Max Length must be a positive integer, greater than lockMinLength.');
     }
     if(Object.keys(vault).length) {
-      for(let key in vault) {
-        for(let k in vault[key]) {
+      for(const key of Object.keys(vault)) {
+        for(const k in vault[key]) {
           if(isNaN(vault[key][k].balance) || !Number.isInteger(vault[key][k]) || vault[key][k].balance < 1) {
             throw new Error('Vault balance must be a positive integer.');
           }
@@ -281,7 +281,7 @@ export default class Community {
     return res.role;
   }
 
-  /** Setters **/
+  // Setters
 
   /**
    * 
@@ -400,7 +400,7 @@ export default class Community {
     // @ts-ignore
     const target = await readContract(this.arweave, this.mainContract).then((state: StateInterface) => {
         const balances = state.balances;
-        for(let addy in state.vault) {
+        for(const addy in state.vault) {
           if(addy in balances) {
             if(balances[addy] && state.vault[addy].length) {
               balances[addy] += state.vault[addy].map(a => a.balance).reduce((a, b) => {

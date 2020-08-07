@@ -110,7 +110,6 @@ export default class Community {
      * @returns Current target role
      */
     getRole(target?: string): Promise<string>;
-    /** Setters **/
     /**
      *
      * @param target - Target Wallet Address
