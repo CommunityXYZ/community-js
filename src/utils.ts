@@ -6,10 +6,12 @@ export default class Utils {
   static trimObj(obj: any) {
     if (obj === null || (!Array.isArray(obj) && typeof obj !== 'object')) return obj;
 
-    return Object.keys(obj).reduce((acc: any, key: string) => {
-      acc[key.trim()] = typeof obj[key] === 'string'? obj[key].trim() : Utils.trimObj(obj[key]);
-      return acc;
-    }, Array.isArray(obj)? []:{});
+    return Object.keys(obj).reduce(
+      (acc: any, key: string) => {
+        acc[key.trim()] = typeof obj[key] === 'string' ? obj[key].trim() : Utils.trimObj(obj[key]);
+        return acc;
+      },
+      Array.isArray(obj) ? [] : {},
+    );
   }
-
 }

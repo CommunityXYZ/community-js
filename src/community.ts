@@ -28,15 +28,18 @@ export default class Community {
    * @param wallet - JWK wallet file data
    * @param cacheRefreshInterval - Refresh interval in milliseconds for the cached state
    */
-  constructor(arweave: Arweave, wallet?: JWKInterface, cacheRefreshInterval = (1000 * 60 * 2)) {
+  constructor(arweave: Arweave, wallet?: JWKInterface, cacheRefreshInterval = 1000 * 60 * 2) {
     this.arweave = arweave;
-    
+
     if (wallet) {
       this.wallet = wallet;
-      arweave.wallets.jwkToAddress(wallet).then(addy => this.walletAddress = addy).catch(console.log);
+      arweave.wallets
+        .jwkToAddress(wallet)
+        .then((addy) => (this.walletAddress = addy))
+        .catch(console.log);
     }
 
-    if(cacheRefreshInterval) {
+    if (cacheRefreshInterval) {
       this.cacheRefreshInterval = cacheRefreshInterval;
     }
   }
@@ -47,16 +50,16 @@ export default class Community {
    * @returns - The current state and sync afterwards if needed.
    */
   public async getState(cached = true): Promise<StateInterface> {
-    if(!this.communityContract.length) {
-      throw new Error("No community set. Use setCommunityTx to get your current state.");
+    if (!this.communityContract.length) {
+      throw new Error('No community set. Use setCommunityTx to get your current state.');
     }
 
-    if(this.firstCall) {
+    if (this.firstCall) {
       this.firstCall = false;
       return this.update(true);
     }
 
-    if(!cached || !this.state) {
+    if (!cached || !this.state) {
       return this.update(false);
     }
 
@@ -88,10 +91,22 @@ export default class Community {
    * @param vault - Vault object, optional
    * @param votes - Votes, optional
    * @param roles - Roles, optional
-   * 
+   *
    * @returns - The created state
    */
-  public async setState(name: string, ticker: string, balances: BalancesInterface, quorum: number = 50, support: number = 50, voteLength: number = 2000, lockMinLength: number = 720, lockMaxLength: number = 10000, vault: VaultInterface = {}, votes: VoteInterface[] = [], roles: RoleInterface = {}): Promise<StateInterface> {
+  public async setState(
+    name: string,
+    ticker: string,
+    balances: BalancesInterface,
+    quorum: number = 50,
+    support: number = 50,
+    voteLength: number = 2000,
+    lockMinLength: number = 720,
+    lockMaxLength: number = 10000,
+    vault: VaultInterface = {},
+    votes: VoteInterface[] = [],
+    roles: RoleInterface = {},
+  ): Promise<StateInterface> {
     // Make sure the wallet exists.
     await this.checkWallet();
 
@@ -109,41 +124,41 @@ export default class Community {
     roles = Utils.trimObj(roles);
 
     // Validations
-    if(name.length < 3) {
+    if (name.length < 3) {
       throw new Error('Community Name must be at least 3 characters.');
     }
-    if(ticker.length < 3) {
+    if (ticker.length < 3) {
       throw new Error('Ticker must be at least 3 characters.');
     }
-    if(!Object.keys(balances).length) {
+    if (!Object.keys(balances).length) {
       throw new Error('At least one account need to be specified.');
     }
-    for(const bal in balances) {
-      if(isNaN(balances[bal]) || !Number.isInteger(balances[bal]) || balances[bal] < 1) {
+    for (const bal in balances) {
+      if (isNaN(balances[bal]) || !Number.isInteger(balances[bal]) || balances[bal] < 1) {
         throw new Error('Address balances must be a positive integer.');
       }
     }
-    if(isNaN(quorum) || quorum < 1 || quorum > 99 || !Number.isInteger(quorum)) {
+    if (isNaN(quorum) || quorum < 1 || quorum > 99 || !Number.isInteger(quorum)) {
       throw new Error('Quorum must be an integer between 1-99.');
     }
     quorum = quorum / 100;
-    if(isNaN(support) || support < 1 || support > 99 || !Number.isInteger(support)) {
+    if (isNaN(support) || support < 1 || support > 99 || !Number.isInteger(support)) {
       throw new Error('Support must be an integer between 1-99.');
     }
     support = support / 100;
-    if(isNaN(voteLength) || !Number.isInteger(voteLength) || voteLength < 1) {
+    if (isNaN(voteLength) || !Number.isInteger(voteLength) || voteLength < 1) {
       throw new Error('Vote Length must be a positive integer.');
     }
-    if(isNaN(lockMinLength) || lockMinLength < 1 || !Number.isInteger(lockMinLength)) {
+    if (isNaN(lockMinLength) || lockMinLength < 1 || !Number.isInteger(lockMinLength)) {
       throw new Error('Lock Min Length must be a positive integer.');
     }
-    if(isNaN(lockMaxLength) || lockMaxLength < lockMinLength || !Number.isInteger(lockMaxLength)) {
+    if (isNaN(lockMaxLength) || lockMaxLength < lockMinLength || !Number.isInteger(lockMaxLength)) {
       throw new Error('Lock Max Length must be a positive integer, greater than lockMinLength.');
     }
-    if(Object.keys(vault).length) {
-      for(const key of Object.keys(vault)) {
-        for(const k in vault[key]) {
-          if(isNaN(vault[key][k].balance) || !Number.isInteger(vault[key][k]) || vault[key][k].balance < 1) {
+    if (Object.keys(vault).length) {
+      for (const key of Object.keys(vault)) {
+        for (const k in vault[key]) {
+          if (isNaN(vault[key][k].balance) || !Number.isInteger(vault[key][k]) || vault[key][k].balance < 1) {
             throw new Error('Vault balance must be a positive integer.');
           }
         }
@@ -151,11 +166,11 @@ export default class Community {
     }
 
     const settings: [string, any][] = [
-      ["quorum", quorum],
-      ["support", support],
-      ["voteLength", voteLength],
-      ["lockMinLength", lockMinLength],
-      ["lockMaxLength", lockMaxLength]
+      ['quorum', quorum],
+      ['support', support],
+      ['voteLength', voteLength],
+      ['lockMinLength', lockMinLength],
+      ['lockMaxLength', lockMaxLength],
     ];
 
     // Set the state
@@ -166,7 +181,7 @@ export default class Community {
       vault,
       votes,
       roles,
-      settings: new Map(settings)
+      settings: new Map(settings),
     };
 
     return this.state;
@@ -182,7 +197,7 @@ export default class Community {
 
     const toSubmit: any = this.state;
     toSubmit.settings = Array.from(this.state.settings);
-    
+
     // @ts-ignore
     const communityID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(toSubmit));
     this.communityContract = communityID;
@@ -195,11 +210,11 @@ export default class Community {
    * @param inAr - Return in winston or AR
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
    */
-  public async getCreateCost(inAr = false, options?: {formatted: boolean, decimals: number, trim: boolean}): Promise<string> {
+  public async getCreateCost(inAr = false, options?: { formatted: boolean; decimals: number; trim: boolean }): Promise<string> {
     const byteSize = new Blob([JSON.stringify(this.state)]).size;
-    const res = await this.arweave.api.get(`/price/${(byteSize+this.createFee)}`);
+    const res = await this.arweave.api.get(`/price/${byteSize + this.createFee}`);
 
-    if(inAr) {
+    if (inAr) {
       return this.arweave.ar.winstonToAr(res.data, options);
     }
 
@@ -211,10 +226,10 @@ export default class Community {
    * @param inAr - Return in winston or AR
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
    */
-  public async getActionCost(inAr = false, options?: {formatted: boolean, decimals: number, trim: boolean}): Promise<string> {
+  public async getActionCost(inAr = false, options?: { formatted: boolean; decimals: number; trim: boolean }): Promise<string> {
     const res = await this.arweave.api.get(`/price/${this.txFee}`);
 
-    if(inAr) {
+    if (inAr) {
       return this.arweave.ar.winstonToAr(res.data, options);
     }
 
@@ -238,7 +253,7 @@ export default class Community {
    * @param params - InputInterface
    * @returns ResultInterface
    */
-  public async get(params: InputInterface = {function: 'balance'}): Promise<ResultInterface> {
+  public async get(params: InputInterface = { function: 'balance' }): Promise<ResultInterface> {
     // @ts-ignore
     return interactRead(this.arweave, this.wallet, this.communityContract, params);
   }
@@ -259,7 +274,7 @@ export default class Community {
    * @returns Current target token balance
    */
   public async getUnlockedBalance(target: string = this.walletAddress): Promise<number> {
-    const res = await this.get({ function: 'unlockedBalance', target});
+    const res = await this.get({ function: 'unlockedBalance', target });
     return res.balance;
   }
 
@@ -269,7 +284,7 @@ export default class Community {
    * @returns Current target token balance
    */
   public async getVaultBalance(target: string = this.walletAddress): Promise<number> {
-    const res = await this.get({ function: 'vaultBalance', target});
+    const res = await this.get({ function: 'vaultBalance', target });
     return res.balance;
   }
 
@@ -279,7 +294,7 @@ export default class Community {
    * @returns Current target role
    */
   public async getRole(target: string = this.walletAddress): Promise<string> {
-    const res = await this.get({ function: 'role', target});
+    const res = await this.get({ function: 'role', target });
     return res.role;
   }
 
@@ -289,19 +304,19 @@ export default class Community {
    * @param vault - State vault, optional.
    */
   public async selectWeightedHolder(balances: BalancesInterface = this.state.balances, vault: VaultInterface = this.state.vault) {
-    if(!this.state) {
+    if (!this.state) {
       throw new Error('Need to initilate the state and worker.');
     }
 
     let totalTokens = 0;
-    for(const addy of Object.keys(balances)) {
+    for (const addy of Object.keys(balances)) {
       totalTokens += balances[addy];
     }
-    for(const addy of Object.keys(vault)) {
-      if(!vault[addy].length) continue;
-      const vaultBalance = vault[addy].map(a => a.balance).reduce((a, b) => a + b, 0);
+    for (const addy of Object.keys(vault)) {
+      if (!vault[addy].length) continue;
+      const vaultBalance = vault[addy].map((a) => a.balance).reduce((a, b) => a + b, 0);
       totalTokens += vaultBalance;
-      if(addy in balances) {
+      if (addy in balances) {
         balances[addy] += vaultBalance;
       } else {
         balances[addy] = vaultBalance;
@@ -309,15 +324,15 @@ export default class Community {
     }
 
     const weighted: BalancesInterface = {};
-    for(const addy of Object.keys(balances)) {
+    for (const addy of Object.keys(balances)) {
       weighted[addy] = balances[addy] / totalTokens;
     }
 
     let sum = 0;
     const r = Math.random();
-    for(const addy of Object.keys(weighted)) {
+    for (const addy of Object.keys(weighted)) {
       sum += weighted[addy];
-      if(r <= sum && weighted[addy] > 0) {
+      if (r <= sum && weighted[addy] > 0) {
         return addy;
       }
     }
@@ -328,14 +343,14 @@ export default class Community {
   // Setters
 
   /**
-   * 
+   *
    * @param target - Target Wallet Address
    * @param qty - Amount of the token to send
    * @returns The transaction ID for this action
    */
   public async transfer(target: string, qty: number): Promise<string> {
     await this.chargeFee('transfer');
-    return this.interact({function: 'transfer', target, qty});
+    return this.interact({ function: 'transfer', target, qty });
   }
 
   /**
@@ -346,7 +361,7 @@ export default class Community {
    */
   public async lockBalance(qty: number, lockLength: number): Promise<string> {
     await this.chargeFee('lockBalance');
-    return this.interact({function: 'lock', qty, lockLength});
+    return this.interact({ function: 'lock', qty, lockLength });
   }
 
   /**
@@ -355,7 +370,7 @@ export default class Community {
    */
   public async unlockVault(): Promise<string> {
     await this.chargeFee('unlockVault');
-    return this.interact({function: 'unlock'});
+    return this.interact({ function: 'unlock' });
   }
 
   /**
@@ -366,7 +381,7 @@ export default class Community {
    */
   public async increaseVault(vaultId: number, lockLength: number): Promise<string> {
     await this.chargeFee('increaseVault');
-    return this.interact({function: 'increaseVault', id: vaultId, lockLength });
+    return this.interact({ function: 'increaseVault', id: vaultId, lockLength });
   }
 
   /**
@@ -377,29 +392,29 @@ export default class Community {
   public async proposeVote(params: VoteInterface): Promise<string> {
     const pCopy: VoteInterface = JSON.parse(JSON.stringify(params));
 
-    if(pCopy.type === 'set') {
-      if(pCopy.key === 'quorum' || pCopy.key === 'support' || pCopy.key === 'lockMinLength' || pCopy.key === 'lockMaxLength') {
+    if (pCopy.type === 'set') {
+      if (pCopy.key === 'quorum' || pCopy.key === 'support' || pCopy.key === 'lockMinLength' || pCopy.key === 'lockMaxLength') {
         pCopy.value = +pCopy.value;
       }
 
-      if(pCopy.key === 'quorum' || pCopy.key === 'support') {
-        if(pCopy.value > 0 && pCopy.value < 100) {
+      if (pCopy.key === 'quorum' || pCopy.key === 'support') {
+        if (pCopy.value > 0 && pCopy.value < 100) {
           pCopy.value = pCopy.value / 100;
-        } else if(pCopy.value <= 0 || pCopy.value >= 100) {
+        } else if (pCopy.value <= 0 || pCopy.value >= 100) {
           throw new Error('Invalid value.');
         }
       }
 
-      if(pCopy.key === 'lockMinLength' && (pCopy.value < 1 || pCopy.value > this.state.settings.get('lockMaxLength'))) {
+      if (pCopy.key === 'lockMinLength' && (pCopy.value < 1 || pCopy.value > this.state.settings.get('lockMaxLength'))) {
         throw new Error('Invalid minimum lock length.');
       }
-      if(pCopy.key === 'lockMaxLength' && (pCopy.value < 1 || pCopy.value < this.state.settings.get('lockMinLength'))) {
+      if (pCopy.key === 'lockMaxLength' && (pCopy.value < 1 || pCopy.value < this.state.settings.get('lockMinLength'))) {
         throw new Error('Invalid maximum lock length.');
       }
     }
 
     await this.chargeFee('proposeVote');
-    const input: InputInterface = {...pCopy, function: 'propose'};
+    const input: InputInterface = { ...pCopy, function: 'propose' };
 
     return this.interact(input);
   }
@@ -412,7 +427,7 @@ export default class Community {
    */
   public async vote(id: number, cast: 'yay' | 'nay'): Promise<string> {
     await this.chargeFee('vote');
-    return this.interact({function: 'vote', id, cast});
+    return this.interact({ function: 'vote', id, cast });
   }
 
   /**
@@ -422,7 +437,7 @@ export default class Community {
    */
   public async finalize(id: number): Promise<string> {
     await this.chargeFee('finalize');
-    return this.interact({function: 'finalize', id});
+    return this.interact({ function: 'finalize', id });
   }
 
   /**
@@ -437,7 +452,7 @@ export default class Community {
 
     console.log(balance, fee);
 
-    if((+balance) < (+fee)) {
+    if (+balance < +fee) {
       throw new Error('Not enough balance.');
     }
 
@@ -449,9 +464,9 @@ export default class Community {
     const tx = await this.arweave.createTransaction(
       {
         target,
-        quantity: fee.toString()
+        quantity: fee.toString(),
       },
-      this.wallet
+      this.wallet,
     );
 
     await this.setDefaultTags(tx);
@@ -487,15 +502,15 @@ export default class Community {
   }
 
   private async update(recall = false): Promise<StateInterface> {
-    if(!this.communityContract.length) {
+    if (!this.communityContract.length) {
       setTimeout(() => this.update(), this.cacheRefreshInterval);
       return;
     }
 
-    if(this.stateCallInProgress) {
+    if (this.stateCallInProgress) {
       const getLastState = async (): Promise<StateInterface> => {
-        if(this.stateCallInProgress) {
-          return new Promise(resolve => setTimeout(() => resolve(getLastState()), 1000));
+        if (this.stateCallInProgress) {
+          return new Promise((resolve) => setTimeout(() => resolve(getLastState()), 1000));
         }
 
         return this.state;
@@ -511,8 +526,8 @@ export default class Community {
     this.state = res;
 
     this.stateCallInProgress = false;
-    
-    if(recall) {
+
+    if (recall) {
       setTimeout(() => this.update(true), this.cacheRefreshInterval);
     }
     return this.state;
@@ -525,7 +540,8 @@ export default class Community {
   private async interact(input: InputInterface): Promise<string> {
     // @ts-ignore
     const res = await interactWriteDryRun(this.arweave, this.wallet, this.communityContract, input);
-    if(res.type === 'error') { //  || res.type === 'exception'
+    if (res.type === 'error') {
+      //  || res.type === 'exception'
       throw new Error(res.result);
     }
 
