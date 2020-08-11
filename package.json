@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "arweave": "^1.9.1",
-    "smartweave": "https://arweave.net/AM-u4X2po-3Tx7fma3lRonCfLwrjI42IALwDL_YFXBs"
+    "smartweave": "https://arweave.net/AM-u4X2po-3Tx7fma3lRonCfLwrjI42IALwDL_YFXBs",
+    "tiny-worker": "^2.3.0"
   }
 }

@@ -24,7 +24,7 @@
 
 • **balances**: *[BalancesInterface](_faces_.balancesinterface.md)*
 
-*Defined in [faces.ts:4](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L4)*
+*Defined in [faces.ts:4](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L4)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **name**: *string*
 
-*Defined in [faces.ts:2](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L2)*
+*Defined in [faces.ts:2](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L2)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **roles**: *[RoleInterface](_faces_.roleinterface.md)*
 
-*Defined in [faces.ts:7](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L7)*
+*Defined in [faces.ts:7](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L7)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **settings**: *Map‹string, any›*
 
-*Defined in [faces.ts:8](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L8)*
+*Defined in [faces.ts:8](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L8)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **ticker**: *string*
 
-*Defined in [faces.ts:3](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L3)*
+*Defined in [faces.ts:3](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L3)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **vault**: *[VaultInterface](_faces_.vaultinterface.md)*
 
-*Defined in [faces.ts:5](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L5)*
+*Defined in [faces.ts:5](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L5)*
 
 ___
 
@@ -72,4 +72,4 @@ ___
 
 • **votes**: *[VoteInterface](_faces_.voteinterface.md)[]*
 
-*Defined in [faces.ts:6](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L6)*
+*Defined in [faces.ts:6](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L6)*

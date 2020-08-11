@@ -1,8 +1,8 @@
 import Arweave from 'arweave';
-import { interactWrite, createContractFromTx, selectWeightedPstHolder, readContract, interactWriteDryRun, interactRead } from 'smartweave';
+import { interactWrite, createContractFromTx, readContract, interactWriteDryRun, interactRead } from 'smartweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import Transaction from 'arweave/web/lib/transaction';
-import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, GetFunctionType, ResultInterface, VoteType } from './faces';
+import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface } from './faces';
 import Utils from './utils';
 
 export default class Community {
@@ -30,7 +30,7 @@ export default class Community {
    */
   constructor(arweave: Arweave, wallet?: JWKInterface, cacheRefreshInterval = (1000 * 60 * 2)) {
     this.arweave = arweave;
-
+    
     if (wallet) {
       this.wallet = wallet;
       arweave.wallets.jwkToAddress(wallet).then(addy => this.walletAddress = addy).catch(console.log);
@@ -229,6 +229,8 @@ export default class Community {
     // reset state
     this.state = null;
     this.communityContract = txId;
+
+    await this.getState(false);
   }
 
   /**
@@ -279,6 +281,52 @@ export default class Community {
   public async getRole(target: string = this.walletAddress): Promise<string> {
     const res = await this.get({ function: 'role', target});
     return res.role;
+  }
+
+  /**
+   * Select one of your community holders based on their weighted total balance.
+   * @param balances  - State balances, optional.
+   * @param vault - State vault, optional.
+   */
+  public async selectWeightedHolder(balances: BalancesInterface = this.state.balances, vault: VaultInterface = this.state.vault) {
+    if(!this.state) {
+      throw new Error('Need to initilate the state and worker.');
+    }
+
+    const fn = async (balances: BalancesInterface, vault: VaultInterface): Promise<string> => {
+      let totalTokens = 0;
+      for(const addy of Object.keys(balances)) {
+        totalTokens += balances[addy];
+      }
+      for(const addy of Object.keys(vault)) {
+        if(!vault[addy].length) continue;
+        const vaultBalance = vault[addy].map(a => a.balance).reduce((a, b) => a + b, 0);
+        totalTokens += vaultBalance;
+        if(addy in balances) {
+          balances[addy] += vaultBalance;
+        } else {
+          balances[addy] = vaultBalance;
+        }
+      }
+  
+      const weighted: BalancesInterface = {};
+      for(const addy of Object.keys(balances)) {
+        weighted[addy] = balances[addy] / totalTokens;
+      }
+  
+      let sum = 0;
+      const r = Math.random();
+      for(const addy of Object.keys(weighted)) {
+        sum += weighted[addy];
+        if(r <= sum && weighted[addy] > 0) {
+          return addy;
+        }
+      }
+  
+      return null;
+    }
+
+    return fn(balances, vault);
   }
 
   // Setters
@@ -399,24 +447,8 @@ export default class Community {
 
     // @ts-ignore
     const target = await readContract(this.arweave, this.mainContract).then((state: StateInterface) => {
-        const balances = state.balances;
-        for(const addy in state.vault) {
-          if(addy in balances) {
-            if(balances[addy] && state.vault[addy].length) {
-              balances[addy] += state.vault[addy].map(a => a.balance).reduce((a, b) => {
-                return a + b;
-              });
-            } else if(state.vault[addy].length) {
-              balances[addy] = state.vault[addy].map(a => a.balance).reduce((a, b) => {
-                return a + b;
-              });
-            }
-          }
-        }
-        return selectWeightedPstHolder(balances);
+      return this.selectWeightedHolder(state.balances, state.vault);
     });
-
-    
 
     const tx = await this.arweave.createTransaction(
       {

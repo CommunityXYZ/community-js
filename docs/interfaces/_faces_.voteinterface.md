@@ -34,7 +34,7 @@
 
 • **id**? : *number*
 
-*Defined in [faces.ts:42](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L42)*
+*Defined in [faces.ts:42](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L42)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 • **key**? : *string*
 
-*Defined in [faces.ts:47](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L47)*
+*Defined in [faces.ts:47](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L47)*
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • **lockLength**? : *number*
 
-*Defined in [faces.ts:54](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L54)*
+*Defined in [faces.ts:54](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L54)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • **nays**? : *number*
 
-*Defined in [faces.ts:51](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L51)*
+*Defined in [faces.ts:51](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L51)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **note**? : *string*
 
-*Defined in [faces.ts:49](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L49)*
+*Defined in [faces.ts:49](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L49)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 • **qty**? : *number*
 
-*Defined in [faces.ts:46](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L46)*
+*Defined in [faces.ts:46](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L46)*
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 • **recipient**? : *string*
 
-*Defined in [faces.ts:44](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L44)*
+*Defined in [faces.ts:44](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L44)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • **start**? : *number*
 
-*Defined in [faces.ts:53](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L53)*
+*Defined in [faces.ts:53](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L53)*
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • **status**? : *[VoteStatus](../modules/_faces_.md#votestatus)*
 
-*Defined in [faces.ts:40](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L40)*
+*Defined in [faces.ts:40](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L40)*
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 • **target**? : *string*
 
-*Defined in [faces.ts:45](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L45)*
+*Defined in [faces.ts:45](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L45)*
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 • **totalWeight**? : *number*
 
-*Defined in [faces.ts:43](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L43)*
+*Defined in [faces.ts:43](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L43)*
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 • **type**? : *[VoteType](../modules/_faces_.md#votetype)*
 
-*Defined in [faces.ts:41](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L41)*
+*Defined in [faces.ts:41](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L41)*
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 • **value**? : *any*
 
-*Defined in [faces.ts:48](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L48)*
+*Defined in [faces.ts:48](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L48)*
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 • **voted**? : *string[]*
 
-*Defined in [faces.ts:52](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L52)*
+*Defined in [faces.ts:52](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L52)*
 
 ___
 
@@ -146,4 +146,4 @@ ___
 
 • **yays**? : *number*
 
-*Defined in [faces.ts:50](https://github.com/CommunityXYZ/community-js/blob/4577aac/src/faces.ts#L50)*
+*Defined in [faces.ts:50](https://github.com/CommunityXYZ/community-js/blob/2d3c34c/src/faces.ts#L50)*

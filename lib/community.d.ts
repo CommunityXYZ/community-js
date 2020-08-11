@@ -111,6 +111,12 @@ export default class Community {
      */
     getRole(target?: string): Promise<string>;
     /**
+     * Select one of your community holders based on their weighted total balance.
+     * @param balances  - State balances, optional.
+     * @param vault - State vault, optional.
+     */
+    selectWeightedHolder(balances?: BalancesInterface, vault?: VaultInterface): Promise<string>;
+    /**
      *
      * @param target - Target Wallet Address
      * @param qty - Amount of the token to send
