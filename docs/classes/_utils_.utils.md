@@ -18,7 +18,7 @@
 
 ▸ **trimObj**(`obj`: any): *any*
 
-*Defined in [utils.ts:6](https://github.com/CommunityXYZ/community-js/blob/17e7f95/src/utils.ts#L6)*
+*Defined in [utils.ts:6](https://github.com/CommunityXYZ/community-js/blob/5815a0e/src/utils.ts#L6)*
 
 Trims object keys and values.
 
