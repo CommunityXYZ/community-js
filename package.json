@@ -20,7 +20,7 @@
     "watch": "node watch.js",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "docs": "rimraf ./docs && typedoc --plugin typedoc-plugin-markdown --excludePrivate --out ./docs ./src",
+    "docs": "rimraf ./docs && typedoc --plugin typedoc-plugin-markdown --disableSources --readme none --excludePrivate --out ./docs ./src",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",

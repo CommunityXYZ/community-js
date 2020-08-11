@@ -1,4 +1,4 @@
-[community-js](../README.md) › [Globals](../globals.md) › ["utils"](../modules/_utils_.md) › [Utils](_utils_.utils.md)
+[community-js](../README.md) › ["utils"](../modules/_utils_.md) › [Utils](_utils_.utils.md)
 
 # Class: Utils
 
@@ -17,8 +17,6 @@
 ### `Static` trimObj
 
 ▸ **trimObj**(`obj`: any): *any*
-
-*Defined in [utils.ts:6](https://github.com/CommunityXYZ/community-js/blob/5815a0e/src/utils.ts#L6)*
 
 Trims object keys and values.
 
