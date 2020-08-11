@@ -293,40 +293,36 @@ export default class Community {
       throw new Error('Need to initilate the state and worker.');
     }
 
-    const fn = async (balances: BalancesInterface, vault: VaultInterface): Promise<string> => {
-      let totalTokens = 0;
-      for(const addy of Object.keys(balances)) {
-        totalTokens += balances[addy];
+    let totalTokens = 0;
+    for(const addy of Object.keys(balances)) {
+      totalTokens += balances[addy];
+    }
+    for(const addy of Object.keys(vault)) {
+      if(!vault[addy].length) continue;
+      const vaultBalance = vault[addy].map(a => a.balance).reduce((a, b) => a + b, 0);
+      totalTokens += vaultBalance;
+      if(addy in balances) {
+        balances[addy] += vaultBalance;
+      } else {
+        balances[addy] = vaultBalance;
       }
-      for(const addy of Object.keys(vault)) {
-        if(!vault[addy].length) continue;
-        const vaultBalance = vault[addy].map(a => a.balance).reduce((a, b) => a + b, 0);
-        totalTokens += vaultBalance;
-        if(addy in balances) {
-          balances[addy] += vaultBalance;
-        } else {
-          balances[addy] = vaultBalance;
-        }
-      }
-  
-      const weighted: BalancesInterface = {};
-      for(const addy of Object.keys(balances)) {
-        weighted[addy] = balances[addy] / totalTokens;
-      }
-  
-      let sum = 0;
-      const r = Math.random();
-      for(const addy of Object.keys(weighted)) {
-        sum += weighted[addy];
-        if(r <= sum && weighted[addy] > 0) {
-          return addy;
-        }
-      }
-  
-      return null;
     }
 
-    return fn(balances, vault);
+    const weighted: BalancesInterface = {};
+    for(const addy of Object.keys(balances)) {
+      weighted[addy] = balances[addy] / totalTokens;
+    }
+
+    let sum = 0;
+    const r = Math.random();
+    for(const addy of Object.keys(weighted)) {
+      sum += weighted[addy];
+      if(r <= sum && weighted[addy] > 0) {
+        return addy;
+      }
+    }
+
+    return null;
   }
 
   // Setters
