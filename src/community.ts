@@ -255,11 +255,11 @@ export default class Community {
    * @returns ResultInterface
    */
   public async get(params: InputInterface = { function: 'balance' }): Promise<ResultInterface> {
-    if(!this.wallet && !this.dummyWallet && (!params || !params.target)) {
+    if (!this.wallet && !this.dummyWallet && (!params || !params.target)) {
       this.dummyWallet = await this.arweave.wallets.generate();
     }
-    const targetWallet = params.target? { n: params.target } : this.dummyWallet;
-    
+    const targetWallet = params.target ? { n: params.target } : this.dummyWallet;
+
     // @ts-ignore
     return interactRead(this.arweave, this.wallet || targetWallet, this.communityContract, params);
   }
