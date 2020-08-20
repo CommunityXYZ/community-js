@@ -249,7 +249,7 @@ export default class Community {
 
     try {
       await this.getState(false);
-    } catch(e) {
+    } catch (e) {
       this.state = null;
       this.communityContract = null;
       return false;
