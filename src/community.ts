@@ -264,13 +264,12 @@ export default class Community {
    * @returns ResultInterface
    */
   public async get(params: InputInterface = { function: 'balance' }): Promise<ResultInterface> {
-    if (!this.wallet && !this.dummyWallet && (!params || !params.target)) {
+    if (!this.wallet && !this.dummyWallet) {
       this.dummyWallet = await this.arweave.wallets.generate();
     }
-    const targetWallet = params.target ? { n: params.target } : this.dummyWallet;
 
     // @ts-ignore
-    return interactRead(this.arweave, this.wallet || targetWallet, this.communityContract, params);
+    return interactRead(this.arweave, this.wallet || this.dummyWallet, this.communityContract, params);
   }
 
   /**
