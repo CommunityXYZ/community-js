@@ -14,6 +14,7 @@ export default class Community {
   private arweave: Arweave;
   private wallet!: JWKInterface;
   private walletAddress!: string;
+  private dummyWallet: JWKInterface;
 
   // Community specific variables
   private communityContract = '';
@@ -254,8 +255,13 @@ export default class Community {
    * @returns ResultInterface
    */
   public async get(params: InputInterface = { function: 'balance' }): Promise<ResultInterface> {
+    if(!this.wallet && !this.dummyWallet && (!params || !params.target)) {
+      this.dummyWallet = await this.arweave.wallets.generate();
+    }
+    const targetWallet = params.target? { n: params.target } : this.dummyWallet;
+    
     // @ts-ignore
-    return interactRead(this.arweave, this.wallet, this.communityContract, params);
+    return interactRead(this.arweave, this.wallet || targetWallet, this.communityContract, params);
   }
 
   /**

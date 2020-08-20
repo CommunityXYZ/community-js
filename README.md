@@ -14,11 +14,11 @@ npm install community-js
 
 Or you can use the currently permaweb version for your frontend, using:
 ```html
-<script src="https://arweave.net/X6_x9aHNIaGCs_DTeRHwKQ_ZdWKzNSVxi_vTE5iCzGI"></script>
+<script src="https://arweave.net/IFH9AiNPYkBnEl7iwkJVwP_LuzKG_foh0eoCR5BtspU"></script>
 ```
 Or the minified version:
 ```html
-<script src="https://arweave.net/2uKz8OAMLL_1DA33WpKtGblKKFllGrzqmCtEMz7jC_w"></script>
+<script src="https://arweave.net/bS9Al-nZTpKaDPh-Cg2TDrfVGFcbn0S4sEWCLwudL6o"></script>
 ```
 
 To read about the CommunityJS usage go here: https://github.com/CommunityXYZ/community-js/blob/master/docs/classes/_community_.community.md

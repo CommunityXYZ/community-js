@@ -9,6 +9,7 @@ export default class Community {
     private arweave;
     private wallet;
     private walletAddress;
+    private dummyWallet;
     private communityContract;
     private state;
     private firstCall;
