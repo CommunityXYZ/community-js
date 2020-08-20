@@ -240,13 +240,22 @@ export default class Community {
   /**
    * Set the Community interactions to this transaction ID.
    * @param txId Community's Transaction ID
+   * @returns boolean - True if successful, false if error.
    */
-  public async setCommunityTx(txId: string): Promise<void> {
+  public async setCommunityTx(txId: string): Promise<boolean> {
     // reset state
     this.state = null;
     this.communityContract = txId;
 
-    await this.getState(false);
+    try {
+      await this.getState(false);
+    } catch(e) {
+      this.state = null;
+      this.communityContract = null;
+      return false;
+    }
+
+    return true;
   }
 
   /**

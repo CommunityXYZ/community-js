@@ -79,8 +79,9 @@ export default class Community {
     /**
      * Set the Community interactions to this transaction ID.
      * @param txId Community's Transaction ID
+     * @returns boolean - True if successful, false if error.
      */
-    setCommunityTx(txId: string): Promise<void>;
+    setCommunityTx(txId: string): Promise<boolean>;
     /**
      * Do a GET call to any function on the contract.
      * @param params - InputInterface

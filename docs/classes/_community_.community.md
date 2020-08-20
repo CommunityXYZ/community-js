@@ -320,7 +320,7 @@ ___
 
 ###  setCommunityTx
 
-▸ **setCommunityTx**(`txId`: string): *Promise‹void›*
+▸ **setCommunityTx**(`txId`: string): *Promise‹boolean›*
 
 Set the Community interactions to this transaction ID.
 
@@ -328,9 +328,11 @@ Set the Community interactions to this transaction ID.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`txId` | string | Community's Transaction ID  |
+`txId` | string | Community's Transaction ID |
 
-**Returns:** *Promise‹void›*
+**Returns:** *Promise‹boolean›*
+
+boolean - True if successful, false if error.
 
 ___
 
