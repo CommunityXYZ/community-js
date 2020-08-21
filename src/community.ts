@@ -6,8 +6,8 @@ import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateI
 import Utils from './utils';
 
 export default class Community {
-  private readonly contractSrc: string = '2QYcBH4omIYNgri2jOdVmVxR9oPSOqVyhR6xbPmTidI';
-  private readonly mainContract: string = 'FcM-QQpfcD0xTTzr8u4Su9QCgcvRx_JH4JSCQoFi6Ck';
+  private readonly contractSrc: string = 'g9aDt3dVz62PN2_0ahwep8x8u1sNgybauSlvQuXL6u8';
+  private readonly mainContract: string = 'Lr08-VeqSEb74fsj-gplPdQz1Cw64G-xknFqUnas-pY';
   private readonly txFee: number = 400000000;
   private readonly createFee: number = 9500000000;
 
@@ -43,6 +43,14 @@ export default class Community {
     if (cacheRefreshInterval) {
       this.cacheRefreshInterval = cacheRefreshInterval;
     }
+  }
+
+  /**
+   * Get the Community contract ID
+   * @returns {Promise<string>} The main contract ID.
+   */
+  public async getMainContractId(): Promise<string> {
+    return this.mainContract;
   }
 
   /**
@@ -499,10 +507,10 @@ export default class Community {
    * Set default tags to each transaction sent from CommunityJS.
    * @param tx - Transaction to set the defaults.
    */
-  private async setDefaultTags(tx: Transaction): Promise<void> {
-    tx.addTag('App-Name', 'Community');
-    tx.addTag('App-Version', '0.0.1');
-    tx.addTag('Community-Contract', this.communityContract);
+  private async setDefaultTags(tx: Transaction, communityId: string = this.communityContract): Promise<void> {
+    tx.addTag('App-Name', 'CommunityJS');
+    tx.addTag('App-Version', '1.0.7');
+    tx.addTag('Community-Contract', communityId);
     tx.addTag('Community-Ticker', this.state.ticker);
   }
 

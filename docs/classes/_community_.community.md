@@ -20,6 +20,7 @@
 * [getActionCost](_community_.community.md#getactioncost)
 * [getBalance](_community_.community.md#getbalance)
 * [getCreateCost](_community_.community.md#getcreatecost)
+* [getMainContractId](_community_.community.md#getmaincontractid)
 * [getRole](_community_.community.md#getrole)
 * [getState](_community_.community.md#getstate)
 * [getUnlockedBalance](_community_.community.md#getunlockedbalance)
@@ -170,6 +171,18 @@ Name | Type |
 `trim` | boolean |
 
 **Returns:** *Promise‹string›*
+
+___
+
+###  getMainContractId
+
+▸ **getMainContractId**(): *Promise‹string›*
+
+Get the Community contract ID
+
+**Returns:** *Promise‹string›*
+
+The main contract ID.
 
 ___
 

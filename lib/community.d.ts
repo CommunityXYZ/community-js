@@ -23,6 +23,11 @@ export default class Community {
      */
     constructor(arweave: Arweave, wallet?: JWKInterface, cacheRefreshInterval?: number);
     /**
+     * Get the Community contract ID
+     * @returns {Promise<string>} The main contract ID.
+     */
+    getMainContractId(): Promise<string>;
+    /**
      * Get the current Community state.
      * @param cached - Wether to return the cached version or reload
      * @returns - The current state and sync afterwards if needed.
