@@ -21,16 +21,5 @@ Or the minified version:
 <script src="https://arweave.net/a7PlxlxRklZUSOujnXF5Y8sFJfdRgIxiXgowSxRbqa4"></script>
 ```
 
-#### Version 1.0.10
-Note: Version 1.0.10 requires the Arweave insteance to be connected to `arweave.dev` because of the use of GQL, which is still in development.
-
-NodeJS Version:
-```npm install community-js```
-
-Permaweb version:
-```https://arweave.net/Vk6_HaBpl8NYx3qMoE_l35WqEXrxO46T8You87w-vYA```
-Minified:
-```https://arweave.net/bwuYXkKJIz57EZe7AzVd-CROH3iJaKLoDT3uG3UWuwY```
-
 ## Documentation
 To read about the CommunityJS usage go here: https://github.com/CommunityXYZ/community-js/blob/master/docs/classes/_community_.community.md

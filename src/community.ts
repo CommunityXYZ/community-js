@@ -260,6 +260,7 @@ export default class Community {
     } catch (e) {
       this.state = null;
       this.communityContract = null;
+      console.log(e);
       return false;
     }
 

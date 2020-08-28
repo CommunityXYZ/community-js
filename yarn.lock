@@ -277,10 +277,10 @@ emoji-regex@^8.0.0:
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
   integrity sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
 
-esbuild@^0.6.26:
-  version "0.6.26"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.6.26.tgz#f0ac2abe476b77c2ec7f6ee270467659314c43d5"
-  integrity sha512-4NB2I2g6m/ggI7e3Bqv9862i+CgkizS6ehTsrgrkmXlQAI7rGsWIRteYMpmc2wCavCpAHIP5ae3z5DlCG/p11A==
+esbuild@^0.6.28:
+  version "0.6.28"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.6.28.tgz#b14fc7a2a04d13c416f75024ac5c449f4248edc4"
+  integrity sha512-VU1QBpzUiuPdrmt6oN1Xd/w/xurSqvsrIUFKPIV9K25Fedqx0Zb9NaBtPlFXawM5vt0dxsbpKJxgylmPz1GlyQ==
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
@@ -639,9 +639,9 @@ shelljs@^0.8.4:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-"smartweave@https://arweave.net/bGbhpHfMnFhjrrqcTNs1X5NERqsC_p2UA0xP50EqFPk":
+"smartweave@https://arweave.net/wdLl4M0wJOOYsdKuqMNaiug2vb7MwEBFYTVEerwTUyk":
   version "0.3.2"
-  resolved "https://arweave.net/bGbhpHfMnFhjrrqcTNs1X5NERqsC_p2UA0xP50EqFPk#dd25246c2942d6a6b31582a447c1301a6554dc28"
+  resolved "https://arweave.net/wdLl4M0wJOOYsdKuqMNaiug2vb7MwEBFYTVEerwTUyk#36b322559adddb949fc1fadc35638df90cb9f3f7"
   dependencies:
     arweave "^1.9.1"
     bignumber.js "^9.0.0"
