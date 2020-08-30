@@ -1,5 +1,5 @@
 import Arweave from 'arweave';
-import { interactWrite, createContractFromTx, readContract, interactWriteDryRun, interactRead } from 'smartweave/dist-src';
+import { interactWrite, createContractFromTx, readContract, interactWriteDryRun, interactRead } from 'smartweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import Transaction from 'arweave/web/lib/transaction';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface } from './faces';
