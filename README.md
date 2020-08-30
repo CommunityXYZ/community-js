@@ -21,8 +21,8 @@ Or the minified version:
 <script src="https://arweave.net/a7PlxlxRklZUSOujnXF5Y8sFJfdRgIxiXgowSxRbqa4"></script>
 ```
 
-### Version 1.0.11
-Note: Version 1.0.11 requires the Arweave insteance to be connected to `arweave.dev` because of the use of GQL, which is still in development.
+### Version ^1.0.11
+Note: Version 1.0.11 and higher require the Arweave instance to be connected to `arweave.dev` because of the use of GQL, which is still in development.
 
 NodeJS Version:
 ```
