@@ -32,7 +32,7 @@
   ],
   "devDependencies": {
     "@types/jest": "^26.0.5",
-    "esbuild": "^0.6.28",
+    "esbuild": "^0.6.29",
     "node-watch": "^0.6.4",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "arweave": "^1.9.1",
-    "smartweave": "https://arweave.net/QKWySKiNimiOU7taGjuh3eLCESmcbBO9A8iNw8FdUFc",
+    "smartweave": "^0.3.3",
     "tiny-worker": "^2.3.0"
   }
 }
