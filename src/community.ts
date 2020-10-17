@@ -116,43 +116,43 @@ export default class Community {
     vault: VaultInterface = {},
     votes: VoteInterface[] = [],
     roles: RoleInterface = {},
-    extraSettings: [string, any][]
+    extraSettings: [string, any][],
   ): Promise<StateInterface> {
     // Make sure the wallet exists.
     await this.checkWallet();
 
     // Make sure data isn't null
-    if(!name) {
+    if (!name) {
       name = '';
     }
-    if(!ticker) {
+    if (!ticker) {
       ticker = '';
     }
-    if(!balances) {
+    if (!balances) {
       balances = {};
     }
-    if(!quorum) {
+    if (!quorum) {
       quorum = 0;
     }
-    if(!support) {
+    if (!support) {
       support = 0;
     }
-    if(!voteLength) {
+    if (!voteLength) {
       voteLength = 0;
     }
-    if(!lockMinLength) {
+    if (!lockMinLength) {
       lockMinLength = 0;
     }
-    if(!lockMaxLength) {
+    if (!lockMaxLength) {
       lockMaxLength = 0;
     }
-    if(!vault) {
+    if (!vault) {
       vault = {};
     }
-    if(!votes) {
+    if (!votes) {
       votes = [];
     }
-    if(!roles) {
+    if (!roles) {
       roles = {};
     }
 
@@ -219,9 +219,9 @@ export default class Community {
       ['lockMaxLength', lockMaxLength],
     ];
 
-    for(let i = 0, j = extraSettings.length; i < j; i++) {
+    for (let i = 0, j = extraSettings.length; i < j; i++) {
       const s = extraSettings[i];
-      if(typeof s[0] === 'string' && typeof s[1] !== 'undefined') {
+      if (typeof s[0] === 'string' && typeof s[1] !== 'undefined') {
         settings.push(s);
       }
     }
