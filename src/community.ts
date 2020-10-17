@@ -116,7 +116,7 @@ export default class Community {
     vault: VaultInterface = {},
     votes: VoteInterface[] = [],
     roles: RoleInterface = {},
-    extraSettings: [string, any][],
+    extraSettings: [string, any][] = [],
   ): Promise<StateInterface> {
     // Make sure the wallet exists.
     await this.checkWallet();
@@ -154,6 +154,9 @@ export default class Community {
     }
     if (!roles) {
       roles = {};
+    }
+    if (!extraSettings) {
+      extraSettings = [];
     }
 
     // Clean data

@@ -56,7 +56,7 @@ export default class Community {
      *
      * @returns - The created state
      */
-    setState(name: string, ticker: string, balances: BalancesInterface, quorum: number, support: number, voteLength: number, lockMinLength: number, lockMaxLength: number, vault: VaultInterface, votes: VoteInterface[], roles: RoleInterface, extraSettings: [string, any][]): Promise<StateInterface>;
+    setState(name: string, ticker: string, balances: BalancesInterface, quorum?: number, support?: number, voteLength?: number, lockMinLength?: number, lockMaxLength?: number, vault?: VaultInterface, votes?: VoteInterface[], roles?: RoleInterface, extraSettings?: [string, any][]): Promise<StateInterface>;
     /**
      * Create a new Community with the current, previously saved (with `setState`) state.
      * @returns The created community transaction ID.
