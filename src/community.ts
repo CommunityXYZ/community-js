@@ -100,6 +100,7 @@ export default class Community {
    * @param vault - Vault object, optional
    * @param votes - Votes, optional
    * @param roles - Roles, optional
+   * @param extraSettings - Any custom extra settings can be sent here. @since v1.1.0
    *
    * @returns - The created state
    */
@@ -115,9 +116,45 @@ export default class Community {
     vault: VaultInterface = {},
     votes: VoteInterface[] = [],
     roles: RoleInterface = {},
+    extraSettings: [string, any][]
   ): Promise<StateInterface> {
     // Make sure the wallet exists.
     await this.checkWallet();
+
+    // Make sure data isn't null
+    if(!name) {
+      name = '';
+    }
+    if(!ticker) {
+      ticker = '';
+    }
+    if(!balances) {
+      balances = {};
+    }
+    if(!quorum) {
+      quorum = 0;
+    }
+    if(!support) {
+      support = 0;
+    }
+    if(!voteLength) {
+      voteLength = 0;
+    }
+    if(!lockMinLength) {
+      lockMinLength = 0;
+    }
+    if(!lockMaxLength) {
+      lockMaxLength = 0;
+    }
+    if(!vault) {
+      vault = {};
+    }
+    if(!votes) {
+      votes = [];
+    }
+    if(!roles) {
+      roles = {};
+    }
 
     // Clean data
     name = name.trim();
@@ -181,6 +218,13 @@ export default class Community {
       ['lockMinLength', lockMinLength],
       ['lockMaxLength', lockMaxLength],
     ];
+
+    for(let i = 0, j = extraSettings.length; i < j; i++) {
+      const s = extraSettings[i];
+      if(typeof s[0] === 'string' && typeof s[1] !== 'undefined') {
+        settings.push(s);
+      }
+    }
 
     // Set the state
     this.state = {
