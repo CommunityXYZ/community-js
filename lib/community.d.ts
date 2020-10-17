@@ -52,10 +52,11 @@ export default class Community {
      * @param vault - Vault object, optional
      * @param votes - Votes, optional
      * @param roles - Roles, optional
+     * @param extraSettings - Any custom extra settings can be sent here. @since v1.1.0
      *
      * @returns - The created state
      */
-    setState(name: string, ticker: string, balances: BalancesInterface, quorum?: number, support?: number, voteLength?: number, lockMinLength?: number, lockMaxLength?: number, vault?: VaultInterface, votes?: VoteInterface[], roles?: RoleInterface): Promise<StateInterface>;
+    setState(name: string, ticker: string, balances: BalancesInterface, quorum: number, support: number, voteLength: number, lockMinLength: number, lockMaxLength: number, vault: VaultInterface, votes: VoteInterface[], roles: RoleInterface, extraSettings: [string, any][]): Promise<StateInterface>;
     /**
      * Create a new Community with the current, previously saved (with `setState`) state.
      * @returns The created community transaction ID.
