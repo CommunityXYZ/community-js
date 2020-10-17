@@ -12,14 +12,15 @@ To get started you need to have community-js installed on your webpage or server
 npm install community-js
 ```
 
-Or you can use the currently permaweb version for your frontend
+Or you can use the currently permaweb version for your frontend.
+
 Minified:
 ```html
-<script src="https://arweave.net/bCvVC98MMNW-c6EhWfV1Tuho7Si-nAvaDICKNLGIwaI"></script>
+<script src="https://arweave.net/xqxDMg4VM11bWC5Vz8owtOiOiwx9KYGkcFGgYV5DNr0"></script>
 ```
 Full:
 ```html
-<script src="https://arweave.net/hzi7YilHeXLBo8oEzc6dUThO1wkRYPlB-QLKfY22Bk8"></script>
+<script src="https://arweave.net/Uo_LBOBNBugA3QKNxxTPM_7qVAj5Dfm8dIrJTCsV3i0"></script>
 ```
 
 ## Documentation
