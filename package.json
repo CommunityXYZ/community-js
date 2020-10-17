@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "arweave": "^1.9.1",
-    "smartweave": "^0.4.0",
+    "smartweave": "^0.3.x",
     "tiny-worker": "^2.3.0"
   }
 }
