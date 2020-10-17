@@ -1,4 +1,4 @@
-![Community](https://raw.githubusercontent.com/CommunityXYZ/website/master/src/assets/images/logo.png)
+![Community](https://raw.githubusercontent.com/CommunityXYZ/website/master/src/assets/images/logo.svg)
 # CommunityJS
 
 ## About
