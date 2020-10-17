@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [ActionInterface](_faces_.actioninterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / ActionInterface
 
 # Interface: ActionInterface
 
@@ -15,12 +17,12 @@
 
 ## Properties
 
-###  caller
+### caller
 
-• **caller**: *string*
+•  **caller**: string
 
 ___
 
-###  input
+### input
 
-• **input**: *[InputInterface](_faces_.inputinterface.md)*
+•  **input**: [InputInterface](_faces_.inputinterface.md)

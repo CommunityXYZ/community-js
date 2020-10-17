@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [BalancesInterface](_faces_.balancesinterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / BalancesInterface
 
 # Interface: BalancesInterface
 
@@ -8,4 +10,4 @@
 
 ## Indexable
 
-* \[ **key**: *string*\]: number
+▪ [key: string]: number

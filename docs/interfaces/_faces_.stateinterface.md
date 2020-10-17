@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [StateInterface](_faces_.stateinterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / StateInterface
 
 # Interface: StateInterface
 
@@ -20,42 +22,42 @@
 
 ## Properties
 
-###  balances
+### balances
 
-• **balances**: *[BalancesInterface](_faces_.balancesinterface.md)*
-
-___
-
-###  name
-
-• **name**: *string*
+•  **balances**: [BalancesInterface](_faces_.balancesinterface.md)
 
 ___
 
-###  roles
+### name
 
-• **roles**: *[RoleInterface](_faces_.roleinterface.md)*
-
-___
-
-###  settings
-
-• **settings**: *Map‹string, any›*
+•  **name**: string
 
 ___
 
-###  ticker
+### roles
 
-• **ticker**: *string*
-
-___
-
-###  vault
-
-• **vault**: *[VaultInterface](_faces_.vaultinterface.md)*
+•  **roles**: [RoleInterface](_faces_.roleinterface.md)
 
 ___
 
-###  votes
+### settings
 
-• **votes**: *[VoteInterface](_faces_.voteinterface.md)[]*
+•  **settings**: Map\<string, any>
+
+___
+
+### ticker
+
+•  **ticker**: string
+
+___
+
+### vault
+
+•  **vault**: [VaultInterface](_faces_.vaultinterface.md)
+
+___
+
+### votes
+
+•  **votes**: [VoteInterface](_faces_.voteinterface.md)[]

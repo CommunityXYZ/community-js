@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [ResultInterface](_faces_.resultinterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / ResultInterface
 
 # Interface: ResultInterface
 
@@ -16,18 +18,18 @@
 
 ## Properties
 
-###  balance
+### balance
 
-• **balance**: *number*
-
-___
-
-###  role
-
-• **role**: *string*
+•  **balance**: number
 
 ___
 
-###  target
+### role
 
-• **target**: *string*
+•  **role**: string
+
+___
+
+### target
+
+•  **target**: string

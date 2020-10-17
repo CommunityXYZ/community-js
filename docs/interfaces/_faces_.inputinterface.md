@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [InputInterface](_faces_.inputinterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / InputInterface
 
 # Interface: InputInterface
 
@@ -12,152 +14,152 @@
 
 ### Properties
 
-* [cast](_faces_.inputinterface.md#optional-cast)
+* [cast](_faces_.inputinterface.md#cast)
 * [function](_faces_.inputinterface.md#function)
-* [id](_faces_.inputinterface.md#optional-id)
-* [key](_faces_.inputinterface.md#optional-key)
-* [lockLength](_faces_.inputinterface.md#optional-locklength)
-* [nays](_faces_.inputinterface.md#optional-nays)
-* [note](_faces_.inputinterface.md#optional-note)
-* [qty](_faces_.inputinterface.md#optional-qty)
-* [recipient](_faces_.inputinterface.md#optional-recipient)
-* [start](_faces_.inputinterface.md#optional-start)
-* [status](_faces_.inputinterface.md#optional-status)
-* [target](_faces_.inputinterface.md#optional-target)
-* [totalWeight](_faces_.inputinterface.md#optional-totalweight)
-* [type](_faces_.inputinterface.md#optional-type)
-* [value](_faces_.inputinterface.md#optional-value)
-* [voted](_faces_.inputinterface.md#optional-voted)
-* [yays](_faces_.inputinterface.md#optional-yays)
+* [id](_faces_.inputinterface.md#id)
+* [key](_faces_.inputinterface.md#key)
+* [lockLength](_faces_.inputinterface.md#locklength)
+* [nays](_faces_.inputinterface.md#nays)
+* [note](_faces_.inputinterface.md#note)
+* [qty](_faces_.inputinterface.md#qty)
+* [recipient](_faces_.inputinterface.md#recipient)
+* [start](_faces_.inputinterface.md#start)
+* [status](_faces_.inputinterface.md#status)
+* [target](_faces_.inputinterface.md#target)
+* [totalWeight](_faces_.inputinterface.md#totalweight)
+* [type](_faces_.inputinterface.md#type)
+* [value](_faces_.inputinterface.md#value)
+* [voted](_faces_.inputinterface.md#voted)
+* [yays](_faces_.inputinterface.md#yays)
 
 ## Properties
 
-### `Optional` cast
+### cast
 
-• **cast**? : *string*
-
-___
-
-###  function
-
-• **function**: *[GetFunctionType](../modules/_faces_.md#getfunctiontype) | [SetFunctionType](../modules/_faces_.md#setfunctiontype)*
+• `Optional` **cast**: string
 
 ___
 
-### `Optional` id
+### function
 
-• **id**? : *number*
-
-*Inherited from [InputInterface](_faces_.inputinterface.md).[id](_faces_.inputinterface.md#optional-id)*
+•  **function**: [GetFunctionType](../modules/_faces_.md#getfunctiontype) \| [SetFunctionType](../modules/_faces_.md#setfunctiontype)
 
 ___
 
-### `Optional` key
+### id
 
-• **key**? : *string*
+• `Optional` **id**: number
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[key](_faces_.inputinterface.md#optional-key)*
-
-___
-
-### `Optional` lockLength
-
-• **lockLength**? : *number*
-
-*Inherited from [InputInterface](_faces_.inputinterface.md).[lockLength](_faces_.inputinterface.md#optional-locklength)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[id](_faces_.inputinterface.md#id)*
 
 ___
 
-### `Optional` nays
+### key
 
-• **nays**? : *number*
+• `Optional` **key**: string
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[nays](_faces_.inputinterface.md#optional-nays)*
-
-___
-
-### `Optional` note
-
-• **note**? : *string*
-
-*Inherited from [InputInterface](_faces_.inputinterface.md).[note](_faces_.inputinterface.md#optional-note)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[key](_faces_.inputinterface.md#key)*
 
 ___
 
-### `Optional` qty
+### lockLength
 
-• **qty**? : *number*
+• `Optional` **lockLength**: number
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[qty](_faces_.inputinterface.md#optional-qty)*
-
-___
-
-### `Optional` recipient
-
-• **recipient**? : *string*
-
-*Inherited from [InputInterface](_faces_.inputinterface.md).[recipient](_faces_.inputinterface.md#optional-recipient)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[lockLength](_faces_.inputinterface.md#locklength)*
 
 ___
 
-### `Optional` start
+### nays
 
-• **start**? : *number*
+• `Optional` **nays**: number
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[start](_faces_.inputinterface.md#optional-start)*
-
-___
-
-### `Optional` status
-
-• **status**? : *[VoteStatus](../modules/_faces_.md#votestatus)*
-
-*Inherited from [InputInterface](_faces_.inputinterface.md).[status](_faces_.inputinterface.md#optional-status)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[nays](_faces_.inputinterface.md#nays)*
 
 ___
 
-### `Optional` target
+### note
 
-• **target**? : *string*
+• `Optional` **note**: string
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[target](_faces_.inputinterface.md#optional-target)*
-
-___
-
-### `Optional` totalWeight
-
-• **totalWeight**? : *number*
-
-*Inherited from [InputInterface](_faces_.inputinterface.md).[totalWeight](_faces_.inputinterface.md#optional-totalweight)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[note](_faces_.inputinterface.md#note)*
 
 ___
 
-### `Optional` type
+### qty
 
-• **type**? : *[VoteType](../modules/_faces_.md#votetype)*
+• `Optional` **qty**: number
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[type](_faces_.inputinterface.md#optional-type)*
-
-___
-
-### `Optional` value
-
-• **value**? : *any*
-
-*Inherited from [InputInterface](_faces_.inputinterface.md).[value](_faces_.inputinterface.md#optional-value)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[qty](_faces_.inputinterface.md#qty)*
 
 ___
 
-### `Optional` voted
+### recipient
 
-• **voted**? : *string[]*
+• `Optional` **recipient**: string
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[voted](_faces_.inputinterface.md#optional-voted)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[recipient](_faces_.inputinterface.md#recipient)*
 
 ___
 
-### `Optional` yays
+### start
 
-• **yays**? : *number*
+• `Optional` **start**: number
 
-*Inherited from [InputInterface](_faces_.inputinterface.md).[yays](_faces_.inputinterface.md#optional-yays)*
+*Inherited from [InputInterface](_faces_.inputinterface.md).[start](_faces_.inputinterface.md#start)*
+
+___
+
+### status
+
+• `Optional` **status**: [VoteStatus](../modules/_faces_.md#votestatus)
+
+*Inherited from [InputInterface](_faces_.inputinterface.md).[status](_faces_.inputinterface.md#status)*
+
+___
+
+### target
+
+• `Optional` **target**: string
+
+*Inherited from [InputInterface](_faces_.inputinterface.md).[target](_faces_.inputinterface.md#target)*
+
+___
+
+### totalWeight
+
+• `Optional` **totalWeight**: number
+
+*Inherited from [InputInterface](_faces_.inputinterface.md).[totalWeight](_faces_.inputinterface.md#totalweight)*
+
+___
+
+### type
+
+• `Optional` **type**: [VoteType](../modules/_faces_.md#votetype)
+
+*Inherited from [InputInterface](_faces_.inputinterface.md).[type](_faces_.inputinterface.md#type)*
+
+___
+
+### value
+
+• `Optional` **value**: any
+
+*Inherited from [InputInterface](_faces_.inputinterface.md).[value](_faces_.inputinterface.md#value)*
+
+___
+
+### voted
+
+• `Optional` **voted**: string[]
+
+*Inherited from [InputInterface](_faces_.inputinterface.md).[voted](_faces_.inputinterface.md#voted)*
+
+___
+
+### yays
+
+• `Optional` **yays**: number
+
+*Inherited from [InputInterface](_faces_.inputinterface.md).[yays](_faces_.inputinterface.md#yays)*

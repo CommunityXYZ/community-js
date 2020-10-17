@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [RoleInterface](_faces_.roleinterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / RoleInterface
 
 # Interface: RoleInterface
 
@@ -8,4 +10,4 @@
 
 ## Indexable
 
-* \[ **key**: *string*\]: string
+▪ [key: string]: string

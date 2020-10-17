@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [VaultParamsInterface](_faces_.vaultparamsinterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / VaultParamsInterface
 
 # Interface: VaultParamsInterface
 
@@ -16,18 +18,18 @@
 
 ## Properties
 
-###  balance
+### balance
 
-• **balance**: *number*
-
-___
-
-###  end
-
-• **end**: *number*
+•  **balance**: number
 
 ___
 
-###  start
+### end
 
-• **start**: *number*
+•  **end**: number
+
+___
+
+### start
+
+•  **start**: number

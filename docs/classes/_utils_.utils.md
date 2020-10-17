@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["utils"](../modules/_utils_.md) › [Utils](_utils_.utils.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["utils"](../modules/_utils_.md) / Utils
 
 # Class: Utils
 
@@ -10,20 +12,20 @@
 
 ### Methods
 
-* [trimObj](_utils_.utils.md#static-trimobj)
+* [trimObj](_utils_.utils.md#trimobj)
 
 ## Methods
 
-### `Static` trimObj
+### trimObj
 
-▸ **trimObj**(`obj`: any): *any*
+▸ `Static`**trimObj**(`obj`: any): any
 
 Trims object keys and values.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `obj` | any | Object to trim key/values  |
 
-**Returns:** *any*
+**Returns:** any

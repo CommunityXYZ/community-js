@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](_faces_.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / "faces"
 
 # Module: "faces"
 
@@ -25,24 +27,24 @@
 
 ## Type aliases
 
-###  GetFunctionType
+### GetFunctionType
 
-Ƭ **GetFunctionType**: *"balance" | "unlockedBalance" | "vaultBalance" | "role"*
-
-___
-
-###  SetFunctionType
-
-Ƭ **SetFunctionType**: *"transfer" | "vote" | "propose" | "finalize" | "lock" | "increaseVault" | "unlock"*
+Ƭ  **GetFunctionType**: \"balance\" \| \"unlockedBalance\" \| \"vaultBalance\" \| \"role\"
 
 ___
 
-###  VoteStatus
+### SetFunctionType
 
-Ƭ **VoteStatus**: *"active" | "quorumFailed" | "passed" | "failed"*
+Ƭ  **SetFunctionType**: \"transfer\" \| \"vote\" \| \"propose\" \| \"finalize\" \| \"lock\" \| \"increaseVault\" \| \"unlock\"
 
 ___
 
-###  VoteType
+### VoteStatus
 
-Ƭ **VoteType**: *"mint" | "mintLocked" | "burnVault" | "indicative" | "set"*
+Ƭ  **VoteStatus**: \"active\" \| \"quorumFailed\" \| \"passed\" \| \"failed\"
+
+___
+
+### VoteType
+
+Ƭ  **VoteType**: \"mint\" \| \"mintLocked\" \| \"burnVault\" \| \"indicative\" \| \"set\"

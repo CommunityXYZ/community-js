@@ -1,4 +1,6 @@
-[community-js](../README.md) › ["faces"](../modules/_faces_.md) › [VaultInterface](_faces_.vaultinterface.md)
+**[community-js](../README.md)**
+
+> [Globals](../README.md) / ["faces"](../modules/_faces_.md) / VaultInterface
 
 # Interface: VaultInterface
 
@@ -8,4 +10,4 @@
 
 ## Indexable
 
-* \[ **key**: *string*\]: [VaultParamsInterface](_faces_.vaultparamsinterface.md)[]
+▪ [key: string]: [VaultParamsInterface](_faces_.vaultparamsinterface.md)[]
