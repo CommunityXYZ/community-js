@@ -8,8 +8,8 @@ import Utils from './utils';
 export default class Community {
   private readonly contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
   private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
-  private readonly txFee: number = 0.83;
-  private readonly createFee: number = 0.21;
+  private readonly txFee: number = 0.21;
+  private readonly createFee: number = 0.83;
 
   private arweave: Arweave;
   private wallet!: JWKInterface;
