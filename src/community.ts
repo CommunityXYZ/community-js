@@ -8,8 +8,8 @@ import Utils from './utils';
 export default class Community {
   private readonly contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
   private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
-  private readonly txFee: number = 400000000;
-  private readonly createFee: number = 9500000000;
+  private readonly txFee: number = 0.83;
+  private readonly createFee: number = 0.21;
 
   private arweave: Arweave;
   private wallet!: JWKInterface;
@@ -267,14 +267,12 @@ export default class Community {
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
    */
   public async getCreateCost(inAr = false, options?: { formatted: boolean; decimals: number; trim: boolean }): Promise<string> {
-    const byteSize = new Blob([JSON.stringify(this.state)]).size;
-    const res = await this.arweave.api.get(`/price/${byteSize + this.createFee}`);
-
+    const res = this.arweave.ar.arToWinston(this.createFee.toString());
     if (inAr) {
-      return this.arweave.ar.winstonToAr(res.data, options);
+      return this.arweave.ar.winstonToAr(res, options);
     }
 
-    return res.data;
+    return res;
   }
 
   /**
@@ -283,13 +281,12 @@ export default class Community {
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
    */
   public async getActionCost(inAr = false, options?: { formatted: boolean; decimals: number; trim: boolean }): Promise<string> {
-    const res = await this.arweave.api.get(`/price/${this.txFee}`);
-
+    const res = this.arweave.ar.arToWinston(this.txFee.toString());
     if (inAr) {
-      return this.arweave.ar.winstonToAr(res.data, options);
+      return this.arweave.ar.winstonToAr(res, options);
     }
 
-    return res.data;
+    return res;
   }
 
   /**
