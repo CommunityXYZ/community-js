@@ -512,12 +512,9 @@ export default class Community {
    * @param action - Current action name. Usually the same as the method name
    * @param bytes - Bytes to get it's price to charge
    */
-  private async chargeFee(action: string, bytes: number = this.txFee): Promise<void> {
+  private async chargeFee(action: string, fee: number = this.txFee): Promise<void> {
     // TODO: Check if the user has enough balance for this action
-    const fee = (await this.arweave.api.get(`/price/${bytes}`)).data;
     const balance = await this.arweave.wallets.getBalance(this.walletAddress);
-
-    console.log(balance, fee);
 
     if (+balance < +fee) {
       throw new Error('Not enough balance.');
@@ -531,7 +528,7 @@ export default class Community {
     const tx = await this.arweave.createTransaction(
       {
         target,
-        quantity: fee.toString(),
+        quantity: this.arweave.ar.arToWinston(fee.toString()),
       },
       this.wallet,
     );
