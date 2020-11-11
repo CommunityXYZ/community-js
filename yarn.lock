@@ -603,16 +603,15 @@ shelljs@^0.8.4:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-smartweave@^0.4.10:
-  version "0.4.10"
-  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.10.tgz#9f5c29e439226476599476beaedb60d71c6cb57f"
-  integrity sha512-6/F44M55OahP7vM1SIxYGBNuYJO+UUEuHgN/U1YGwib9WOKbBXmhJH5g5249d3CWbdtPd37qFrtzfkfXFAk6jw==
+smartweave@^0.4.11:
+  version "0.4.11"
+  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.11.tgz#847cc736f1b15f425059407e1a654a49a16893f7"
+  integrity sha512-y/tcaWh9Uq6qPzIpqLadsxjR6GoeFU2no8KoQ8ycQgQbrcGKm7hQGghWNOknPzX+qaoF/xEA73hkAewyKM9Tpw==
   dependencies:
     "@weavery/clarity" "^0.1.5"
     arweave "^1.9.1"
     bignumber.js "^9.0.1"
     loglevel "^1.7.0"
-    store "^2.0.12"
     yargs "^16.1.0"
 
 source-map-support@^0.5.17:
@@ -632,11 +631,6 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
-
-store@^2.0.12:
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/store/-/store-2.0.12.tgz#8c534e2a0b831f72b75fc5f1119857c44ef5d593"
-  integrity sha1-jFNOKguDH3K3X8XxEZhXxE711ZM=
 
 string-width@^4.1.0, string-width@^4.2.0:
   version "4.2.0"
