@@ -16,11 +16,11 @@ Or you can use the currently permaweb version for your frontend.
 
 Minified:
 ```html
-<script src="https://arweave.net/xqxDMg4VM11bWC5Vz8owtOiOiwx9KYGkcFGgYV5DNr0"></script>
+<script src="https://arweave.net/1LZZnqhztNtoQ_w9ZDzjg1mJuXRxkxHH0azF-5Jyj5w"></script>
 ```
 Full:
 ```html
-<script src="https://arweave.net/Uo_LBOBNBugA3QKNxxTPM_7qVAj5Dfm8dIrJTCsV3i0"></script>
+<script src="https://arweave.net/itSqmoaxOOo3frmlyVs1EFRnerRaU80E_YGNu-K50nA"></script>
 ```
 
 ## Documentation
