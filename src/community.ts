@@ -1,4 +1,5 @@
 import Arweave from 'arweave';
+import axios from 'axios';
 import { interactWrite, createContractFromTx, readContract, interactWriteDryRun, interactRead } from 'smartweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import Transaction from 'arweave/web/lib/transaction';
@@ -6,6 +7,7 @@ import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateI
 import Utils from './utils';
 
 export default class Community {
+  private readonly cacheServer: string = 'https://cache.community.xyz/';
   private readonly contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
   private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
   private readonly txFee: number = 0.21;
@@ -513,17 +515,21 @@ export default class Community {
    * @param bytes - Bytes to get it's price to charge
    */
   private async chargeFee(action: string, fee: number = this.txFee): Promise<void> {
-    // TODO: Check if the user has enough balance for this action
+    // Check if the user has enough balance for this action
     const balance = await this.arweave.wallets.getBalance(this.walletAddress);
 
     if (+balance < +fee) {
       throw new Error('Not enough balance.');
     }
 
-    // @ts-ignore
-    const target = await readContract(this.arweave, this.mainContract).then((state: StateInterface) => {
-      return this.selectWeightedHolder(state.balances, state.vault);
-    });
+    let state: StateInterface;
+    try {
+      state = (await axios(`${this.cacheServer}contract/${this.mainContract}`)).data;
+    } catch(e) {
+      state = await readContract(this.arweave, this.mainContract);
+    }
+    
+    const target = await this.selectWeightedHolder(state.balances, state.vault);
 
     const tx = await this.arweave.createTransaction(
       {
@@ -584,10 +590,16 @@ export default class Community {
 
     this.stateCallInProgress = true;
 
-    // @ts-ignore
-    const res: StateInterface = await readContract(this.arweave, this.communityContract);
-    res.settings = new Map(res.settings);
-    this.state = res;
+    let state: StateInterface;
+    try {
+      state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
+    } catch(e) {
+      state = await readContract(this.arweave, this.communityContract);
+    }
+
+    
+    state.settings = new Map(state.settings);
+    this.state = state;
 
     this.stateCallInProgress = false;
 
@@ -602,7 +614,7 @@ export default class Community {
    * @param input - InputInterface
    */
   private async interact(input: InputInterface): Promise<string> {
-    // @ts-ignore
+
     const res = await interactWriteDryRun(this.arweave, this.wallet, this.communityContract, input);
     if (res.type === 'error') {
       //  || res.type === 'exception'
