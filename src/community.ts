@@ -525,10 +525,10 @@ export default class Community {
     let state: StateInterface;
     try {
       state = (await axios(`${this.cacheServer}contract/${this.mainContract}`)).data;
-    } catch(e) {
+    } catch (e) {
       state = await readContract(this.arweave, this.mainContract);
     }
-    
+
     const target = await this.selectWeightedHolder(state.balances, state.vault);
 
     const tx = await this.arweave.createTransaction(
@@ -593,11 +593,10 @@ export default class Community {
     let state: StateInterface;
     try {
       state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
-    } catch(e) {
+    } catch (e) {
       state = await readContract(this.arweave, this.communityContract);
     }
 
-    
     state.settings = new Map(state.settings);
     this.state = state;
 
@@ -614,7 +613,6 @@ export default class Community {
    * @param input - InputInterface
    */
   private async interact(input: InputInterface): Promise<string> {
-
     const res = await interactWriteDryRun(this.arweave, this.wallet, this.communityContract, input);
     if (res.type === 'error') {
       //  || res.type === 'exception'
