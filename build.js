@@ -13,10 +13,13 @@ const runBuild = async (doClean = false) => {
  
   // Build to browser js
   build({
-    entryPoints: ['./src/community.ts'],
+    entryPoints: ['./browser.ts'],
     minify: false,
     bundle: true,
-    outfile: './dist/community.js'
+    platform: 'browser',
+    target: ['chrome58','firefox57','safari11','edge16'],
+    outfile: './dist/community.js',
+    sourcemap: 'inline'
   }).catch((e) => {
     console.log(e);
     process.exit(1)
@@ -24,10 +27,13 @@ const runBuild = async (doClean = false) => {
 
   // Minified version
   build({
-    entryPoints: ['./src/community.ts'],
+    entryPoints: ['./browser.ts'],
     minify: true,
     bundle: true,
-    outfile: './dist/community.min.js'
+    platform: 'browser',
+    target: ['chrome58','firefox57','safari11','edge16'],
+    outfile: './dist/community.min.js',
+    sourcemap: 'inline'
   }).catch((e) => {
     console.log(e);
     process.exit(1)
