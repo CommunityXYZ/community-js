@@ -177,11 +177,6 @@ export default class Community {
      */
     private chargeFee;
     /**
-     * Set default tags to each transaction sent from CommunityJS.
-     * @param tx - Transaction to set the defaults.
-     */
-    private setDefaultTags;
-    /**
      * Function used to check if the user is already logged in
      */
     private checkWallet;
