@@ -259,7 +259,7 @@ export default class Community {
    */
   public async create(): Promise<string> {
     // Create the new Community.
-    const {target, winstonQty} = await this.chargeFee(this.createFee);
+    const { target, winstonQty } = await this.chargeFee(this.createFee);
 
     const toSubmit: any = this.state;
     toSubmit.settings = Array.from(this.state.settings);
@@ -270,12 +270,12 @@ export default class Community {
       this.contractSrc,
       JSON.stringify(toSubmit),
       [
-        {name: 'Action', value: 'CreateCommunity'},
-        {name: 'Message', value: `Created the Community ${this.state.name} with ticker ${this.state.ticker}.`},
-        {name: 'Service', value: 'CommunityXYZ'}
+        { name: 'Action', value: 'CreateCommunity' },
+        { name: 'Message', value: `Created the Community ${this.state.name} with ticker ${this.state.ticker}.` },
+        { name: 'Service', value: 'CommunityXYZ' },
       ],
       target,
-      winstonQty
+      winstonQty,
     );
     this.communityContract = communityID;
     return communityID;
@@ -445,12 +445,11 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async transfer(target: string, qty: number): Promise<string> {
-    return this.interact({ function: 'transfer', target, qty }, 
-    [
-      {name: 'Action', value: 'transfer'}, 
-      {name: 'Message', value: `Transfer from ${this.walletAddress} to ${target} of ${qty}`}, 
-      {name: 'Community-ID', value: this.communityContract},
-      {name: 'Service', value: 'CommunityXYZ'}
+    return this.interact({ function: 'transfer', target, qty }, [
+      { name: 'Action', value: 'transfer' },
+      { name: 'Message', value: `Transfer from ${this.walletAddress} to ${target} of ${qty}` },
+      { name: 'Community-ID', value: this.communityContract },
+      { name: 'Service', value: 'CommunityXYZ' },
     ]);
   }
 
@@ -461,12 +460,11 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async lockBalance(qty: number, lockLength: number): Promise<string> {
-    return this.interact({ function: 'lock', qty, lockLength },
-    [
-      {name: 'Action', value: 'lock'},
-      {name: 'Message', value: `Locked ${qty} for ${lockLength} blocks.`},
-      {name: 'Community-ID', value: this.communityContract},
-      {name: 'Service', value: 'CommunityXYZ'}
+    return this.interact({ function: 'lock', qty, lockLength }, [
+      { name: 'Action', value: 'lock' },
+      { name: 'Message', value: `Locked ${qty} for ${lockLength} blocks.` },
+      { name: 'Community-ID', value: this.communityContract },
+      { name: 'Service', value: 'CommunityXYZ' },
     ]);
   }
 
@@ -475,12 +473,11 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async unlockVault(): Promise<string> {
-    return this.interact({ function: 'unlock' },
-    [
-      {name: 'Action', value: 'unlock'},
-      {name: 'Message', value: `Unlocked vaults.`},
-      {name: 'Community-ID', value: this.communityContract},
-      {name: 'Service', value: 'CommunityXYZ'}
+    return this.interact({ function: 'unlock' }, [
+      { name: 'Action', value: 'unlock' },
+      { name: 'Message', value: `Unlocked vaults.` },
+      { name: 'Community-ID', value: this.communityContract },
+      { name: 'Service', value: 'CommunityXYZ' },
     ]);
   }
 
@@ -491,12 +488,11 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async increaseVault(vaultId: number, lockLength: number): Promise<string> {
-    return this.interact({ function: 'increaseVault', id: vaultId, lockLength },
-    [
-      {name: 'Action', value: 'increase'},
-      {name: 'Message', value: `Increased vault ${vaultId} for ${lockLength} blocks.`},
-      {name: 'Community-ID', value: this.communityContract},
-      {name: 'Service', value: 'CommunityXYZ'}
+    return this.interact({ function: 'increaseVault', id: vaultId, lockLength }, [
+      { name: 'Action', value: 'increase' },
+      { name: 'Message', value: `Increased vault ${vaultId} for ${lockLength} blocks.` },
+      { name: 'Community-ID', value: this.communityContract },
+      { name: 'Service', value: 'CommunityXYZ' },
     ]);
   }
 
@@ -542,13 +538,12 @@ export default class Community {
 
     const input: InputInterface = { ...pCopy, function: 'propose' };
 
-    return this.interact(input, 
-      [
-        {name: 'Action', value: 'propose'},
-        {name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}`},
-        {name: 'Community-ID', value: this.communityContract},
-        {name: 'Service', value: 'CommunityXYZ'}
-      ]);
+    return this.interact(input, [
+      { name: 'Action', value: 'propose' },
+      { name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}` },
+      { name: 'Community-ID', value: this.communityContract },
+      { name: 'Service', value: 'CommunityXYZ' },
+    ]);
   }
 
   /**
@@ -558,12 +553,11 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async vote(id: number, cast: 'yay' | 'nay'): Promise<string> {
-    return this.interact({ function: 'vote', id, cast }, 
-    [
-      {name: 'Action', value: 'vote'},
-      {name: 'Message', value: `Voted on ${id}: ${cast}`},
-      {name: 'Community-ID', value: this.communityContract},
-      {name: 'Service', value: 'CommunityXYZ'}
+    return this.interact({ function: 'vote', id, cast }, [
+      { name: 'Action', value: 'vote' },
+      { name: 'Message', value: `Voted on ${id}: ${cast}` },
+      { name: 'Community-ID', value: this.communityContract },
+      { name: 'Service', value: 'CommunityXYZ' },
     ]);
   }
 
@@ -573,12 +567,11 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async finalize(id: number): Promise<string> {
-    return this.interact({ function: 'finalize', id },
-    [
-      {name: 'Action', value: 'finalize'},
-      {name: 'Message', value: `Finalized completed proposals.`},
-      {name: 'Community-ID', value: this.communityContract},
-      {name: 'Service', value: 'CommunityXYZ'}
+    return this.interact({ function: 'finalize', id }, [
+      { name: 'Action', value: 'finalize' },
+      { name: 'Message', value: `Finalized completed proposals.` },
+      { name: 'Community-ID', value: this.communityContract },
+      { name: 'Service', value: 'CommunityXYZ' },
     ]);
   }
 
@@ -587,7 +580,7 @@ export default class Community {
    * @param action - Current action name. Usually the same as the method name
    * @param bytes - Bytes to get it's price to charge
    */
-  private async chargeFee(fee: number = this.txFee): Promise<{target: string, winstonQty: string}> {
+  private async chargeFee(fee: number = this.txFee): Promise<{ target: string; winstonQty: string }> {
     const balance = await this.arweave.wallets.getBalance(this.walletAddress);
 
     if (+balance < +fee) {
@@ -664,10 +657,9 @@ export default class Community {
   private async interact(
     input: InputInterface,
     tags: { name: string; value: string }[],
-    fee: number = this.txFee
+    fee: number = this.txFee,
   ): Promise<string> {
-
-    const {target, winstonQty} = await this.chargeFee(fee);
+    const { target, winstonQty } = await this.chargeFee(fee);
     const res = await interactWriteDryRun(
       this.arweave,
       this.wallet,
