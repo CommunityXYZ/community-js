@@ -1,9 +1,17 @@
 import Arweave from 'arweave';
 import axios from 'axios';
-import { interactWrite, createContractFromTx, readContract, interactWriteDryRun, interactRead } from 'smartweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import Transaction from 'arweave/web/lib/transaction';
-import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface } from './faces';
+import { readContract, interactWriteDryRun, interactWrite, createContractFromTx } from 'smartweave';
+import {
+  BalancesInterface,
+  VaultInterface,
+  VoteInterface,
+  RoleInterface,
+  StateInterface,
+  InputInterface,
+  ResultInterface,
+} from './faces';
 import Utils from './utils';
 
 export default class Community {
@@ -251,15 +259,25 @@ export default class Community {
    */
   public async create(): Promise<string> {
     // Create the new Community.
-    await this.chargeFee('CreateCommunity', this.createFee);
+    const {target, winstonQty} = await this.chargeFee(this.createFee);
 
     const toSubmit: any = this.state;
     toSubmit.settings = Array.from(this.state.settings);
 
-    // @ts-ignore
-    const communityID = await createContractFromTx(this.arweave, this.wallet, this.contractSrc, JSON.stringify(toSubmit));
+    const communityID = await createContractFromTx(
+      this.arweave,
+      this.wallet,
+      this.contractSrc,
+      JSON.stringify(toSubmit),
+      [
+        {name: 'Action', value: 'CreateCommunity'},
+        {name: 'Message', value: `Created the Community ${this.state.name} with ticker ${this.state.ticker}.`},
+        {name: 'Service', value: 'CommunityXYZ'}
+      ],
+      target,
+      winstonQty
+    );
     this.communityContract = communityID;
-
     return communityID;
   }
 
@@ -268,7 +286,10 @@ export default class Community {
    * @param inAr - Return in winston or AR
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
    */
-  public async getCreateCost(inAr = false, options?: { formatted: boolean; decimals: number; trim: boolean }): Promise<string> {
+  public async getCreateCost(
+    inAr = false,
+    options?: { formatted: boolean; decimals: number; trim: boolean },
+  ): Promise<string> {
     const res = this.arweave.ar.arToWinston(this.createFee.toString());
     if (inAr) {
       return this.arweave.ar.winstonToAr(res, options);
@@ -282,7 +303,10 @@ export default class Community {
    * @param inAr - Return in winston or AR
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
    */
-  public async getActionCost(inAr = false, options?: { formatted: boolean; decimals: number; trim: boolean }): Promise<string> {
+  public async getActionCost(
+    inAr = false,
+    options?: { formatted: boolean; decimals: number; trim: boolean },
+  ): Promise<string> {
     const res = this.arweave.ar.arToWinston(this.txFee.toString());
     if (inAr) {
       return this.arweave.ar.winstonToAr(res, options);
@@ -372,7 +396,10 @@ export default class Community {
    * @param balances  - State balances, optional.
    * @param vault - State vault, optional.
    */
-  public async selectWeightedHolder(balances: BalancesInterface = this.state.balances, vault: VaultInterface = this.state.vault) {
+  public async selectWeightedHolder(
+    balances: BalancesInterface = this.state.balances,
+    vault: VaultInterface = this.state.vault,
+  ) {
     if (!this.state) {
       throw new Error('Need to initilate the state and worker.');
     }
@@ -418,8 +445,13 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async transfer(target: string, qty: number): Promise<string> {
-    await this.chargeFee('transfer');
-    return this.interact({ function: 'transfer', target, qty });
+    return this.interact({ function: 'transfer', target, qty }, 
+    [
+      {name: 'Action', value: 'transfer'}, 
+      {name: 'Message', value: `Transfer from ${this.walletAddress} to ${target} of ${qty}`}, 
+      {name: 'Community-ID', value: this.communityContract},
+      {name: 'Service', value: 'CommunityXYZ'}
+    ]);
   }
 
   /**
@@ -429,8 +461,13 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async lockBalance(qty: number, lockLength: number): Promise<string> {
-    await this.chargeFee('lockBalance');
-    return this.interact({ function: 'lock', qty, lockLength });
+    return this.interact({ function: 'lock', qty, lockLength },
+    [
+      {name: 'Action', value: 'lock'},
+      {name: 'Message', value: `Locked ${qty} for ${lockLength} blocks.`},
+      {name: 'Community-ID', value: this.communityContract},
+      {name: 'Service', value: 'CommunityXYZ'}
+    ]);
   }
 
   /**
@@ -438,8 +475,13 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async unlockVault(): Promise<string> {
-    await this.chargeFee('unlockVault');
-    return this.interact({ function: 'unlock' });
+    return this.interact({ function: 'unlock' },
+    [
+      {name: 'Action', value: 'unlock'},
+      {name: 'Message', value: `Unlocked vaults.`},
+      {name: 'Community-ID', value: this.communityContract},
+      {name: 'Service', value: 'CommunityXYZ'}
+    ]);
   }
 
   /**
@@ -449,8 +491,13 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async increaseVault(vaultId: number, lockLength: number): Promise<string> {
-    await this.chargeFee('increaseVault');
-    return this.interact({ function: 'increaseVault', id: vaultId, lockLength });
+    return this.interact({ function: 'increaseVault', id: vaultId, lockLength },
+    [
+      {name: 'Action', value: 'increase'},
+      {name: 'Message', value: `Increased vault ${vaultId} for ${lockLength} blocks.`},
+      {name: 'Community-ID', value: this.communityContract},
+      {name: 'Service', value: 'CommunityXYZ'}
+    ]);
   }
 
   /**
@@ -462,7 +509,12 @@ export default class Community {
     const pCopy: VoteInterface = JSON.parse(JSON.stringify(params));
 
     if (pCopy.type === 'set') {
-      if (pCopy.key === 'quorum' || pCopy.key === 'support' || pCopy.key === 'lockMinLength' || pCopy.key === 'lockMaxLength') {
+      if (
+        pCopy.key === 'quorum' ||
+        pCopy.key === 'support' ||
+        pCopy.key === 'lockMinLength' ||
+        pCopy.key === 'lockMaxLength'
+      ) {
         pCopy.value = +pCopy.value;
       }
 
@@ -474,18 +526,29 @@ export default class Community {
         }
       }
 
-      if (pCopy.key === 'lockMinLength' && (pCopy.value < 1 || pCopy.value > this.state.settings.get('lockMaxLength'))) {
+      if (
+        pCopy.key === 'lockMinLength' &&
+        (pCopy.value < 1 || pCopy.value > this.state.settings.get('lockMaxLength'))
+      ) {
         throw new Error('Invalid minimum lock length.');
       }
-      if (pCopy.key === 'lockMaxLength' && (pCopy.value < 1 || pCopy.value < this.state.settings.get('lockMinLength'))) {
+      if (
+        pCopy.key === 'lockMaxLength' &&
+        (pCopy.value < 1 || pCopy.value < this.state.settings.get('lockMinLength'))
+      ) {
         throw new Error('Invalid maximum lock length.');
       }
     }
 
-    await this.chargeFee('proposeVote');
     const input: InputInterface = { ...pCopy, function: 'propose' };
 
-    return this.interact(input);
+    return this.interact(input, 
+      [
+        {name: 'Action', value: 'propose'},
+        {name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}`},
+        {name: 'Community-ID', value: this.communityContract},
+        {name: 'Service', value: 'CommunityXYZ'}
+      ]);
   }
 
   /**
@@ -495,8 +558,13 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async vote(id: number, cast: 'yay' | 'nay'): Promise<string> {
-    await this.chargeFee('vote');
-    return this.interact({ function: 'vote', id, cast });
+    return this.interact({ function: 'vote', id, cast }, 
+    [
+      {name: 'Action', value: 'vote'},
+      {name: 'Message', value: `Voted on ${id}: ${cast}`},
+      {name: 'Community-ID', value: this.communityContract},
+      {name: 'Service', value: 'CommunityXYZ'}
+    ]);
   }
 
   /**
@@ -505,8 +573,13 @@ export default class Community {
    * @returns The transaction ID for this action
    */
   public async finalize(id: number): Promise<string> {
-    await this.chargeFee('finalize');
-    return this.interact({ function: 'finalize', id });
+    return this.interact({ function: 'finalize', id },
+    [
+      {name: 'Action', value: 'finalize'},
+      {name: 'Message', value: `Finalized completed proposals.`},
+      {name: 'Community-ID', value: this.communityContract},
+      {name: 'Service', value: 'CommunityXYZ'}
+    ]);
   }
 
   /**
@@ -514,8 +587,7 @@ export default class Community {
    * @param action - Current action name. Usually the same as the method name
    * @param bytes - Bytes to get it's price to charge
    */
-  private async chargeFee(action: string, fee: number = this.txFee): Promise<void> {
-    // Check if the user has enough balance for this action
+  private async chargeFee(fee: number = this.txFee): Promise<{target: string, winstonQty: string}> {
     const balance = await this.arweave.wallets.getBalance(this.walletAddress);
 
     if (+balance < +fee) {
@@ -531,35 +603,10 @@ export default class Community {
 
     const target = await this.selectWeightedHolder(state.balances, state.vault);
 
-    const tx = await this.arweave.createTransaction(
-      {
-        target,
-        quantity: this.arweave.ar.arToWinston(fee.toString()),
-      },
-      this.wallet,
-    );
-
-    await this.setDefaultTags(tx);
-    tx.addTag('Action', action);
-
-    await this.arweave.transactions.sign(tx, this.wallet);
-    const txId = tx.id;
-
-    const res = await this.arweave.transactions.post(tx);
-    if (res.status !== 200 && res.status !== 202) {
-      throw new Error('Error while submiting a transaction.');
-    }
-  }
-
-  /**
-   * Set default tags to each transaction sent from CommunityJS.
-   * @param tx - Transaction to set the defaults.
-   */
-  private async setDefaultTags(tx: Transaction, communityId: string = this.communityContract): Promise<void> {
-    tx.addTag('App-Name', 'CommunityJS');
-    tx.addTag('App-Version', '1.0.7');
-    tx.addTag('Community-Contract', communityId);
-    tx.addTag('Community-Ticker', this.state.ticker);
+    return {
+      target,
+      winstonQty: this.arweave.ar.arToWinston(fee.toString()),
+    };
   }
 
   /**
@@ -567,7 +614,9 @@ export default class Community {
    */
   private async checkWallet(): Promise<void> {
     if (!this.wallet) {
-      throw new Error('You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).');
+      throw new Error(
+        'You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).',
+      );
     }
   }
 
@@ -612,14 +661,27 @@ export default class Community {
    * The most important function, it writes to the contract.
    * @param input - InputInterface
    */
-  private async interact(input: InputInterface): Promise<string> {
-    const res = await interactWriteDryRun(this.arweave, this.wallet, this.communityContract, input);
+  private async interact(
+    input: InputInterface,
+    tags: { name: string; value: string }[],
+    fee: number = this.txFee
+  ): Promise<string> {
+
+    const {target, winstonQty} = await this.chargeFee(fee);
+    const res = await interactWriteDryRun(
+      this.arweave,
+      this.wallet,
+      this.communityContract,
+      input,
+      tags,
+      target,
+      winstonQty,
+    );
     if (res.type === 'error') {
       //  || res.type === 'exception'
       throw new Error(res.result);
     }
 
-    // @ts-ignore
-    return interactWrite(this.arweave, this.wallet, this.communityContract, input);
+    return interactWrite(this.arweave, this.wallet, this.communityContract, input, tags, target, winstonQty);
   }
 }
