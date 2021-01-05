@@ -46,7 +46,7 @@
   "dependencies": {
     "arweave": "^1.9.1",
     "axios": "^0.21.0",
-    "smartweave": "^0.4.18",
+    "smartweave": "^0.4.19",
     "tiny-worker": "^2.3.0"
   }
 }
