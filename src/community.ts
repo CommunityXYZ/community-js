@@ -595,6 +595,12 @@ export default class Community {
     }
 
     const target = await this.selectWeightedHolder(state.balances, state.vault);
+    if (target === this.walletAddress) {
+      return {
+        target: null,
+        winstonQty: '0',
+      };
+    }
 
     return {
       target,
