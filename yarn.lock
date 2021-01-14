@@ -615,10 +615,10 @@ shelljs@^0.8.4:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-smartweave@^0.4.21:
-  version "0.4.21"
-  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.21.tgz#2c40e0faf4d45f67f32367b88b3fa39a29faa1bc"
-  integrity sha512-DgNdYzCeG6YEeG2Cxg7Bqvgkgii7PVR+Ni53MZ/Oflv9EWu/YNnnXvu5KpoveSfkNHDX7TYZL1iLnjVy9jLkZA==
+smartweave@^0.4.23:
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.23.tgz#8037102b839f4e324fe2aaa605d02e8a14bd0a50"
+  integrity sha512-vU9iAPKZRnjVaRFmRdvkAKy1e+oWYo4mj/7s36VOumYX7jceBYQPb2cwEILgghaimWpIvdHi1kcfs0zcqcNlHg==
   dependencies:
     "@weavery/clarity" "^0.1.5"
     arweave "^1.9.1"
