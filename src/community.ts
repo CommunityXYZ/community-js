@@ -666,6 +666,9 @@ export default class Community {
     fee: number = this.txFee,
   ): Promise<string> {
     const { target, winstonQty } = await this.chargeFee(fee);
+
+    tags.push({name: 'Type', value: 'ArweaveActivity'});
+
     const res = await interactWriteDryRun(
       this.arweave,
       this.wallet,
