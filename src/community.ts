@@ -569,7 +569,7 @@ export default class Community {
   public async finalize(id: number): Promise<string> {
     return this.interact({ function: 'finalize', id }, [
       { name: 'Action', value: 'finalize' },
-      { name: 'Message', value: `Finalized completed proposals.` },
+      { name: 'Message', value: `Finalize completed proposals.` },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
