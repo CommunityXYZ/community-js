@@ -667,7 +667,7 @@ export default class Community {
   ): Promise<string> {
     const { target, winstonQty } = await this.chargeFee(fee);
 
-    tags.push({name: 'Type', value: 'ArweaveActivity'});
+    tags.push({ name: 'Type', value: 'ArweaveActivity' });
 
     const res = await interactWriteDryRun(
       this.arweave,
