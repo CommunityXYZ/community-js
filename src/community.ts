@@ -271,7 +271,7 @@ export default class Community {
       JSON.stringify(toSubmit),
       [
         { name: 'Action', value: 'CreateCommunity' },
-        { name: 'Message', value: `Created the Community ${this.state.name} with ticker ${this.state.ticker}.` },
+        { name: 'Message', value: `Created Community ${this.state.name}, ticker: ${this.state.ticker}.` },
         { name: 'Service', value: 'CommunityXYZ' },
       ],
       target,
@@ -447,7 +447,7 @@ export default class Community {
   public async transfer(target: string, qty: number): Promise<string> {
     return this.interact({ function: 'transfer', target, qty }, [
       { name: 'Action', value: 'transfer' },
-      { name: 'Message', value: `Transfer from ${this.walletAddress} to ${target} of ${qty}` },
+      { name: 'Message', value: `Transfer to ${target} of ${qty}.` },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
@@ -490,7 +490,7 @@ export default class Community {
   public async increaseVault(vaultId: number, lockLength: number): Promise<string> {
     return this.interact({ function: 'increaseVault', id: vaultId, lockLength }, [
       { name: 'Action', value: 'increase' },
-      { name: 'Message', value: `Increased vault ${vaultId} for ${lockLength} blocks.` },
+      { name: 'Message', value: `Increased vault ID ${vaultId} for ${lockLength} blocks.` },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
@@ -540,7 +540,7 @@ export default class Community {
 
     return this.interact(input, [
       { name: 'Action', value: 'propose' },
-      { name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}` },
+      { name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}.` },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
@@ -555,7 +555,7 @@ export default class Community {
   public async vote(id: number, cast: 'yay' | 'nay'): Promise<string> {
     return this.interact({ function: 'vote', id, cast }, [
       { name: 'Action', value: 'vote' },
-      { name: 'Message', value: `Voted on ${id}: ${cast}` },
+      { name: 'Message', value: `Voted on vote #${id}: ${cast}.` },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
