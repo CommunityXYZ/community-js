@@ -1,13 +1,11 @@
-**[community-js](README.md)**
-
-> Globals
+community-js
 
 # community-js
 
-## Index
+## Table of contents
 
 ### Modules
 
-* ["community"](modules/_community_.md)
-* ["faces"](modules/_faces_.md)
-* ["utils"](modules/_utils_.md)
+- [community](modules/community.md)
+- [faces](modules/faces.md)
+- [utils](modules/utils.md)
