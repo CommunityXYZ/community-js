@@ -180,10 +180,16 @@ export default class Community {
      * Function used to check if the user is already logged in
      */
     private checkWallet;
+    /**
+     * Updates the current state used for a Community instance
+     * @param recall Auto recall this function each cacheRefreshInterval ms
+     */
     private update;
     /**
      * The most important function, it writes to the contract.
      * @param input - InputInterface
+     * @param tags - Array of tags as an object with name and value as strings
+     * @param fee - Transaction fee
      */
     private interact;
 }

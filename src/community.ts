@@ -445,7 +445,7 @@ export default class Community {
   public async transfer(target: string, qty: number): Promise<string> {
     return this.interact({ function: 'transfer', target, qty }, [
       { name: 'Action', value: 'transfer' },
-      { name: 'Message', value: `Transfer to ${target} of ${qty}.` },
+      { name: 'Message', value: `Transfer to ${target} of ${Utils.formatNumber(qty)}.` },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
@@ -460,7 +460,12 @@ export default class Community {
   public async lockBalance(qty: number, lockLength: number): Promise<string> {
     return this.interact({ function: 'lock', qty, lockLength }, [
       { name: 'Action', value: 'lock' },
-      { name: 'Message', value: `Locked ${qty} for ${lockLength} blocks.` },
+      {
+        name: 'Message',
+        value: `Locked ${Utils.formatNumber(qty)} for ${Utils.formatNumber(lockLength)} blocks (${Utils.formatBlocks(
+          lockLength,
+        )}).`,
+      },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
@@ -488,7 +493,10 @@ export default class Community {
   public async increaseVault(vaultId: number, lockLength: number): Promise<string> {
     return this.interact({ function: 'increaseVault', id: vaultId, lockLength }, [
       { name: 'Action', value: 'increase' },
-      { name: 'Message', value: `Increased vault ID ${vaultId} for ${lockLength} blocks.` },
+      {
+        name: 'Message',
+        value: `Increased vault ID ${vaultId} for ${lockLength} blocks (${Utils.formatBlocks(lockLength)}).`,
+      },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
@@ -553,7 +561,7 @@ export default class Community {
   public async vote(id: number, cast: 'yay' | 'nay'): Promise<string> {
     return this.interact({ function: 'vote', id, cast }, [
       { name: 'Action', value: 'vote' },
-      { name: 'Message', value: `Voted on vote #${id}: ${cast}.` },
+      { name: 'Message', value: `Voted on vote ID ${id}: ${cast}.` },
       { name: 'Community-ID', value: this.communityContract },
       { name: 'Service', value: 'CommunityXYZ' },
     ]);
