@@ -1,8 +1,7 @@
 import Arweave from 'arweave';
 import axios from 'axios';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import Transaction from 'arweave/web/lib/transaction';
-import { readContract, interactWriteDryRun, interactWrite, createContractFromTx } from 'smartweave';
+import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
 import {
   BalancesInterface,
   VaultInterface,
@@ -347,7 +346,6 @@ export default class Community {
       this.dummyWallet = await this.arweave.wallets.generate();
     }
 
-    // @ts-ignore
     return interactRead(this.arweave, this.wallet || this.dummyWallet, this.communityContract, params);
   }
 
@@ -619,6 +617,10 @@ export default class Community {
     }
   }
 
+  /**
+   * Updates the current state used for a Community instance
+   * @param recall Auto recall this function each cacheRefreshInterval ms
+   */
   private async update(recall = false): Promise<StateInterface> {
     if (!this.communityContract.length) {
       setTimeout(() => this.update(), this.cacheRefreshInterval);
@@ -659,6 +661,8 @@ export default class Community {
   /**
    * The most important function, it writes to the contract.
    * @param input - InputInterface
+   * @param tags - Array of tags as an object with name and value as strings
+   * @param fee - Transaction fee
    */
   private async interact(
     input: InputInterface,
