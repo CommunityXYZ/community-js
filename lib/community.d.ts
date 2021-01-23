@@ -1,6 +1,6 @@
 import Arweave from 'arweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface } from './faces';
+import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface, TagInterface } from './faces';
 export default class Community {
     private readonly cacheServer;
     private readonly contractSrc;
@@ -24,10 +24,14 @@ export default class Community {
      */
     constructor(arweave: Arweave, wallet?: JWKInterface, cacheRefreshInterval?: number);
     /**
-     * Get the Community contract ID
+     * Get the Main Community contract ID
      * @returns {Promise<string>} The main contract ID.
      */
     getMainContractId(): Promise<string>;
+    /**
+     * Get the current Community contract ID
+     */
+    getCommunityContract(): Promise<string>;
     /**
      * Get the current Community state.
      * @param cached - Wether to return the cached version or reload
@@ -60,9 +64,10 @@ export default class Community {
     setState(name: string, ticker: string, balances: BalancesInterface, quorum?: number, support?: number, voteLength?: number, lockMinLength?: number, lockMaxLength?: number, vault?: VaultInterface, votes?: VoteInterface[], roles?: RoleInterface, extraSettings?: [string, any][]): Promise<StateInterface>;
     /**
      * Create a new Community with the current, previously saved (with `setState`) state.
+     * @param tags - optional: tags to be added to this transaction
      * @returns The created community transaction ID.
      */
-    create(): Promise<string>;
+    create(tags?: TagInterface[]): Promise<string>;
     /**
      * Get the current create cost of a community.
      * @param inAr - Return in winston or AR
@@ -129,57 +134,68 @@ export default class Community {
      *
      * @param target - Target Wallet Address
      * @param qty - Amount of the token to send
+     * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
-    transfer(target: string, qty: number): Promise<string>;
+    transfer(target: string, qty: number, tags?: TagInterface[]): Promise<string>;
     /**
      * Lock your balances in a vault to earn voting weight.
      * @param qty - Positive integer for the quantity to lock
      * @param lockLength - Length of the lock, in blocks
+     * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
-    lockBalance(qty: number, lockLength: number): Promise<string>;
+    lockBalance(qty: number, lockLength: number, tags?: TagInterface[]): Promise<string>;
     /**
      * Unlock all your locked balances that are over the lock period.
+     * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
-    unlockVault(): Promise<string>;
+    unlockVault(tags?: TagInterface[]): Promise<string>;
     /**
      * Increase the lock time (in blocks) of a vault.
      * @param vaultId - The vault index position to increase
      * @param lockLength - Length of the lock, in blocks
+     * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
-    increaseVault(vaultId: number, lockLength: number): Promise<string>;
+    increaseVault(vaultId: number, lockLength: number, tags?: TagInterface[]): Promise<string>;
     /**
      * Create a new vote
      * @param params VoteInterface without the "function"
+     * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
-    proposeVote(params: VoteInterface): Promise<string>;
+    proposeVote(params: VoteInterface, tags?: TagInterface[]): Promise<string>;
     /**
      * Cast a vote on an existing, and active, vote proposal.
      * @param id - The vote ID, this is the index of the vote in votes
      * @param cast - Cast your vote with 'yay' (for yes) or 'nay' (for no)
+     * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
-    vote(id: number, cast: 'yay' | 'nay'): Promise<string>;
+    vote(id: number, cast: 'yay' | 'nay', tags?: TagInterface[]): Promise<string>;
     /**
      * Finalize a vote, to run the desired vote details if approved, or reject it and close.
      * @param id - The vote ID, this is the index of the vote in votes
+     * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
-    finalize(id: number): Promise<string>;
+    finalize(id: number, tags?: TagInterface[]): Promise<string>;
     /**
      * Charge a fee for each Community's interactions.
-     * @param action - Current action name. Usually the same as the method name
-     * @param bytes - Bytes to get it's price to charge
+     * @param fee - which fee to charge
      */
     private chargeFee;
     /**
      * Function used to check if the user is already logged in
      */
     private checkWallet;
+    /**
+     * Stringify and remove tags that are defined by CommunityJS
+     * @returns An array of the TagInterface object `{name: string, value: string}`
+     */
+    private cleanTags;
     /**
      * Updates the current state used for a Community instance
      * @param recall Auto recall this function each cacheRefreshInterval ms

@@ -51,6 +51,10 @@ export interface ResultInterface {
     balance: number;
     role: string;
 }
+export interface TagInterface {
+    name: string;
+    value: string;
+}
 export declare type VoteStatus = 'active' | 'quorumFailed' | 'passed' | 'failed';
 export declare type VoteType = 'mint' | 'mintLocked' | 'burnVault' | 'indicative' | 'set';
 export declare type GetFunctionType = 'balance' | 'unlockedBalance' | 'vaultBalance' | 'role';

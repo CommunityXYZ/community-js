@@ -10,6 +10,7 @@ import {
   StateInterface,
   InputInterface,
   ResultInterface,
+  TagInterface,
 } from './faces';
 import Utils from './utils';
 
@@ -55,11 +56,18 @@ export default class Community {
   }
 
   /**
-   * Get the Community contract ID
+   * Get the Main Community contract ID
    * @returns {Promise<string>} The main contract ID.
    */
   public async getMainContractId(): Promise<string> {
     return this.mainContract;
+  }
+
+  /**
+   * Get the current Community contract ID
+   */
+  public async getCommunityContract(): Promise<string> {
+    return this.communityContract;
   }
 
   /**
@@ -254,25 +262,31 @@ export default class Community {
 
   /**
    * Create a new Community with the current, previously saved (with `setState`) state.
+   * @param tags - optional: tags to be added to this transaction
    * @returns The created community transaction ID.
    */
-  public async create(): Promise<string> {
+  public async create(tags: TagInterface[] = []): Promise<string> {
     // Create the new Community.
     const { target, winstonQty } = await this.chargeFee(this.createFee);
 
     const toSubmit: any = this.state;
     toSubmit.settings = Array.from(this.state.settings);
 
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'CreateCommunity' },
+        { name: 'Message', value: `Created Community ${this.state.name}, ticker: ${this.state.ticker}.` },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+
     const communityID = await createContractFromTx(
       this.arweave,
       this.wallet,
       this.contractSrc,
       JSON.stringify(toSubmit),
-      [
-        { name: 'Action', value: 'CreateCommunity' },
-        { name: 'Message', value: `Created Community ${this.state.name}, ticker: ${this.state.ticker}.` },
-        { name: 'Service', value: 'CommunityXYZ' },
-      ],
+      tags,
       target,
       winstonQty,
     );
@@ -440,74 +454,97 @@ export default class Community {
    *
    * @param target - Target Wallet Address
    * @param qty - Amount of the token to send
+   * @param tags - optional: tags to be added to this transaction
    * @returns The transaction ID for this action
    */
-  public async transfer(target: string, qty: number): Promise<string> {
-    return this.interact({ function: 'transfer', target, qty }, [
-      { name: 'Action', value: 'transfer' },
-      { name: 'Message', value: `Transfer to ${target} of ${Utils.formatNumber(qty)}.` },
-      { name: 'Community-ID', value: this.communityContract },
-      { name: 'Service', value: 'CommunityXYZ' },
-    ]);
+  public async transfer(target: string, qty: number, tags: TagInterface[] = []): Promise<string> {
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'transfer' },
+        { name: 'Message', value: `Transfer to ${target} of ${Utils.formatNumber(qty)}.` },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+
+    return this.interact({ function: 'transfer', target, qty }, tags);
   }
 
   /**
    * Lock your balances in a vault to earn voting weight.
    * @param qty - Positive integer for the quantity to lock
    * @param lockLength - Length of the lock, in blocks
+   * @param tags - optional: tags to be added to this transaction
    * @returns The transaction ID for this action
    */
-  public async lockBalance(qty: number, lockLength: number): Promise<string> {
-    return this.interact({ function: 'lock', qty, lockLength }, [
-      { name: 'Action', value: 'lock' },
-      {
-        name: 'Message',
-        value: `Locked ${Utils.formatNumber(qty)} for ${Utils.formatNumber(lockLength)} blocks (${Utils.formatBlocks(
-          lockLength,
-        )}).`,
-      },
-      { name: 'Community-ID', value: this.communityContract },
-      { name: 'Service', value: 'CommunityXYZ' },
-    ]);
+  public async lockBalance(qty: number, lockLength: number, tags: TagInterface[] = []): Promise<string> {
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'lock' },
+        {
+          name: 'Message',
+          value: `Locked ${Utils.formatNumber(qty)} for ${Utils.formatNumber(lockLength)} blocks (${Utils.formatBlocks(
+            lockLength,
+          )}).`,
+        },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+
+    return this.interact({ function: 'lock', qty, lockLength }, tags);
   }
 
   /**
    * Unlock all your locked balances that are over the lock period.
+   * @param tags - optional: tags to be added to this transaction
    * @returns The transaction ID for this action
    */
-  public async unlockVault(): Promise<string> {
-    return this.interact({ function: 'unlock' }, [
-      { name: 'Action', value: 'unlock' },
-      { name: 'Message', value: `Unlocked vaults.` },
-      { name: 'Community-ID', value: this.communityContract },
-      { name: 'Service', value: 'CommunityXYZ' },
-    ]);
+  public async unlockVault(tags: TagInterface[] = []): Promise<string> {
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'unlock' },
+        { name: 'Message', value: `Unlocked vaults.` },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+    return this.interact({ function: 'unlock' }, tags);
   }
 
   /**
    * Increase the lock time (in blocks) of a vault.
    * @param vaultId - The vault index position to increase
    * @param lockLength - Length of the lock, in blocks
+   * @param tags - optional: tags to be added to this transaction
    * @returns The transaction ID for this action
    */
-  public async increaseVault(vaultId: number, lockLength: number): Promise<string> {
-    return this.interact({ function: 'increaseVault', id: vaultId, lockLength }, [
-      { name: 'Action', value: 'increase' },
-      {
-        name: 'Message',
-        value: `Increased vault ID ${vaultId} for ${lockLength} blocks (${Utils.formatBlocks(lockLength)}).`,
-      },
-      { name: 'Community-ID', value: this.communityContract },
-      { name: 'Service', value: 'CommunityXYZ' },
-    ]);
+  public async increaseVault(vaultId: number, lockLength: number, tags: TagInterface[] = []): Promise<string> {
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'increase' },
+        {
+          name: 'Message',
+          value: `Increased vault ID ${vaultId} for ${lockLength} blocks (${Utils.formatBlocks(lockLength)}).`,
+        },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+    return this.interact({ function: 'increaseVault', id: vaultId, lockLength }, tags);
   }
 
   /**
    * Create a new vote
    * @param params VoteInterface without the "function"
+   * @param tags - optional: tags to be added to this transaction
    * @returns The transaction ID for this action
    */
-  public async proposeVote(params: VoteInterface): Promise<string> {
+  public async proposeVote(params: VoteInterface, tags: TagInterface[] = []): Promise<string> {
     const pCopy: VoteInterface = JSON.parse(JSON.stringify(params));
 
     if (pCopy.type === 'set') {
@@ -544,47 +581,60 @@ export default class Community {
 
     const input: InputInterface = { ...pCopy, function: 'propose' };
 
-    return this.interact(input, [
-      { name: 'Action', value: 'propose' },
-      { name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}.` },
-      { name: 'Community-ID', value: this.communityContract },
-      { name: 'Service', value: 'CommunityXYZ' },
-    ]);
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'propose' },
+        { name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}.` },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+    return this.interact(input, tags);
   }
 
   /**
    * Cast a vote on an existing, and active, vote proposal.
    * @param id - The vote ID, this is the index of the vote in votes
    * @param cast - Cast your vote with 'yay' (for yes) or 'nay' (for no)
+   * @param tags - optional: tags to be added to this transaction
    * @returns The transaction ID for this action
    */
-  public async vote(id: number, cast: 'yay' | 'nay'): Promise<string> {
-    return this.interact({ function: 'vote', id, cast }, [
-      { name: 'Action', value: 'vote' },
-      { name: 'Message', value: `Voted on vote ID ${id}: ${cast}.` },
-      { name: 'Community-ID', value: this.communityContract },
-      { name: 'Service', value: 'CommunityXYZ' },
-    ]);
+  public async vote(id: number, cast: 'yay' | 'nay', tags: TagInterface[] = []): Promise<string> {
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'vote' },
+        { name: 'Message', value: `Voted on vote ID ${id}: ${cast}.` },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+    return this.interact({ function: 'vote', id, cast }, tags);
   }
 
   /**
    * Finalize a vote, to run the desired vote details if approved, or reject it and close.
    * @param id - The vote ID, this is the index of the vote in votes
+   * @param tags - optional: tags to be added to this transaction
    * @returns The transaction ID for this action
    */
-  public async finalize(id: number): Promise<string> {
-    return this.interact({ function: 'finalize', id }, [
-      { name: 'Action', value: 'finalize' },
-      { name: 'Message', value: `Finalize completed proposals.` },
-      { name: 'Community-ID', value: this.communityContract },
-      { name: 'Service', value: 'CommunityXYZ' },
-    ]);
+  public async finalize(id: number, tags: TagInterface[] = []): Promise<string> {
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'finalize' },
+        { name: 'Message', value: `Finalize completed votes.` },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+    return this.interact({ function: 'finalize', id }, tags);
   }
 
   /**
    * Charge a fee for each Community's interactions.
-   * @param action - Current action name. Usually the same as the method name
-   * @param bytes - Bytes to get it's price to charge
+   * @param fee - which fee to charge
    */
   private async chargeFee(fee: number = this.txFee): Promise<{ target: string; winstonQty: string }> {
     const balance = await this.arweave.wallets.getBalance(this.walletAddress);
@@ -623,6 +673,32 @@ export default class Community {
         'You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).',
       );
     }
+  }
+
+  /**
+   * Stringify and remove tags that are defined by CommunityJS
+   * @returns An array of the TagInterface object `{name: string, value: string}`
+   */
+  private async cleanTags(tags: TagInterface[]): Promise<TagInterface[]> {
+    if (!tags || !tags.length) {
+      return [];
+    }
+
+    const blacklist: string[] = ['action', 'message', 'community-id', 'service', 'type'];
+    const res: TagInterface[] = [];
+
+    for (const tag of tags) {
+      if (!tag.name || !tag.value) continue;
+
+      if (!blacklist.includes(tag.name.toLowerCase())) {
+        res.push({
+          name: tag.name.toString(),
+          value: tag.value.toString(),
+        });
+      }
+    }
+
+    return res;
   }
 
   /**

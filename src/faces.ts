@@ -60,6 +60,11 @@ export interface ResultInterface {
   role: string;
 }
 
+export interface TagInterface {
+  name: string;
+  value: string;
+}
+
 export type VoteStatus = 'active' | 'quorumFailed' | 'passed' | 'failed';
 export type VoteType = 'mint' | 'mintLocked' | 'burnVault' | 'indicative' | 'set';
 export type GetFunctionType = 'balance' | 'unlockedBalance' | 'vaultBalance' | 'role';
