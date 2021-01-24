@@ -160,10 +160,10 @@ articles@~0.2.1:
   resolved "https://registry.yarnpkg.com/articles/-/articles-0.2.2.tgz#cc6b429f8cfa811f41e7a08505abbb4e45503197"
   integrity sha512-S3Y4MPp+LD/l0HHm/4yrr6MoXhUkKT98ZdsV2tkTuBNywqUXEtvJT+NBO3KTSQEttc5EOwEJe2Xw8cZ9TI5Hrw==
 
-arweave@^1.10.1, arweave@^1.9.1:
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.1.tgz#170c5e1ffc2da13bbe7da39ce7bb2d245be30ab1"
-  integrity sha512-jhJYiZXQnQLLfj9h3fNxV7eHs+xyFPPDHusgOhyqg0PM6/xeD3zoMMBc+68W743pMQAnioHHne2wQXz29krvSA==
+arweave@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.2.tgz#937707e9620e05d62eb59e941748e7716a3c1507"
+  integrity sha512-1OuVjHB6TMMvDc+N1O2l6q5qjS6sPoWJ5OrXHty3bcvefSM2bkNARdbgIhMLlwRwL1PMHFkPaoE4xK5LypvYtA==
   dependencies:
     asn1.js "^5.4.1"
     axios "^0.21.1"
@@ -963,15 +963,15 @@ signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
-smartweave@^0.4.24:
-  version "0.4.24"
-  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.24.tgz#03323015b8f8a7093b9df326a721dabd349774b9"
-  integrity sha512-hwzGemz4uL3fdmmpmR7Kl6odvFN15MYs+oA4vjyjq51W9nTbbJCjE3b0XndgpVCounmvvUjtCrHperljNdMTAQ==
+smartweave@^0.4.25:
+  version "0.4.25"
+  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.25.tgz#71ba8843117589fa73b3cdbc8a0415476fdc6afa"
+  integrity sha512-tJaqgAEA7Vky7w4lKYnoaNDXO5vZsQiOIolsjwjXFDQStg96A+9ZKH647qUoHiaDKcg/1/p/5wA4XOov5MM8IQ==
   dependencies:
     "@types/clui" "^0.3.0"
     "@types/inquirer" "^7.3.1"
     "@weavery/clarity" "^0.1.5"
-    arweave "^1.9.1"
+    arweave "^1.10.2"
     bignumber.js "^9.0.1"
     chalk "^4.1.0"
     clui "^0.3.6"
