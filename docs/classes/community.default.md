@@ -21,6 +21,7 @@
 - [get](community.default.md#get)
 - [getActionCost](community.default.md#getactioncost)
 - [getBalance](community.default.md#getbalance)
+- [getCommunityContract](community.default.md#getcommunitycontract)
 - [getCreateCost](community.default.md#getcreatecost)
 - [getMainContractId](community.default.md#getmaincontractid)
 - [getRole](community.default.md#getrole)
@@ -60,9 +61,15 @@ Name | Type | Default value | Description |
 
 ### create
 
-▸ **create**(): *Promise*<*string*\>
+▸ **create**(`tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 Create a new Community with the current, previously saved (with `setState`) state.
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 
@@ -72,15 +79,16 @@ ___
 
 ### finalize
 
-▸ **finalize**(`id`: *number*): *Promise*<*string*\>
+▸ **finalize**(`id`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 Finalize a vote, to run the desired vote details if approved, or reject it and close.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`id` | *number* | The vote ID, this is the index of the vote in votes   |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`id` | *number* | - | The vote ID, this is the index of the vote in votes   |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 
@@ -141,6 +149,16 @@ Current target token balance
 
 ___
 
+### getCommunityContract
+
+▸ **getCommunityContract**(): *Promise*<*string*\>
+
+Get the current Community contract ID
+
+**Returns:** *Promise*<*string*\>
+
+___
+
 ### getCreateCost
 
 ▸ **getCreateCost**(`inAr?`: *boolean*, `options?`: { `decimals`: *number* ; `formatted`: *boolean* ; `trim`: *boolean*  }): *Promise*<*string*\>
@@ -162,7 +180,7 @@ ___
 
 ▸ **getMainContractId**(): *Promise*<*string*\>
 
-Get the Community contract ID
+Get the Main Community contract ID
 
 **Returns:** *Promise*<*string*\>
 
@@ -244,16 +262,17 @@ ___
 
 ### increaseVault
 
-▸ **increaseVault**(`vaultId`: *number*, `lockLength`: *number*): *Promise*<*string*\>
+▸ **increaseVault**(`vaultId`: *number*, `lockLength`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 Increase the lock time (in blocks) of a vault.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`vaultId` | *number* | The vault index position to increase   |
-`lockLength` | *number* | Length of the lock, in blocks   |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`vaultId` | *number* | - | The vault index position to increase   |
+`lockLength` | *number* | - | Length of the lock, in blocks   |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 
@@ -263,16 +282,17 @@ ___
 
 ### lockBalance
 
-▸ **lockBalance**(`qty`: *number*, `lockLength`: *number*): *Promise*<*string*\>
+▸ **lockBalance**(`qty`: *number*, `lockLength`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 Lock your balances in a vault to earn voting weight.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`qty` | *number* | Positive integer for the quantity to lock   |
-`lockLength` | *number* | Length of the lock, in blocks   |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`qty` | *number* | - | Positive integer for the quantity to lock   |
+`lockLength` | *number* | - | Length of the lock, in blocks   |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 
@@ -282,15 +302,16 @@ ___
 
 ### proposeVote
 
-▸ **proposeVote**(`params`: [*VoteInterface*](../interfaces/faces.voteinterface.md)): *Promise*<*string*\>
+▸ **proposeVote**(`params`: [*VoteInterface*](../interfaces/faces.voteinterface.md), `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 Create a new vote
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`params` | [*VoteInterface*](../interfaces/faces.voteinterface.md) | VoteInterface without the "function"   |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`params` | [*VoteInterface*](../interfaces/faces.voteinterface.md) | - | VoteInterface without the "function"   |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 
@@ -382,14 +403,15 @@ ___
 
 ### transfer
 
-▸ **transfer**(`target`: *string*, `qty`: *number*): *Promise*<*string*\>
+▸ **transfer**(`target`: *string*, `qty`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`target` | *string* | Target Wallet Address   |
-`qty` | *number* | Amount of the token to send   |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`target` | *string* | - | Target Wallet Address   |
+`qty` | *number* | - | Amount of the token to send   |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 
@@ -399,9 +421,15 @@ ___
 
 ### unlockVault
 
-▸ **unlockVault**(): *Promise*<*string*\>
+▸ **unlockVault**(`tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 Unlock all your locked balances that are over the lock period.
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 
@@ -411,16 +439,17 @@ ___
 
 ### vote
 
-▸ **vote**(`id`: *number*, `cast`: *yay* | *nay*): *Promise*<*string*\>
+▸ **vote**(`id`: *number*, `cast`: *yay* | *nay*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<*string*\>
 
 Cast a vote on an existing, and active, vote proposal.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`id` | *number* | The vote ID, this is the index of the vote in votes   |
-`cast` | *yay* | *nay* | Cast your vote with 'yay' (for yes) or 'nay' (for no)   |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`id` | *number* | - | The vote ID, this is the index of the vote in votes   |
+`cast` | *yay* | *nay* | - | Cast your vote with 'yay' (for yes) or 'nay' (for no)   |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | ... | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<*string*\>
 

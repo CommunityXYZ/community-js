@@ -12,6 +12,7 @@
 - [ResultInterface](../interfaces/faces.resultinterface.md)
 - [RoleInterface](../interfaces/faces.roleinterface.md)
 - [StateInterface](../interfaces/faces.stateinterface.md)
+- [TagInterface](../interfaces/faces.taginterface.md)
 - [VaultInterface](../interfaces/faces.vaultinterface.md)
 - [VaultParamsInterface](../interfaces/faces.vaultparamsinterface.md)
 - [VoteInterface](../interfaces/faces.voteinterface.md)
