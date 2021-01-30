@@ -24,4 +24,4 @@ Full:
 ```
 
 ## Documentation
-To read about the CommunityJS usage go here: https://github.com/CommunityXYZ/community-js/blob/master/docs/classes/_community_.community.md
+To read about the CommunityJS usage go here: https://github.com/CommunityXYZ/community-js/blob/master/docs/classes/community.default.md
