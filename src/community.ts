@@ -586,7 +586,12 @@ export default class Community {
       ...(await this.cleanTags(tags)),
       ...[
         { name: 'Action', value: 'propose' },
-        { name: 'Message', value: `Proposed ${(pCopy.type === 'indicative' || pCopy.key === 'other')? 'an' : 'a'} ${pCopy.key || pCopy.type} vote, value: ${pCopy.value}.` },
+        {
+          name: 'Message',
+          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${
+            pCopy.key || pCopy.type
+          } vote, value: ${pCopy.value}.`,
+        },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
       ],
