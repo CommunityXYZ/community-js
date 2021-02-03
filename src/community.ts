@@ -546,6 +546,7 @@ export default class Community {
    */
   public async proposeVote(params: VoteInterface, tags: TagInterface[] = []): Promise<string> {
     const pCopy: VoteInterface = JSON.parse(JSON.stringify(params));
+    console.log(pCopy);
 
     if (pCopy.type === 'set') {
       if (
@@ -585,7 +586,7 @@ export default class Community {
       ...(await this.cleanTags(tags)),
       ...[
         { name: 'Action', value: 'propose' },
-        { name: 'Message', value: `Proposed a ${pCopy.key} vote, value: ${pCopy.value}.` },
+        { name: 'Message', value: `Proposed ${(pCopy.type === 'indicative' || pCopy.key === 'other')? 'an' : 'a'} ${pCopy.key || pCopy.type} vote, value: ${pCopy.value}.` },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
       ],
