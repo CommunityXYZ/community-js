@@ -881,9 +881,9 @@ export default class Community {
       this.isWalletConnect = true;
     }
 
-    window.removeEventListener('arweaveWalletLoaded', () => walletConnect());
-    window.removeEventListener('walletSwitch', (e) => walletSwitch(e));
-    window.addEventListener('arweaveWalletLoaded', () => walletConnect());
-    window.addEventListener('walletSwitch', (e) => walletSwitch(e));
+    win.removeEventListener('arweaveWalletLoaded', () => walletConnect());
+    win.removeEventListener('walletSwitch', (e) => walletSwitch(e));
+    win.addEventListener('arweaveWalletLoaded', () => walletConnect());
+    win.addEventListener('walletSwitch', (e) => walletSwitch(e));
   }
 }
