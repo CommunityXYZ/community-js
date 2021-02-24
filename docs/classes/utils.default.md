@@ -4,10 +4,6 @@
 
 [utils](../modules/utils.md).default
 
-## Hierarchy
-
-* **default**
-
 ## Table of contents
 
 ### Constructors
@@ -39,7 +35,7 @@ Formats a block number into human readable hours, days, months, years.
 #### Parameters:
 
 Name | Type | Default value | Description |
------- | ------ | ------ | ------ |
+:------ | :------ | :------ | :------ |
 `len` | *number* | 720 | block length    |
 
 **Returns:** *string*
@@ -55,7 +51,7 @@ Formats the currency
 #### Parameters:
 
 Name | Type | Default value | Description |
------- | ------ | ------ | ------ |
+:------ | :------ | :------ | :------ |
 `amount` | *number* | - | balance to be formatted   |
 `decimalCount` | *number* | 0 | how many decimals to add   |
 `decimal` | *string* | '.' | string to separate decimals   |
@@ -74,7 +70,7 @@ Trims object keys and values.
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `obj` | *any* | Object to trim key/values    |
 
 **Returns:** *any*

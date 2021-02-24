@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).ResultInterface
 
-## Hierarchy
-
-* **ResultInterface**
-
 ## Table of contents
 
 ### Properties

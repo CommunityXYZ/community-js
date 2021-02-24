@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).RoleInterface
 
-## Hierarchy
-
-* **RoleInterface**
-
 ## Indexable
 
 ▪ [key: *string*]: *string*

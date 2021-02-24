@@ -20,7 +20,7 @@ export default class Community {
   private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
   private readonly txFeeUsd: number = 0.5;
   private readonly createFeeUsd: number = 3;
-  
+
   private createFee: number = 0.83;
   private txFee: number = 0.21;
 
@@ -462,7 +462,7 @@ export default class Community {
    * Get the current fee charged for actions on Community.
    * @return {object} - The txFee and the createFee, both are numbers.
    */
-  public async getFees(): Promise<{txFee: number, createFee: number}> {
+  public async getFees(): Promise<{ txFee: number; createFee: number }> {
     /**
      * limestoneDeployerAddy: string = 'R9PL9jt-mZoV6XcNjJD2uB2ajiFTC7PYZ_iyySzzz6U';
   private readonly checkCoingeckoAfter: number = 60 * 60 * 24 * 1000;
@@ -489,38 +489,38 @@ export default class Community {
         }
       }
     }`;
-    
+
     try {
       const res = await this.arweave.api.post('/graphql', query);
       let createdAt: number;
       let arPrice: number;
 
       const edge = res.data.data.transactions.edges[0];
-      for(const tag of edge.node.tags) {
-        if(tag.name === 'time') {
+      for (const tag of edge.node.tags) {
+        if (tag.name === 'time') {
           createdAt = tag.value;
-        } else if(tag.name === 'value') {
+        } else if (tag.name === 'value') {
           arPrice = tag.value;
         }
       }
 
-      if(createdAt && arPrice) {
+      if (createdAt && arPrice) {
         const deployTime = new Date().getTime() - createdAt;
-        if(deployTime > this.checkCoingeckoAfter) {
-          console.warn('Limestone hasn\'t been updated over a day ago!');
+        if (deployTime > this.checkCoingeckoAfter) {
+          console.warn("Limestone hasn't been updated over a day ago!");
         }
 
         this.createFee = +(this.createFeeUsd / arPrice).toFixed(5);
         this.txFee = +(this.txFeeUsd / arPrice).toFixed(5);
       }
-    } catch(e) { 
-      console.log(e); 
+    } catch (e) {
+      console.log(e);
       console.warn('Was not able to update the fees, please try again later');
     }
 
     return {
       createFee: this.createFee,
-      txFee: this.txFee
+      txFee: this.txFee,
     };
   }
 
@@ -853,7 +853,15 @@ export default class Community {
       throw new Error(res.result);
     }
 
-    return interactWrite(this.arweave, this.wallet || 'use_wallet', this.communityContract, input, tags, target, winstonQty);
+    return interactWrite(
+      this.arweave,
+      this.wallet || 'use_wallet',
+      this.communityContract,
+      input,
+      tags,
+      target,
+      winstonQty,
+    );
   }
 
   /**
@@ -861,10 +869,11 @@ export default class Community {
    */
   private events() {
     let win: any = window;
-    if(!win) win = {
-      removeEventListener: (evName: string) => {},
-      addEventListener: (evName: string, callback: Function) => {}
-    };
+    if (!win)
+      win = {
+        removeEventListener: (evName: string) => {},
+        addEventListener: (evName: string, callback: Function) => {},
+      };
 
     async function walletConnect() {
       this.walletAddress = await this.arweave.wallets.getAddress();

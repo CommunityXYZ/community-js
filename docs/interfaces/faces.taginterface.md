@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).TagInterface
 
-## Hierarchy
-
-* **TagInterface**
-
 ## Table of contents
 
 ### Properties

@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).StateInterface
 
-## Hierarchy
-
-* **StateInterface**
-
 ## Table of contents
 
 ### Properties
@@ -42,7 +38,7 @@ ___
 
 ### settings
 
-• **settings**: *Map*<*string*, *any*\>
+• **settings**: *Map*<string, any\>
 
 ___
 

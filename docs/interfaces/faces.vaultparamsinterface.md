@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).VaultParamsInterface
 
-## Hierarchy
-
-* **VaultParamsInterface**
-
 ## Table of contents
 
 ### Properties

@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).VaultInterface
 
-## Hierarchy
-
-* **VaultInterface**
-
 ## Indexable
 
 ▪ [key: *string*]: [*VaultParamsInterface*](faces.vaultparamsinterface.md)[]

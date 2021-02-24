@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).BalancesInterface
 
-## Hierarchy
-
-* **BalancesInterface**
-
 ## Indexable
 
 ▪ [key: *string*]: *number*

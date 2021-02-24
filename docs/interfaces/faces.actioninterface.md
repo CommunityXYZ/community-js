@@ -4,10 +4,6 @@
 
 [faces](../modules/faces.md).ActionInterface
 
-## Hierarchy
-
-* **ActionInterface**
-
 ## Table of contents
 
 ### Properties

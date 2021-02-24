@@ -221,5 +221,8 @@ export default class Community {
      * @param fee - Transaction fee
      */
     private interact;
+    /**
+     * Create events to handle the wallet connect feature
+     */
     private events;
 }
