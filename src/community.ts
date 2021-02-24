@@ -25,6 +25,7 @@ export default class Community {
   private wallet!: JWKInterface;
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
+  private isWalletConnect: boolean = false;
 
   // Community specific variables
   private communityContract = '';
@@ -53,6 +54,8 @@ export default class Community {
     if (cacheRefreshInterval) {
       this.cacheRefreshInterval = cacheRefreshInterval;
     }
+
+    this.events();
   }
 
   /**
@@ -674,7 +677,7 @@ export default class Community {
    * Function used to check if the user is already logged in
    */
   private async checkWallet(): Promise<void> {
-    if (!this.wallet) {
+    if (!this.wallet && !this.isWalletConnect) {
       throw new Error(
         'You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).',
       );
@@ -765,7 +768,7 @@ export default class Community {
 
     const res = await interactWriteDryRun(
       this.arweave,
-      this.wallet,
+      this.wallet || 'use_wallet',
       this.communityContract,
       input,
       tags,
@@ -777,6 +780,28 @@ export default class Community {
       throw new Error(res.result);
     }
 
-    return interactWrite(this.arweave, this.wallet, this.communityContract, input, tags, target, winstonQty);
+    return interactWrite(this.arweave, this.wallet || 'use_wallet', this.communityContract, input, tags, target, winstonQty);
+  }
+
+  private events() {
+    let win: any = window;
+    if(!win) win = {
+      removeEventListener: (evName: string) => {},
+      addEventListener: (evName: string, callback: Function) => {}
+    };
+
+    async function walletConnect() {
+      this.walletAddress = await this.arweave.wallets.getAddress();
+      this.isWalletConnect = true;
+    }
+    async function walletSwitch(e: any) {
+      this.walletAddress = await e.detail.address;
+      this.isWalletConnect = true;
+    }
+
+    window.removeEventListener('arweaveWalletLoaded', () => walletConnect());
+    window.removeEventListener('walletSwitch', (e) => walletSwitch(e));
+    window.addEventListener('arweaveWalletLoaded', () => walletConnect());
+    window.addEventListener('walletSwitch', (e) => walletSwitch(e));
   }
 }
