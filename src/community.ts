@@ -864,7 +864,7 @@ export default class Community {
    * Create events to handle the wallet connect feature
    */
   private events() {
-    let win: any = (typeof window !== 'undefined')? window : {
+    const win: any = (typeof window !== 'undefined')? window : {
       removeEventListener: (evName: string) => {},
       addEventListener: (evName: string, callback: (e: any) => {}) => {},
     };
