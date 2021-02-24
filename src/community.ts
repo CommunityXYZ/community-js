@@ -864,12 +864,10 @@ export default class Community {
    * Create events to handle the wallet connect feature
    */
   private events() {
-    let win: any = window;
-    if (!win)
-      win = {
-        removeEventListener: (evName: string) => {},
-        addEventListener: (evName: string, callback: (e: any) => {}) => {},
-      };
+    let win: any = (typeof window !== 'undefined')? window : {
+      removeEventListener: (evName: string) => {},
+      addEventListener: (evName: string, callback: (e: any) => {}) => {},
+    };
 
     async function walletConnect() {
       this.walletAddress = await this.arweave.wallets.getAddress();
