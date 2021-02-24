@@ -463,10 +463,6 @@ export default class Community {
    * @return {object} - The txFee and the createFee, both are numbers.
    */
   public async getFees(): Promise<{ txFee: number; createFee: number }> {
-    /**
-     * limestoneDeployerAddy: string = 'R9PL9jt-mZoV6XcNjJD2uB2ajiFTC7PYZ_iyySzzz6U';
-  private readonly checkCoingeckoAfter: number = 60 * 60 * 24 * 1000;
-     */
     const query = `
     query {
       transactions(
@@ -872,7 +868,7 @@ export default class Community {
     if (!win)
       win = {
         removeEventListener: (evName: string) => {},
-        addEventListener: (evName: string, callback: Function) => {},
+        addEventListener: (evName: string, callback: (e: any) => {}) => {},
       };
 
     async function walletConnect() {
