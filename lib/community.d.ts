@@ -5,17 +5,22 @@ export default class Community {
     private readonly cacheServer;
     private readonly contractSrc;
     private readonly mainContract;
-    private readonly txFee;
-    private readonly createFee;
+    private readonly txFeeUsd;
+    private readonly createFeeUsd;
+    private createFee;
+    private txFee;
     private arweave;
     private wallet;
     private walletAddress;
     private dummyWallet;
+    private isWalletConnect;
     private communityContract;
     private state;
     private firstCall;
     private cacheRefreshInterval;
     private stateCallInProgress;
+    private readonly limestoneDeployerAddy;
+    private readonly checkCoingeckoAfter;
     /**
      * Before interacting with Community you need to have at least Arweave initialized.
      * @param arweave - Arweave instance
@@ -131,6 +136,14 @@ export default class Community {
      */
     selectWeightedHolder(balances?: BalancesInterface, vault?: VaultInterface): Promise<string>;
     /**
+     * Get the current fee charged for actions on Community.
+     * @return {object} - The txFee and the createFee, both are numbers.
+     */
+    getFees(): Promise<{
+        txFee: number;
+        createFee: number;
+    }>;
+    /**
      *
      * @param target - Target Wallet Address
      * @param qty - Amount of the token to send
@@ -208,4 +221,5 @@ export default class Community {
      * @param fee - Transaction fee
      */
     private interact;
+    private events;
 }
