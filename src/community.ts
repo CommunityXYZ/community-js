@@ -487,7 +487,7 @@ export default class Community {
     }`;
 
     try {
-      const res = await this.arweave.api.post('/graphql', {query});
+      const res = await this.arweave.api.post('/graphql', { query });
       let createdAt: number;
       let arPrice: number;
 
