@@ -1,4 +1,4 @@
 {
-  "ponicode.testSettings.testLocation.locationType": "Same folder as source file",
-  "ponicode.testSettings.testLocation.path": "{rootDir}/{filePath}/{fileName}.test.{ext}"
+  "ponicode.testSettings.testLocation.locationType": "In folder __tests__ at workspace root",
+  "ponicode.testSettings.testLocation.path": "{rootDir}/__tests__/{filePath}/{fileName}.test.{ext}"
 }
