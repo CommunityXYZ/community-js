@@ -463,47 +463,53 @@ export default class Community {
    * @return {object} - The txFee and the createFee, both are numbers.
    */
   public async getFees(): Promise<{ txFee: number; createFee: number }> {
-    const query = `
-    query {
-      transactions(
-        owners: ["${this.limestoneDeployerAddy}"]
-        tags: [
-          { name: "app", values: "Limestone" }
-          { name: "type", values: "data-latest" }
-          { name: "token", values: "AR" }
-          { name: "version", values: "0.005" }
-        ]
-        first: 1
-      ) {
-        edges {
-          node {
-            tags {
-              name
-              value
-            }
-          }
-        }
-      }
-    }`;
+    // const query = `
+    // query {
+    //   transactions(
+    //     owners: ["${this.limestoneDeployerAddy}"]
+    //     tags: [
+    //       { name: "app", values: "Limestone" }
+    //       { name: "type", values: "data-latest" }
+    //       { name: "token", values: "AR" }
+    //       { name: "version", values: "0.005" }
+    //     ]
+    //     first: 1
+    //   ) {
+    //     edges {
+    //       node {
+    //         tags {
+    //           name
+    //           value
+    //         }
+    //       }
+    //     }
+    //   }
+    // }`;
 
     try {
-      const res = await this.arweave.api.post('/graphql', { query }, { timeout: 50000 });
-      let createdAt: number;
-      let arPrice: number;
+      // const res = await this.arweave.api.post('/graphql', { query }, { timeout: 50000 });
+      // let createdAt: number;
+      // let arPrice: number;
 
-      const edge = res.data.data.transactions.edges[0];
-      for (const tag of edge.node.tags) {
-        if (tag.name === 'time') {
-          createdAt = tag.value;
-        } else if (tag.name === 'value') {
-          arPrice = tag.value;
-        }
-      }
+      // const edge = res.data.data.transactions.edges[0];
+      // for (const tag of edge.node.tags) {
+      //   if (tag.name === 'time') {
+      //     createdAt = tag.value;
+      //   } else if (tag.name === 'value') {
+      //     arPrice = tag.value;
+      //   }
+      // }
+
+      const res = await axios(
+        'https://api.coingecko.com/api/v3/simple/price?ids=arweave&vs_currencies=usd&include_last_updated_at=true',
+      );
+      const createdAt = +res.data.arweave.last_updated_at * 1000;
+      const arPrice = +res.data.arweave.price;
 
       if (createdAt && arPrice) {
         const deployTime = new Date().getTime() - createdAt;
         if (deployTime > this.checkCoingeckoAfter) {
-          console.warn("Limestone hasn't been updated over a day ago!");
+          console.warn("Price hasn't been updated over a day ago!");
         }
 
         this.createFee = +(this.createFeeUsd / arPrice).toFixed(5);
