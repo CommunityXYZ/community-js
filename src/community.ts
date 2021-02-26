@@ -39,6 +39,7 @@ export default class Community {
 
   private readonly limestoneDeployerAddy: string = 'R9PL9jt-mZoV6XcNjJD2uB2ajiFTC7PYZ_iyySzzz6U';
   private readonly checkCoingeckoAfter: number = 60 * 60 * 24 * 1000; // 24 hours
+  private updatedFees: boolean = false;
 
   /**
    * Before interacting with Community you need to have at least Arweave initialized.
@@ -313,6 +314,10 @@ export default class Community {
     inAr = false,
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
+    if (!this.updatedFees) {
+      return this.getCreateCost(inAr, options);
+    }
+
     const res = this.arweave.ar.arToWinston(this.createFee.toString());
     if (inAr) {
       return this.arweave.ar.winstonToAr(res, options);
@@ -330,6 +335,10 @@ export default class Community {
     inAr = false,
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
+    if (!this.updatedFees) {
+      return this.getActionCost(inAr, options);
+    }
+
     const res = this.arweave.ar.arToWinston(this.txFee.toString());
     if (inAr) {
       return this.arweave.ar.winstonToAr(res, options);
@@ -520,6 +529,7 @@ export default class Community {
       console.warn('Was not able to update the fees, please try again later');
     }
 
+    this.updatedFees = true;
     return {
       createFee: this.createFee,
       txFee: this.txFee,

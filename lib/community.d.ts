@@ -21,6 +21,7 @@ export default class Community {
     private stateCallInProgress;
     private readonly limestoneDeployerAddy;
     private readonly checkCoingeckoAfter;
+    private updatedFees;
     /**
      * Before interacting with Community you need to have at least Arweave initialized.
      * @param arweave - Arweave instance
