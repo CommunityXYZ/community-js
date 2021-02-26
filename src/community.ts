@@ -513,7 +513,7 @@ export default class Community {
         'https://api.coingecko.com/api/v3/simple/price?ids=arweave&vs_currencies=usd&include_last_updated_at=true',
       );
       const createdAt = +res.data.arweave.last_updated_at * 1000;
-      const arPrice = +res.data.arweave.price;
+      const arPrice = +res.data.arweave.usd;
 
       if (createdAt && arPrice) {
         const deployTime = new Date().getTime() - createdAt;
