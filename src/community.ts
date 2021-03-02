@@ -315,6 +315,7 @@ export default class Community {
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
     if (!this.updatedFees) {
+      await new Promise((resolve) => setTimeout(() => resolve(true), 100));
       return this.getCreateCost(inAr, options);
     }
 
@@ -336,6 +337,7 @@ export default class Community {
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
     if (!this.updatedFees) {
+      await new Promise((resolve) => setTimeout(() => resolve(true), 100));
       return this.getActionCost(inAr, options);
     }
 

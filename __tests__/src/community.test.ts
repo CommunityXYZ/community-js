@@ -22,4 +22,10 @@ describe("inst.getFees", () => {
         expect(fees.createFee).toBeGreaterThan(0);
         expect(fees.createFee).toBeGreaterThan(fees.txFee);
     })
+
+    test('getActionCost', async () => {
+        jest.setTimeout(60000)
+        const cost = await inst.getActionCost();
+        expect(cost).toMatch(/\d+/);
+    })
 })
