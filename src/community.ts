@@ -219,7 +219,7 @@ export default class Community {
       throw new Error('At least one account need to be specified.');
     }
     for (const bal in balances) {
-      if (isNaN(balances[bal]) || !Number.isInteger(balances[bal]) || balances[bal] < 1) {
+      if (isNaN(balances[bal]) || !Number.isInteger(balances[bal]) || balances[bal] < 0) {
         throw new Error('Address balances must be a positive integer.');
       }
     }
@@ -243,7 +243,7 @@ export default class Community {
     if (Object.keys(vault).length) {
       for (const key of Object.keys(vault)) {
         for (const k in vault[key]) {
-          if (isNaN(vault[key][k].balance) || !Number.isInteger(vault[key][k]) || vault[key][k].balance < 1) {
+          if (isNaN(vault[key][k].balance) || !Number.isInteger(vault[key][k]) || vault[key][k].balance < 0) {
             throw new Error('Vault balance must be a positive integer.');
           }
         }
