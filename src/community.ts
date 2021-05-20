@@ -16,7 +16,7 @@ import Utils from './utils';
 
 export default class Community {
   private readonly cacheServer: string = 'https://cache.community.xyz/';
-  private readonly contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
+  private contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
   private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
   private readonly txFeeUsd: number = 0.5;
   private readonly createFeeUsd: number = 3;
@@ -277,6 +277,19 @@ export default class Community {
     };
 
     return this.state;
+  }
+
+  /**
+   * Update the used contract source transaction ID.
+   * @param id New contract source ID.
+   * @returns boolean that validates if the update was done.
+   */
+  public async setContractSourceId(id: string): Promise<boolean> {
+    if (!Utils.isTxId(id)) {
+      return false;
+    }
+    this.contractSrc = id;
+    return true;
   }
 
   /**

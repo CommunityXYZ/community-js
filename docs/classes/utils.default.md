@@ -14,6 +14,7 @@
 
 - [formatBlocks](utils.default.md#formatblocks)
 - [formatNumber](utils.default.md#formatnumber)
+- [isTxId](utils.default.md#istxid)
 - [trimObj](utils.default.md#trimobj)
 
 ## Constructors
@@ -58,6 +59,22 @@ Name | Type | Default value | Description |
 `thousands` | *string* | ',' | string to separate thousands    |
 
 **Returns:** *string*
+
+___
+
+### isTxId
+
+▸ `Static`**isTxId**(`id`: *string*): *boolean*
+
+Checks if a string is a valid Arweave transaction ID.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`id` | *string* | Transaction id.   |
+
+**Returns:** *boolean*
 
 ___
 

@@ -31,6 +31,7 @@
 - [proposeVote](community.default.md#proposevote)
 - [selectWeightedHolder](community.default.md#selectweightedholder)
 - [setCommunityTx](community.default.md#setcommunitytx)
+- [setContractSourceId](community.default.md#setcontractsourceid)
 - [setState](community.default.md#setstate)
 - [setWallet](community.default.md#setwallet)
 - [transfer](community.default.md#transfer)
@@ -379,6 +380,24 @@ Name | Type | Description |
 **Returns:** *Promise*<boolean\>
 
 boolean - True if successful, false if error.
+
+___
+
+### setContractSourceId
+
+▸ **setContractSourceId**(`id`: *string*): *Promise*<boolean\>
+
+Update the used contract source transaction ID.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`id` | *string* | New contract source ID.   |
+
+**Returns:** *Promise*<boolean\>
+
+boolean that validates if the update was done.
 
 ___
 

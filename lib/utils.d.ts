@@ -5,6 +5,12 @@ export default class Utils {
      */
     static trimObj(obj: any): any;
     /**
+     * Checks if a string is a valid Arweave transaction ID.
+     * @param id Transaction id.
+     * @returns
+     */
+    static isTxId(id: string): boolean;
+    /**
      * Formats the currency
      * @param amount balance to be formatted
      * @param decimalCount how many decimals to add

@@ -3,7 +3,7 @@ import { JWKInterface } from 'arweave/node/lib/wallet';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface, TagInterface } from './faces';
 export default class Community {
     private readonly cacheServer;
-    private readonly contractSrc;
+    private contractSrc;
     private readonly mainContract;
     private readonly txFeeUsd;
     private readonly createFeeUsd;
@@ -34,6 +34,11 @@ export default class Community {
      * @returns {Promise<string>} The main contract ID.
      */
     getMainContractId(): Promise<string>;
+    /**
+     * Get the contract source txid used for new PSCs.
+     * @returns {Promise<string>} The contract source ID.
+     */
+    getContractSourceId(): Promise<string>;
     /**
      * Get the current Community contract ID
      */
@@ -68,6 +73,12 @@ export default class Community {
      * @returns - The created state
      */
     setState(name: string, ticker: string, balances: BalancesInterface, quorum?: number, support?: number, voteLength?: number, lockMinLength?: number, lockMaxLength?: number, vault?: VaultInterface, votes?: VoteInterface[], roles?: RoleInterface, extraSettings?: [string, any][]): Promise<StateInterface>;
+    /**
+     * Update the used contract source transaction ID.
+     * @param id New contract source ID.
+     * @returns boolean that validates if the update was done.
+     */
+    setContractSourceId(id: string): Promise<boolean>;
     /**
      * Create a new Community with the current, previously saved (with `setState`) state.
      * @param tags - optional: tags to be added to this transaction
