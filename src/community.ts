@@ -243,7 +243,7 @@ export default class Community {
     if (Object.keys(vault).length) {
       for (const key of Object.keys(vault)) {
         for (const k in vault[key]) {
-          if (isNaN(vault[key][k].balance) || !Number.isInteger(vault[key][k]) || vault[key][k].balance < 0) {
+          if (isNaN(vault[key][k].balance) || !Number.isInteger(vault[key][k].balance) || vault[key][k].balance < 0) {
             throw new Error('Vault balance must be a positive integer.');
           }
         }
