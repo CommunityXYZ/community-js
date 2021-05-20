@@ -18,6 +18,7 @@
 - [getActionCost](community.default.md#getactioncost)
 - [getBalance](community.default.md#getbalance)
 - [getCommunityContract](community.default.md#getcommunitycontract)
+- [getContractSourceId](community.default.md#getcontractsourceid)
 - [getCreateCost](community.default.md#getcreatecost)
 - [getFees](community.default.md#getfees)
 - [getMainContractId](community.default.md#getmaincontractid)
@@ -156,6 +157,18 @@ ___
 Get the current Community contract ID
 
 **Returns:** *Promise*<string\>
+
+___
+
+### getContractSourceId
+
+▸ **getContractSourceId**(): *Promise*<string\>
+
+Get the contract source txid used for new PSCs.
+
+**Returns:** *Promise*<string\>
+
+The contract source ID.
 
 ___
 

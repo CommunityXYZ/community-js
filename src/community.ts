@@ -75,6 +75,14 @@ export default class Community {
   }
 
   /**
+   * Get the contract source txid used for new PSCs.
+   * @returns {Promise<string>} The contract source ID.
+   */
+  public async getContractSourceId(): Promise<string> {
+    return this.contractSrc;
+  }
+
+  /**
    * Get the current Community contract ID
    */
   public async getCommunityContract(): Promise<string> {
@@ -474,43 +482,7 @@ export default class Community {
    * @return {object} - The txFee and the createFee, both are numbers.
    */
   public async getFees(): Promise<{ txFee: number; createFee: number }> {
-    // const query = `
-    // query {
-    //   transactions(
-    //     owners: ["${this.limestoneDeployerAddy}"]
-    //     tags: [
-    //       { name: "app", values: "Limestone" }
-    //       { name: "type", values: "data-latest" }
-    //       { name: "token", values: "AR" }
-    //       { name: "version", values: "0.005" }
-    //     ]
-    //     first: 1
-    //   ) {
-    //     edges {
-    //       node {
-    //         tags {
-    //           name
-    //           value
-    //         }
-    //       }
-    //     }
-    //   }
-    // }`;
-
     try {
-      // const res = await this.arweave.api.post('/graphql', { query }, { timeout: 50000 });
-      // let createdAt: number;
-      // let arPrice: number;
-
-      // const edge = res.data.data.transactions.edges[0];
-      // for (const tag of edge.node.tags) {
-      //   if (tag.name === 'time') {
-      //     createdAt = tag.value;
-      //   } else if (tag.name === 'value') {
-      //     arPrice = tag.value;
-      //   }
-      // }
-
       const res = await axios(
         'https://api.coingecko.com/api/v3/simple/price?ids=arweave&vs_currencies=usd&include_last_updated_at=true',
       );
