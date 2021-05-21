@@ -58,4 +58,4 @@ export interface TagInterface {
 export declare type VoteStatus = 'active' | 'quorumFailed' | 'passed' | 'failed';
 export declare type VoteType = 'mint' | 'mintLocked' | 'burnVault' | 'indicative' | 'set';
 export declare type GetFunctionType = 'balance' | 'unlockedBalance' | 'vaultBalance' | 'role';
-export declare type SetFunctionType = 'transfer' | 'vote' | 'propose' | 'finalize' | 'lock' | 'increaseVault' | 'unlock';
+export declare type SetFunctionType = 'transfer' | 'transferLocked' | 'vote' | 'propose' | 'finalize' | 'lock' | 'increaseVault' | 'unlock';

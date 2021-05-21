@@ -42,7 +42,7 @@ ___
 
 ### function
 
-• **function**: *balance* \| *unlockedBalance* \| *vaultBalance* \| *role* \| *transfer* \| *vote* \| *propose* \| *finalize* \| *lock* \| *increaseVault* \| *unlock*
+• **function**: *balance* \| *unlockedBalance* \| *vaultBalance* \| *role* \| *transfer* \| *transferLocked* \| *vote* \| *propose* \| *finalize* \| *lock* \| *increaseVault* \| *unlock*
 
 ___
 

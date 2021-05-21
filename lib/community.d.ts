@@ -156,13 +156,22 @@ export default class Community {
         createFee: number;
     }>;
     /**
-     *
+     * Transfer token balances to another account.
      * @param target - Target Wallet Address
      * @param qty - Amount of the token to send
      * @param tags - optional: tags to be added to this transaction
      * @returns The transaction ID for this action
      */
     transfer(target: string, qty: number, tags?: TagInterface[]): Promise<string>;
+    /**
+     * Transfer tokens to an account's vault.
+     * @param target - Target Wallet Address
+     * @param qty - Amount of the token to send
+     * @param lockLength - For how many blocks to lock the tokens
+     * @param tags - optional: tags to be added to this transaction
+     * @returns The transaction ID for this action
+     */
+    transferLocked(target: string, qty: number, lockLength: number, tags?: TagInterface[]): Promise<string>;
     /**
      * Lock your balances in a vault to earn voting weight.
      * @param qty - Positive integer for the quantity to lock

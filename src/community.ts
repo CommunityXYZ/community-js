@@ -526,7 +526,7 @@ export default class Community {
   // Setters
 
   /**
-   *
+   * Transfer token balances to another account.
    * @param target - Target Wallet Address
    * @param qty - Amount of the token to send
    * @param tags - optional: tags to be added to this transaction
@@ -544,6 +544,38 @@ export default class Community {
     ];
 
     return this.interact({ function: 'transfer', target, qty }, tags);
+  }
+
+  /**
+   * Transfer tokens to an account's vault.
+   * @param target - Target Wallet Address
+   * @param qty - Amount of the token to send
+   * @param lockLength - For how many blocks to lock the tokens
+   * @param tags - optional: tags to be added to this transaction
+   * @returns The transaction ID for this action
+   */
+  public async transferLocked(
+    target: string,
+    qty: number,
+    lockLength: number,
+    tags: TagInterface[] = [],
+  ): Promise<string> {
+    tags = [
+      ...(await this.cleanTags(tags)),
+      ...[
+        { name: 'Action', value: 'transferLocked' },
+        {
+          name: 'Message',
+          value: `Transfer locked to ${target} of ${Utils.formatNumber(qty)} for ${Utils.formatNumber(
+            lockLength,
+          )} blocks.`,
+        },
+        { name: 'Community-ID', value: this.communityContract },
+        { name: 'Service', value: 'CommunityXYZ' },
+      ],
+    ];
+
+    return this.interact({ function: 'transferLocked', target, qty, lockLength }, tags);
   }
 
   /**

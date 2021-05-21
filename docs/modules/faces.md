@@ -34,7 +34,7 @@ ___
 
 ### SetFunctionType
 
-Ƭ **SetFunctionType**: *transfer* \| *vote* \| *propose* \| *finalize* \| *lock* \| *increaseVault* \| *unlock*
+Ƭ **SetFunctionType**: *transfer* \| *transferLocked* \| *vote* \| *propose* \| *finalize* \| *lock* \| *increaseVault* \| *unlock*
 
 ___
 

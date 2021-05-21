@@ -35,6 +35,7 @@
 - [setState](community.default.md#setstate)
 - [setWallet](community.default.md#setwallet)
 - [transfer](community.default.md#transfer)
+- [transferLocked](community.default.md#transferlocked)
 - [unlockVault](community.default.md#unlockvault)
 - [vote](community.default.md#vote)
 
@@ -452,12 +453,35 @@ ___
 
 ▸ **transfer**(`target`: *string*, `qty`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
 
+Transfer token balances to another account.
+
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `target` | *string* | Target Wallet Address   |
 `qty` | *number* | Amount of the token to send   |
+`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+
+**Returns:** *Promise*<string\>
+
+The transaction ID for this action
+
+___
+
+### transferLocked
+
+▸ **transferLocked**(`target`: *string*, `qty`: *number*, `lockLength`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+
+Transfer tokens to an account's vault.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`target` | *string* | Target Wallet Address   |
+`qty` | *number* | Amount of the token to send   |
+`lockLength` | *number* | For how many blocks to lock the tokens   |
 `tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
 
 **Returns:** *Promise*<string\>
