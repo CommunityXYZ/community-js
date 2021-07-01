@@ -16,16 +16,16 @@
 
 ### balance
 
-• **balance**: *number*
+• **balance**: `number`
 
 ___
 
 ### end
 
-• **end**: *number*
+• **end**: `number`
 
 ___
 
 ### start
 
-• **start**: *number*
+• **start**: `number`

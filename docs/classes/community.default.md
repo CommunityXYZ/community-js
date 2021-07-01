@@ -43,35 +43,35 @@
 
 ### constructor
 
-\+ **new default**(`arweave`: *default*, `wallet?`: JWKInterface, `cacheRefreshInterval?`: *number*): [*default*](community.default.md)
+• **new default**(`arweave`, `wallet?`, `cacheRefreshInterval?`)
 
 Before interacting with Community you need to have at least Arweave initialized.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`arweave` | *default* | Arweave instance   |
-`wallet?` | JWKInterface | JWK wallet file data   |
-`cacheRefreshInterval` | *number* | Refresh interval in milliseconds for the cached state    |
-
-**Returns:** [*default*](community.default.md)
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `arweave` | `default` | Arweave instance |
+| `wallet?` | `JWKInterface` | JWK wallet file data |
+| `cacheRefreshInterval` | `number` | Refresh interval in milliseconds for the cached state |
 
 ## Methods
 
 ### create
 
-▸ **create**(`tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **create**(`tags?`): `Promise`<`string`\>
 
 Create a new Community with the current, previously saved (with `setState`) state.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The created community transaction ID.
 
@@ -79,18 +79,20 @@ ___
 
 ### finalize
 
-▸ **finalize**(`id`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **finalize**(`id`, `tags?`): `Promise`<`string`\>
 
 Finalize a vote, to run the desired vote details if approved, or reject it and close.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`id` | *number* | The vote ID, this is the index of the vote in votes   |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `id` | `number` | `undefined` | The vote ID, this is the index of the vote in votes |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action
 
@@ -98,17 +100,19 @@ ___
 
 ### get
 
-▸ **get**(`params?`: [*InputInterface*](../interfaces/faces.inputinterface.md)): *Promise*<[*ResultInterface*](../interfaces/faces.resultinterface.md)\>
+▸ **get**(`params?`): `Promise`<[`ResultInterface`](../interfaces/faces.resultinterface.md)\>
 
 Do a GET call to any function on the contract.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`params` | [*InputInterface*](../interfaces/faces.inputinterface.md) | InputInterface   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`InputInterface`](../interfaces/faces.inputinterface.md) | InputInterface |
 
-**Returns:** *Promise*<[*ResultInterface*](../interfaces/faces.resultinterface.md)\>
+#### Returns
+
+`Promise`<[`ResultInterface`](../interfaces/faces.resultinterface.md)\>
 
 ResultInterface
 
@@ -116,37 +120,41 @@ ___
 
 ### getActionCost
 
-▸ **getActionCost**(`inAr?`: *boolean*, `options?`: { `decimals`: *number* ; `formatted`: *boolean* ; `trim`: *boolean*  }): *Promise*<string\>
+▸ **getActionCost**(`inAr?`, `options?`): `Promise`<`string`\>
 
 Get the current action (post interaction) cost of a community.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`inAr` | *boolean* | false | Return in winston or AR   |
-`options?` | *object* | - | If return inAr is set to true, these options are used to format the returned AR value.    |
-`options.decimals` | *number* | - | - |
-`options.formatted` | *boolean* | - | - |
-`options.trim` | *boolean* | - | - |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `inAr` | `boolean` | `false` | Return in winston or AR |
+| `options?` | `Object` | `undefined` | If return inAr is set to true, these options are used to format the returned AR value. |
+| `options.decimals` | `number` | `undefined` | - |
+| `options.formatted` | `boolean` | `undefined` | - |
+| `options.trim` | `boolean` | `undefined` | - |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 ___
 
 ### getBalance
 
-▸ **getBalance**(`target?`: *string*): *Promise*<number\>
+▸ **getBalance**(`target?`): `Promise`<`number`\>
 
 Get the target or current wallet token balance
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`target` | *string* | The target wallet address   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `string` | The target wallet address |
 
-**Returns:** *Promise*<number\>
+#### Returns
+
+`Promise`<`number`\>
 
 Current target token balance
 
@@ -154,21 +162,25 @@ ___
 
 ### getCommunityContract
 
-▸ **getCommunityContract**(): *Promise*<string\>
+▸ **getCommunityContract**(): `Promise`<`string`\>
 
 Get the current Community contract ID
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 ___
 
 ### getContractSourceId
 
-▸ **getContractSourceId**(): *Promise*<string\>
+▸ **getContractSourceId**(): `Promise`<`string`\>
 
 Get the contract source txid used for new PSCs.
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The contract source ID.
 
@@ -176,31 +188,35 @@ ___
 
 ### getCreateCost
 
-▸ **getCreateCost**(`inAr?`: *boolean*, `options?`: { `decimals`: *number* ; `formatted`: *boolean* ; `trim`: *boolean*  }): *Promise*<string\>
+▸ **getCreateCost**(`inAr?`, `options?`): `Promise`<`string`\>
 
 Get the current create cost of a community.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`inAr` | *boolean* | false | Return in winston or AR   |
-`options?` | *object* | - | If return inAr is set to true, these options are used to format the returned AR value.    |
-`options.decimals` | *number* | - | - |
-`options.formatted` | *boolean* | - | - |
-`options.trim` | *boolean* | - | - |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `inAr` | `boolean` | `false` | Return in winston or AR |
+| `options?` | `Object` | `undefined` | If return inAr is set to true, these options are used to format the returned AR value. |
+| `options.decimals` | `number` | `undefined` | - |
+| `options.formatted` | `boolean` | `undefined` | - |
+| `options.trim` | `boolean` | `undefined` | - |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 ___
 
 ### getFees
 
-▸ **getFees**(): *Promise*<{ `createFee`: *number* ; `txFee`: *number*  }\>
+▸ **getFees**(): `Promise`<`Object`\>
 
 Get the current fee charged for actions on Community.
 
-**Returns:** *Promise*<{ `createFee`: *number* ; `txFee`: *number*  }\>
+#### Returns
+
+`Promise`<`Object`\>
 
 - The txFee and the createFee, both are numbers.
 
@@ -208,11 +224,13 @@ ___
 
 ### getMainContractId
 
-▸ **getMainContractId**(): *Promise*<string\>
+▸ **getMainContractId**(): `Promise`<`string`\>
 
 Get the Main Community contract ID
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The main contract ID.
 
@@ -220,17 +238,19 @@ ___
 
 ### getRole
 
-▸ **getRole**(`target?`: *string*): *Promise*<string\>
+▸ **getRole**(`target?`): `Promise`<`string`\>
 
 Get the target or current wallet role
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`target` | *string* | The target wallet address   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `string` | The target wallet address |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 Current target role
 
@@ -238,17 +258,19 @@ ___
 
 ### getState
 
-▸ **getState**(`cached?`: *boolean*): *Promise*<[*StateInterface*](../interfaces/faces.stateinterface.md)\>
+▸ **getState**(`cached?`): `Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
 
 Get the current Community state.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`cached` | *boolean* | true | Wether to return the cached version or reload   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `cached` | `boolean` | `true` | Wether to return the cached version or reload |
 
-**Returns:** *Promise*<[*StateInterface*](../interfaces/faces.stateinterface.md)\>
+#### Returns
+
+`Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
 
 - The current state and sync afterwards if needed.
 
@@ -256,17 +278,19 @@ ___
 
 ### getUnlockedBalance
 
-▸ **getUnlockedBalance**(`target?`: *string*): *Promise*<number\>
+▸ **getUnlockedBalance**(`target?`): `Promise`<`number`\>
 
 Get the target or current wallet unlocked token balance
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`target` | *string* | The target wallet address   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `string` | The target wallet address |
 
-**Returns:** *Promise*<number\>
+#### Returns
+
+`Promise`<`number`\>
 
 Current target token balance
 
@@ -274,17 +298,19 @@ ___
 
 ### getVaultBalance
 
-▸ **getVaultBalance**(`target?`: *string*): *Promise*<number\>
+▸ **getVaultBalance**(`target?`): `Promise`<`number`\>
 
 Get the target or current wallet vault balance
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`target` | *string* | The target wallet address   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `string` | The target wallet address |
 
-**Returns:** *Promise*<number\>
+#### Returns
+
+`Promise`<`number`\>
 
 Current target token balance
 
@@ -292,19 +318,21 @@ ___
 
 ### increaseVault
 
-▸ **increaseVault**(`vaultId`: *number*, `lockLength`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **increaseVault**(`vaultId`, `lockLength`, `tags?`): `Promise`<`string`\>
 
 Increase the lock time (in blocks) of a vault.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`vaultId` | *number* | The vault index position to increase   |
-`lockLength` | *number* | Length of the lock, in blocks   |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `vaultId` | `number` | `undefined` | The vault index position to increase |
+| `lockLength` | `number` | `undefined` | Length of the lock, in blocks |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action
 
@@ -312,19 +340,21 @@ ___
 
 ### lockBalance
 
-▸ **lockBalance**(`qty`: *number*, `lockLength`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **lockBalance**(`qty`, `lockLength`, `tags?`): `Promise`<`string`\>
 
 Lock your balances in a vault to earn voting weight.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`qty` | *number* | Positive integer for the quantity to lock   |
-`lockLength` | *number* | Length of the lock, in blocks   |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `qty` | `number` | `undefined` | Positive integer for the quantity to lock |
+| `lockLength` | `number` | `undefined` | Length of the lock, in blocks |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action
 
@@ -332,18 +362,20 @@ ___
 
 ### proposeVote
 
-▸ **proposeVote**(`params`: [*VoteInterface*](../interfaces/faces.voteinterface.md), `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **proposeVote**(`params`, `tags?`): `Promise`<`string`\>
 
 Create a new vote
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`params` | [*VoteInterface*](../interfaces/faces.voteinterface.md) | VoteInterface without the "function"   |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `params` | [`VoteInterface`](../interfaces/faces.voteinterface.md) | `undefined` | VoteInterface without the "function" |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action
 
@@ -351,34 +383,38 @@ ___
 
 ### selectWeightedHolder
 
-▸ **selectWeightedHolder**(`balances?`: [*BalancesInterface*](../interfaces/faces.balancesinterface.md), `vault?`: [*VaultInterface*](../interfaces/faces.vaultinterface.md)): *Promise*<string\>
+▸ **selectWeightedHolder**(`balances?`, `vault?`): `Promise`<`string`\>
 
 Select one of your community holders based on their weighted total balance.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`balances` | [*BalancesInterface*](../interfaces/faces.balancesinterface.md) | State balances, optional.   |
-`vault` | [*VaultInterface*](../interfaces/faces.vaultinterface.md) | State vault, optional.    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `balances` | [`BalancesInterface`](../interfaces/faces.balancesinterface.md) | State balances, optional. |
+| `vault` | [`VaultInterface`](../interfaces/faces.vaultinterface.md) | State vault, optional. |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 ___
 
 ### setCommunityTx
 
-▸ **setCommunityTx**(`txId`: *string*): *Promise*<boolean\>
+▸ **setCommunityTx**(`txId`): `Promise`<`boolean`\>
 
 Set the Community interactions to this transaction ID.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`txId` | *string* | Community's Transaction ID   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `txId` | `string` | Community's Transaction ID |
 
-**Returns:** *Promise*<boolean\>
+#### Returns
+
+`Promise`<`boolean`\>
 
 boolean - True if successful, false if error.
 
@@ -386,17 +422,19 @@ ___
 
 ### setContractSourceId
 
-▸ **setContractSourceId**(`id`: *string*): *Promise*<boolean\>
+▸ **setContractSourceId**(`id`): `Promise`<`boolean`\>
 
 Update the used contract source transaction ID.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`id` | *string* | New contract source ID.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | `string` | New contract source ID. |
 
-**Returns:** *Promise*<boolean\>
+#### Returns
+
+`Promise`<`boolean`\>
 
 boolean that validates if the update was done.
 
@@ -404,28 +442,30 @@ ___
 
 ### setState
 
-▸ **setState**(`name`: *string*, `ticker`: *string*, `balances`: [*BalancesInterface*](../interfaces/faces.balancesinterface.md), `quorum?`: *number*, `support?`: *number*, `voteLength?`: *number*, `lockMinLength?`: *number*, `lockMaxLength?`: *number*, `vault?`: [*VaultInterface*](../interfaces/faces.vaultinterface.md), `votes?`: [*VoteInterface*](../interfaces/faces.voteinterface.md)[], `roles?`: [*RoleInterface*](../interfaces/faces.roleinterface.md), `extraSettings?`: [*string*, *any*][]): *Promise*<[*StateInterface*](../interfaces/faces.stateinterface.md)\>
+▸ **setState**(`name`, `ticker`, `balances`, `quorum?`, `support?`, `voteLength?`, `lockMinLength?`, `lockMaxLength?`, `vault?`, `votes?`, `roles?`, `extraSettings?`): `Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
 
 Set the states for a new Community using the Community contract.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`name` | *string* | - | The Community name   |
-`ticker` | *string* | - | Currency ticker, ex: TICK   |
-`balances` | [*BalancesInterface*](../interfaces/faces.balancesinterface.md) | - | an object of wallet addresses and their token balances   |
-`quorum` | *number* | 50 | % of votes weight, for a proposal to be valid   |
-`support` | *number* | 50 | = % of votes as "yes", for a vote to be valid   |
-`voteLength` | *number* | 2000 | For how long (in blocks) should the vote be active   |
-`lockMinLength` | *number* | 720 | What is the minimum lock time (in blocks)   |
-`lockMaxLength` | *number* | 10000 | What is the maximum lock time (in blocks)   |
-`vault` | [*VaultInterface*](../interfaces/faces.vaultinterface.md) | - | Vault object, optional   |
-`votes` | [*VoteInterface*](../interfaces/faces.voteinterface.md)[] | - | Votes, optional   |
-`roles` | [*RoleInterface*](../interfaces/faces.roleinterface.md) | - | Roles, optional   |
-`extraSettings` | [*string*, *any*][] | - | Any custom extra settings can be sent here. @since v1.1.0    |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `name` | `string` | `undefined` | The Community name |
+| `ticker` | `string` | `undefined` | Currency ticker, ex: TICK |
+| `balances` | [`BalancesInterface`](../interfaces/faces.balancesinterface.md) | `undefined` | an object of wallet addresses and their token balances |
+| `quorum` | `number` | `50` | % of votes weight, for a proposal to be valid |
+| `support` | `number` | `50` | = % of votes as "yes", for a vote to be valid |
+| `voteLength` | `number` | `2000` | For how long (in blocks) should the vote be active |
+| `lockMinLength` | `number` | `720` | What is the minimum lock time (in blocks) |
+| `lockMaxLength` | `number` | `10000` | What is the maximum lock time (in blocks) |
+| `vault` | [`VaultInterface`](../interfaces/faces.vaultinterface.md) | `{}` | Vault object, optional |
+| `votes` | [`VoteInterface`](../interfaces/faces.voteinterface.md)[] | `[]` | Votes, optional |
+| `roles` | [`RoleInterface`](../interfaces/faces.roleinterface.md) | `{}` | Roles, optional |
+| `extraSettings` | [`string`, `any`][] | `[]` | Any custom extra settings can be sent here. @since v1.1.0 |
 
-**Returns:** *Promise*<[*StateInterface*](../interfaces/faces.stateinterface.md)\>
+#### Returns
+
+`Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
 
 - The created state
 
@@ -433,17 +473,19 @@ ___
 
 ### setWallet
 
-▸ **setWallet**(`wallet`: JWKInterface): *Promise*<string\>
+▸ **setWallet**(`wallet`): `Promise`<`string`\>
 
 Set the user wallet data.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`wallet` | JWKInterface | JWK wallet file data   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `wallet` | `JWKInterface` | JWK wallet file data |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The wallet address
 
@@ -451,19 +493,21 @@ ___
 
 ### transfer
 
-▸ **transfer**(`target`: *string*, `qty`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **transfer**(`target`, `qty`, `tags?`): `Promise`<`string`\>
 
 Transfer token balances to another account.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`target` | *string* | Target Wallet Address   |
-`qty` | *number* | Amount of the token to send   |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `target` | `string` | `undefined` | Target Wallet Address |
+| `qty` | `number` | `undefined` | Amount of the token to send |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action
 
@@ -471,20 +515,22 @@ ___
 
 ### transferLocked
 
-▸ **transferLocked**(`target`: *string*, `qty`: *number*, `lockLength`: *number*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **transferLocked**(`target`, `qty`, `lockLength`, `tags?`): `Promise`<`string`\>
 
 Transfer tokens to an account's vault.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`target` | *string* | Target Wallet Address   |
-`qty` | *number* | Amount of the token to send   |
-`lockLength` | *number* | For how many blocks to lock the tokens   |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `target` | `string` | `undefined` | Target Wallet Address |
+| `qty` | `number` | `undefined` | Amount of the token to send |
+| `lockLength` | `number` | `undefined` | For how many blocks to lock the tokens |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action
 
@@ -492,17 +538,19 @@ ___
 
 ### unlockVault
 
-▸ **unlockVault**(`tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **unlockVault**(`tags?`): `Promise`<`string`\>
 
 Unlock all your locked balances that are over the lock period.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action
 
@@ -510,18 +558,20 @@ ___
 
 ### vote
 
-▸ **vote**(`id`: *number*, `cast`: *yay* \| *nay*, `tags?`: [*TagInterface*](../interfaces/faces.taginterface.md)[]): *Promise*<string\>
+▸ **vote**(`id`, `cast`, `tags?`): `Promise`<`string`\>
 
 Cast a vote on an existing, and active, vote proposal.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`id` | *number* | The vote ID, this is the index of the vote in votes   |
-`cast` | *yay* \| *nay* | Cast your vote with 'yay' (for yes) or 'nay' (for no)   |
-`tags` | [*TagInterface*](../interfaces/faces.taginterface.md)[] | optional: tags to be added to this transaction   |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `id` | `number` | `undefined` | The vote ID, this is the index of the vote in votes |
+| `cast` | ``"yay"`` \| ``"nay"`` | `undefined` | Cast your vote with 'yay' (for yes) or 'nay' (for no) |
+| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
-**Returns:** *Promise*<string\>
+#### Returns
+
+`Promise`<`string`\>
 
 The transaction ID for this action

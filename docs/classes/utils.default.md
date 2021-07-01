@@ -21,73 +21,79 @@
 
 ### constructor
 
-\+ **new default**(): [*default*](utils.default.md)
-
-**Returns:** [*default*](utils.default.md)
+• **new default**()
 
 ## Methods
 
 ### formatBlocks
 
-▸ `Static`**formatBlocks**(`len?`: *number*): *string*
+▸ `Static` **formatBlocks**(`len?`): `string`
 
 Formats a block number into human readable hours, days, months, years.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`len` | *number* | 720 | block length    |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `len` | `number` | `720` | block length |
 
-**Returns:** *string*
+#### Returns
+
+`string`
 
 ___
 
 ### formatNumber
 
-▸ `Static`**formatNumber**(`amount`: *number*, `decimalCount?`: *number*, `decimal?`: *string*, `thousands?`: *string*): *string*
+▸ `Static` **formatNumber**(`amount`, `decimalCount?`, `decimal?`, `thousands?`): `string`
 
 Formats the currency
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`amount` | *number* | - | balance to be formatted   |
-`decimalCount` | *number* | 0 | how many decimals to add   |
-`decimal` | *string* | '.' | string to separate decimals   |
-`thousands` | *string* | ',' | string to separate thousands    |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `amount` | `number` | `undefined` | balance to be formatted |
+| `decimalCount` | `number` | `0` | how many decimals to add |
+| `decimal` | `string` | `'.'` | string to separate decimals |
+| `thousands` | `string` | `','` | string to separate thousands |
 
-**Returns:** *string*
+#### Returns
+
+`string`
 
 ___
 
 ### isTxId
 
-▸ `Static`**isTxId**(`id`: *string*): *boolean*
+▸ `Static` **isTxId**(`id`): `boolean`
 
 Checks if a string is a valid Arweave transaction ID.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`id` | *string* | Transaction id.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | `string` | Transaction id. |
 
-**Returns:** *boolean*
+#### Returns
+
+`boolean`
 
 ___
 
 ### trimObj
 
-▸ `Static`**trimObj**(`obj`: *any*): *any*
+▸ `Static` **trimObj**(`obj`): `any`
 
 Trims object keys and values.
 
-#### Parameters:
+#### Parameters
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`obj` | *any* | Object to trim key/values    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `any` | Object to trim key/values |
 
-**Returns:** *any*
+#### Returns
+
+`any`

@@ -28,22 +28,22 @@
 
 ### GetFunctionType
 
-Ƭ **GetFunctionType**: *balance* \| *unlockedBalance* \| *vaultBalance* \| *role*
+Ƭ **GetFunctionType**: ``"balance"`` \| ``"unlockedBalance"`` \| ``"vaultBalance"`` \| ``"role"``
 
 ___
 
 ### SetFunctionType
 
-Ƭ **SetFunctionType**: *transfer* \| *transferLocked* \| *vote* \| *propose* \| *finalize* \| *lock* \| *increaseVault* \| *unlock*
+Ƭ **SetFunctionType**: ``"transfer"`` \| ``"transferLocked"`` \| ``"vote"`` \| ``"propose"`` \| ``"finalize"`` \| ``"lock"`` \| ``"increaseVault"`` \| ``"unlock"``
 
 ___
 
 ### VoteStatus
 
-Ƭ **VoteStatus**: *active* \| *quorumFailed* \| *passed* \| *failed*
+Ƭ **VoteStatus**: ``"active"`` \| ``"quorumFailed"`` \| ``"passed"`` \| ``"failed"``
 
 ___
 
 ### VoteType
 
-Ƭ **VoteType**: *mint* \| *mintLocked* \| *burnVault* \| *indicative* \| *set*
+Ƭ **VoteType**: ``"mint"`` \| ``"mintLocked"`` \| ``"burnVault"`` \| ``"indicative"`` \| ``"set"``

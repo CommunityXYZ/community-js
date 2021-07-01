@@ -15,10 +15,10 @@
 
 ### caller
 
-• **caller**: *string*
+• **caller**: `string`
 
 ___
 
 ### input
 
-• **input**: [*InputInterface*](faces.inputinterface.md)
+• **input**: [`InputInterface`](faces.inputinterface.md)

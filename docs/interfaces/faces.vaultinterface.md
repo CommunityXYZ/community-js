@@ -6,4 +6,4 @@
 
 ## Indexable
 
-▪ [key: *string*]: [*VaultParamsInterface*](faces.vaultparamsinterface.md)[]
+▪ [key: `string`]: [`VaultParamsInterface`](faces.vaultparamsinterface.md)[]

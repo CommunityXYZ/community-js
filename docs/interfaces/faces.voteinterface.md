@@ -6,9 +6,9 @@
 
 ## Hierarchy
 
-* **VoteInterface**
+- **`VoteInterface`**
 
-  ↳ [*InputInterface*](faces.inputinterface.md)
+  ↳ [`InputInterface`](faces.inputinterface.md)
 
 ## Table of contents
 
@@ -34,88 +34,88 @@
 
 ### id
 
-• `Optional` **id**: *number*
+• `Optional` **id**: `number`
 
 ___
 
 ### key
 
-• `Optional` **key**: *string*
+• `Optional` **key**: `string`
 
 ___
 
 ### lockLength
 
-• `Optional` **lockLength**: *number*
+• `Optional` **lockLength**: `number`
 
 ___
 
 ### nays
 
-• `Optional` **nays**: *number*
+• `Optional` **nays**: `number`
 
 ___
 
 ### note
 
-• `Optional` **note**: *string*
+• `Optional` **note**: `string`
 
 ___
 
 ### qty
 
-• `Optional` **qty**: *number*
+• `Optional` **qty**: `number`
 
 ___
 
 ### recipient
 
-• `Optional` **recipient**: *string*
+• `Optional` **recipient**: `string`
 
 ___
 
 ### start
 
-• `Optional` **start**: *number*
+• `Optional` **start**: `number`
 
 ___
 
 ### status
 
-• `Optional` **status**: [*VoteStatus*](../modules/faces.md#votestatus)
+• `Optional` **status**: [`VoteStatus`](../modules/faces.md#votestatus)
 
 ___
 
 ### target
 
-• `Optional` **target**: *string*
+• `Optional` **target**: `string`
 
 ___
 
 ### totalWeight
 
-• `Optional` **totalWeight**: *number*
+• `Optional` **totalWeight**: `number`
 
 ___
 
 ### type
 
-• `Optional` **type**: [*VoteType*](../modules/faces.md#votetype)
+• `Optional` **type**: [`VoteType`](../modules/faces.md#votetype)
 
 ___
 
 ### value
 
-• `Optional` **value**: *any*
+• `Optional` **value**: `any`
 
 ___
 
 ### voted
 
-• `Optional` **voted**: *string*[]
+• `Optional` **voted**: `string`[]
 
 ___
 
 ### yays
 
-• `Optional` **yays**: *number*
+• `Optional` **yays**: `number`

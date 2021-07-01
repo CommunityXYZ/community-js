@@ -20,40 +20,40 @@
 
 ### balances
 
-• **balances**: [*BalancesInterface*](faces.balancesinterface.md)
+• **balances**: [`BalancesInterface`](faces.balancesinterface.md)
 
 ___
 
 ### name
 
-• **name**: *string*
+• **name**: `string`
 
 ___
 
 ### roles
 
-• **roles**: [*RoleInterface*](faces.roleinterface.md)
+• **roles**: [`RoleInterface`](faces.roleinterface.md)
 
 ___
 
 ### settings
 
-• **settings**: *Map*<string, any\>
+• **settings**: `Map`<`string`, `any`\>
 
 ___
 
 ### ticker
 
-• **ticker**: *string*
+• **ticker**: `string`
 
 ___
 
 ### vault
 
-• **vault**: [*VaultInterface*](faces.vaultinterface.md)
+• **vault**: [`VaultInterface`](faces.vaultinterface.md)
 
 ___
 
 ### votes
 
-• **votes**: [*VoteInterface*](faces.voteinterface.md)[]
+• **votes**: [`VoteInterface`](faces.voteinterface.md)[]

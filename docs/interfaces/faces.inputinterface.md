@@ -6,9 +6,9 @@
 
 ## Hierarchy
 
-* [*VoteInterface*](faces.voteinterface.md)
+- [`VoteInterface`](faces.voteinterface.md)
 
-  ↳ **InputInterface**
+  ↳ **`InputInterface`**
 
 ## Table of contents
 
@@ -36,130 +36,160 @@
 
 ### cast
 
-• `Optional` **cast**: *string*
+• `Optional` **cast**: `string`
 
 ___
 
 ### function
 
-• **function**: *balance* \| *unlockedBalance* \| *vaultBalance* \| *role* \| *transfer* \| *transferLocked* \| *vote* \| *propose* \| *finalize* \| *lock* \| *increaseVault* \| *unlock*
+• **function**: [`GetFunctionType`](../modules/faces.md#getfunctiontype) \| [`SetFunctionType`](../modules/faces.md#setfunctiontype)
 
 ___
 
 ### id
 
-• `Optional` **id**: *number*
+• `Optional` **id**: `number`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[id](faces.voteinterface.md#id)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[id](faces.voteinterface.md#id)
 
 ___
 
 ### key
 
-• `Optional` **key**: *string*
+• `Optional` **key**: `string`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[key](faces.voteinterface.md#key)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[key](faces.voteinterface.md#key)
 
 ___
 
 ### lockLength
 
-• `Optional` **lockLength**: *number*
+• `Optional` **lockLength**: `number`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[lockLength](faces.voteinterface.md#locklength)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[lockLength](faces.voteinterface.md#locklength)
 
 ___
 
 ### nays
 
-• `Optional` **nays**: *number*
+• `Optional` **nays**: `number`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[nays](faces.voteinterface.md#nays)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[nays](faces.voteinterface.md#nays)
 
 ___
 
 ### note
 
-• `Optional` **note**: *string*
+• `Optional` **note**: `string`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[note](faces.voteinterface.md#note)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[note](faces.voteinterface.md#note)
 
 ___
 
 ### qty
 
-• `Optional` **qty**: *number*
+• `Optional` **qty**: `number`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[qty](faces.voteinterface.md#qty)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[qty](faces.voteinterface.md#qty)
 
 ___
 
 ### recipient
 
-• `Optional` **recipient**: *string*
+• `Optional` **recipient**: `string`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[recipient](faces.voteinterface.md#recipient)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[recipient](faces.voteinterface.md#recipient)
 
 ___
 
 ### start
 
-• `Optional` **start**: *number*
+• `Optional` **start**: `number`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[start](faces.voteinterface.md#start)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[start](faces.voteinterface.md#start)
 
 ___
 
 ### status
 
-• `Optional` **status**: [*VoteStatus*](../modules/faces.md#votestatus)
+• `Optional` **status**: [`VoteStatus`](../modules/faces.md#votestatus)
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[status](faces.voteinterface.md#status)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[status](faces.voteinterface.md#status)
 
 ___
 
 ### target
 
-• `Optional` **target**: *string*
+• `Optional` **target**: `string`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[target](faces.voteinterface.md#target)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[target](faces.voteinterface.md#target)
 
 ___
 
 ### totalWeight
 
-• `Optional` **totalWeight**: *number*
+• `Optional` **totalWeight**: `number`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[totalWeight](faces.voteinterface.md#totalweight)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[totalWeight](faces.voteinterface.md#totalweight)
 
 ___
 
 ### type
 
-• `Optional` **type**: [*VoteType*](../modules/faces.md#votetype)
+• `Optional` **type**: [`VoteType`](../modules/faces.md#votetype)
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[type](faces.voteinterface.md#type)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[type](faces.voteinterface.md#type)
 
 ___
 
 ### value
 
-• `Optional` **value**: *any*
+• `Optional` **value**: `any`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[value](faces.voteinterface.md#value)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[value](faces.voteinterface.md#value)
 
 ___
 
 ### voted
 
-• `Optional` **voted**: *string*[]
+• `Optional` **voted**: `string`[]
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[voted](faces.voteinterface.md#voted)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[voted](faces.voteinterface.md#voted)
 
 ___
 
 ### yays
 
-• `Optional` **yays**: *number*
+• `Optional` **yays**: `number`
 
-Inherited from: [VoteInterface](faces.voteinterface.md).[yays](faces.voteinterface.md#yays)
+#### Inherited from
+
+[VoteInterface](faces.voteinterface.md).[yays](faces.voteinterface.md#yays)

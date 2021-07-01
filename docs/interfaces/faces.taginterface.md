@@ -15,10 +15,10 @@
 
 ### name
 
-• **name**: *string*
+• **name**: `string`
 
 ___
 
 ### value
 
-• **value**: *string*
+• **value**: `string`

@@ -16,16 +16,16 @@
 
 ### balance
 
-• **balance**: *number*
+• **balance**: `number`
 
 ___
 
 ### role
 
-• **role**: *string*
+• **role**: `string`
 
 ___
 
 ### target
 
-• **target**: *string*
+• **target**: `string`
