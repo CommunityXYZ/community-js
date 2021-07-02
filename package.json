@@ -33,7 +33,7 @@
   ],
   "devDependencies": {
     "@types/jest": "^26.0.23",
-    "esbuild": "^0.12.13",
+    "esbuild": "^0.8.46",
     "jest": "^27.0.6",
     "node-watch": "^0.7.1",
     "prettier": "^2.3.2",
@@ -48,6 +48,6 @@
   "dependencies": {
     "arweave": "^1.10.15",
     "axios": "^0.21.1",
-    "smartweave": "^0.4.36"
+    "smartweave": "^0.4.37"
   }
 }

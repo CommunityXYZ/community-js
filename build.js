@@ -17,6 +17,7 @@ const runBuild = async (doClean = false) => {
     minify: false,
     bundle: true,
     platform: 'browser',
+    target: ['es2020','chrome58','firefox57','safari11','edge16'],
     outfile: './dist/community.js',
     sourcemap: 'inline'
   }).catch((e) => {
@@ -30,6 +31,7 @@ const runBuild = async (doClean = false) => {
     minify: true,
     bundle: true,
     platform: 'browser',
+    target: ['es2020','chrome58','firefox57','safari11','edge16'],
     outfile: './dist/community.min.js',
     sourcemap: 'inline'
   }).catch((e) => {
