@@ -2710,10 +2710,10 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-smartweave@^0.4.34:
-  version "0.4.34"
-  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.34.tgz#5ffaa7f92ce8188d4fa9212bf08179c29b7627ba"
-  integrity sha512-aU/NTgS3ieRQPXJoUunIEyBtB59VPIgZ0/wXm3F4mqMpFgik/3tOYnUOcJITXmUiv0mA6dkVRx95cfuvJ10yZg==
+smartweave@^0.4.35:
+  version "0.4.35"
+  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.35.tgz#28c3ea0bc35102f7abef742865435d3e7d47b71a"
+  integrity sha512-cc93ptRy88lw47+wDjyt08CEzsrpFO2V1Oi38YHRVXQq1t/7lk22fcEMYuqKkWVVJ1nEhEOY/IrKR46R+gLgwg==
   dependencies:
     "@types/clui" "^0.3.0"
     "@types/inquirer" "^7.3.1"
