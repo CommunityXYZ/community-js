@@ -761,12 +761,12 @@ export default class Community {
     } catch (e) {
       try {
         state = await readContract(this.arweave, this.mainContract);
-      } catch(e) {
+      } catch (e) {
         console.log(e);
         return {
           target: '',
-          winstonQty: '0'
-        }
+          winstonQty: '0',
+        };
       }
     }
 
@@ -850,7 +850,7 @@ export default class Community {
     } catch (e) {
       try {
         state = await readContract(this.arweave, this.communityContract);
-      } catch(e) {
+      } catch (e) {
         console.log(e);
         return;
       }
