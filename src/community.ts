@@ -852,7 +852,7 @@ export default class Community {
         state = await readContract(this.arweave, this.communityContract);
       } catch(e) {
         console.log(e);
-        return {};
+        return;
       }
     }
 
