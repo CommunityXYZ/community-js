@@ -9,5 +9,5 @@ export default {
     format: 'umd',
     name: 'Community'
   },
-  plugins: process.env.MINIFY? [resolve(), typescript({lib: ["es5", "es6", "dom"], target: "esnext"}), terser()] : [resolve(), typescript({lib: ["es5", "es6", "dom"], target: "esnext"})]
+  plugins: process.env.MINIFY? [typescript({lib: ["es5", "es6", "dom"], target: "esnext"}), resolve(), terser()] : [typescript({lib: ["es5", "es6", "dom"], target: "esnext"}), resolve()]
 };
