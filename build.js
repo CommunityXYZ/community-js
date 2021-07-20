@@ -19,7 +19,12 @@ const runBuild = async (doClean = false) => {
     platform: 'browser',
     target: ['es2020','chrome58','firefox57','safari11'],
     outfile: './dist/community.js',
-    sourcemap: 'inline'
+    sourcemap: 'inline',
+    define: {
+      'process.env.NODE_DEBUG': false,
+      'process.env.NODE_ENV': 'production',
+      'process.env.DEBUG': false,
+    }
   }).catch((e) => {
     console.log(e);
     process.exit(1)
@@ -33,7 +38,12 @@ const runBuild = async (doClean = false) => {
     platform: 'browser',
     target: ['es2020','chrome58','firefox57','safari11'],
     outfile: './dist/community.min.js',
-    sourcemap: 'inline'
+    sourcemap: 'inline',
+    define: {
+      'process.env.NODE_DEBUG': false,
+      'process.env.NODE_ENV': 'production',
+      'process.env.DEBUG': false,
+    }
   }).catch((e) => {
     console.log(e);
     process.exit(1)
