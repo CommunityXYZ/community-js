@@ -19,8 +19,7 @@ export default class Community {
     private firstCall;
     private cacheRefreshInterval;
     private stateCallInProgress;
-    private readonly limestoneDeployerAddy;
-    private readonly checkCoingeckoAfter;
+    private readonly warnAfter;
     private updatedFees;
     /**
      * Before interacting with Community you need to have at least Arweave initialized.
