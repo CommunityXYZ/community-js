@@ -2,6 +2,7 @@ import Arweave from 'arweave';
 import axios from 'axios';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
+import redstone from 'redstone-api';
 import {
   BalancesInterface,
   VaultInterface,
@@ -37,8 +38,7 @@ export default class Community {
   private cacheRefreshInterval: number = 1000 * 60 * 2; // 2 minutes
   private stateCallInProgress: boolean = false;
 
-  private readonly limestoneDeployerAddy: string = 'R9PL9jt-mZoV6XcNjJD2uB2ajiFTC7PYZ_iyySzzz6U';
-  private readonly checkCoingeckoAfter: number = 60 * 60 * 24 * 1000; // 24 hours
+  private readonly warnAfter: number = 60 * 60 * 24 * 1000; // 24 hours
   private updatedFees: boolean = false;
 
   /**
@@ -496,15 +496,14 @@ export default class Community {
    */
   public async getFees(): Promise<{ txFee: number; createFee: number }> {
     try {
-      const res = await axios(
-        'https://api.coingecko.com/api/v3/simple/price?ids=arweave&vs_currencies=usd&include_last_updated_at=true',
-      );
-      const createdAt = +res.data.arweave.last_updated_at * 1000;
-      const arPrice = +res.data.arweave.usd;
+      const price = await redstone.getPrice("AR");
+      
+      const createdAt = price.timestamp;
+      const arPrice = price.value;
 
       if (createdAt && arPrice) {
         const deployTime = new Date().getTime() - createdAt;
-        if (deployTime > this.checkCoingeckoAfter) {
+        if (deployTime > this.warnAfter) {
           console.warn("Price hasn't been updated over a day ago!");
         }
 

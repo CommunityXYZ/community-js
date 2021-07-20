@@ -48,6 +48,7 @@
   "dependencies": {
     "arweave": "^1.10.15",
     "axios": "^0.21.1",
+    "redstone-api": "^0.4.3",
     "smartweave": "^0.4.39"
   }
 }
