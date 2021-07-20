@@ -1,5 +1,6 @@
-import Community from "../../src/community";
 import Arweave from 'arweave';
+import Community from "../../src/community";
+
 // @ponicode
 describe("inst.getFees", () => {
     jest.setTimeout(60000);
