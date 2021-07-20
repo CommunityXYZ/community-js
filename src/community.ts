@@ -759,7 +759,15 @@ export default class Community {
     try {
       state = (await axios(`${this.cacheServer}contract/${this.mainContract}`)).data;
     } catch (e) {
-      state = await readContract(this.arweave, this.mainContract);
+      try {
+        state = await readContract(this.arweave, this.mainContract);
+      } catch(e) {
+        console.log(e);
+        return {
+          target: '',
+          winstonQty: '0'
+        }
+      }
     }
 
     const target = await this.selectWeightedHolder(state.balances, state.vault);
@@ -840,7 +848,12 @@ export default class Community {
     try {
       state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
     } catch (e) {
-      state = await readContract(this.arweave, this.communityContract);
+      try {
+        state = await readContract(this.arweave, this.communityContract);
+      } catch(e) {
+        console.log(e);
+        return {};
+      }
     }
 
     state.settings = new Map(state.settings);
