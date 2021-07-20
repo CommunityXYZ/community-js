@@ -496,8 +496,8 @@ export default class Community {
    */
   public async getFees(): Promise<{ txFee: number; createFee: number }> {
     try {
-      const price = await redstone.getPrice("AR");
-      
+      const price = await redstone.getPrice('AR');
+
       const createdAt = price.timestamp;
       const arPrice = price.value;
 
