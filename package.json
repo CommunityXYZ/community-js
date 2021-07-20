@@ -7,7 +7,8 @@
     "website": "https://community.xyz"
   },
   "description": "Community Javascript wrapper.",
-  "main": "lib/community.js",
+  "main": "lib/community.cjs.js",
+  "module": "lib/community.es.js",
   "types": "lib/community.d.ts",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
     "url": "https://github.com/CommunityXYZ/community-js.git"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js && npm run buildMin",
-    "buildMin": "MINIFY=true rollup -c rollup.config.js",
+    "build": "rollup -c && npm run buildMin",
+    "buildMin": "MINIFY=true rollup -c",
     "watch": "node watch.js",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
