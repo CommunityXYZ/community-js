@@ -2928,10 +2928,10 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-smartweave@^0.4.39:
-  version "0.4.39"
-  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.39.tgz#cd7fc1877c3a92f2b9abfb24b7bf8d35d10353e5"
-  integrity sha512-EKrcJCz3fNnrOvQk3x2+KqqhvdrOsK4COOY3ocLmKW4nfzEFPNL8HkmXgn1+JRxB296RuBrgBLCQKWa0XtvlAA==
+smartweave@^0.4.41:
+  version "0.4.41"
+  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.41.tgz#40a2cad2f443091b4fe5c8e6bf565d980fe91403"
+  integrity sha512-xixp9Nfuiy/2e2JmU0IICKI9iU0KMDbLKsS/SLOwpgj7LDUwIhfGzaOHWAcK5OJ2iij9dHYSmGPRjRk+wurKqA==
   dependencies:
     "@types/clui" "^0.3.0"
     "@types/inquirer" "^7.3.1"
