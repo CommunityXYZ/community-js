@@ -43,7 +43,7 @@
 
 ### constructor
 
-• **new default**(`arweave`, `wallet?`, `cacheRefreshInterval?`)
+• **new default**(`arweave`, `wallet?`, `cacheTTL?`)
 
 Before interacting with Community you need to have at least Arweave initialized.
 
@@ -53,7 +53,7 @@ Before interacting with Community you need to have at least Arweave initialized.
 | :------ | :------ | :------ |
 | `arweave` | `default` | Arweave instance |
 | `wallet?` | `JWKInterface` | JWK wallet file data |
-| `cacheRefreshInterval` | `number` | Refresh interval in milliseconds for the cached state |
+| `cacheTTL` | `number` | Refresh interval in milliseconds for the cached state |
 
 ## Methods
 
