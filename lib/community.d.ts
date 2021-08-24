@@ -16,18 +16,20 @@ export default class Community {
     private isWalletConnect;
     private communityContract;
     private state;
-    private firstCall;
-    private cacheRefreshInterval;
+    private cacheTTL;
     private stateCallInProgress;
+    private stateUpdatedAt;
     private readonly warnAfter;
-    private updatedFees;
+    private feesUpdatedAt;
+    private feesCallInProgress;
+    private ardb;
     /**
      * Before interacting with Community you need to have at least Arweave initialized.
      * @param arweave - Arweave instance
      * @param wallet - JWK wallet file data
-     * @param cacheRefreshInterval - Refresh interval in milliseconds for the cached state
+     * @param cacheTTL - Refresh interval in milliseconds for the cached state
      */
-    constructor(arweave: Arweave, wallet?: JWKInterface, cacheRefreshInterval?: number);
+    constructor(arweave: Arweave, wallet?: JWKInterface, cacheTTL?: number);
     /**
      * Get the Main Community contract ID
      * @returns {Promise<string>} The main contract ID.
