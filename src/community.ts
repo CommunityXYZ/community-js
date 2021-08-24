@@ -2,7 +2,7 @@ import Arweave from 'arweave';
 import axios from 'axios';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
-import redstone from 'redstone-api';
+import ArDB from 'ardb';
 import {
   BalancesInterface,
   VaultInterface,
@@ -14,6 +14,7 @@ import {
   TagInterface,
 } from './faces';
 import Utils from './utils';
+import ArdbTransaction from 'ardb/lib/models/transaction';
 
 export default class Community {
   private readonly cacheServer: string = 'https://cache.community.xyz/';
@@ -34,21 +35,24 @@ export default class Community {
   // Community specific variables
   private communityContract = '';
   private state!: StateInterface;
-  private firstCall: boolean = true;
-  private cacheRefreshInterval: number = 1000 * 60 * 2; // 2 minutes
+  private cacheTTL: number = 1000 * 60 * 2; // 2 minutes
   private stateCallInProgress: boolean = false;
+  private stateUpdatedAt: number = 0;
 
   private readonly warnAfter: number = 60 * 60 * 24 * 1000; // 24 hours
-  private updatedFees: boolean = false;
+  private feesUpdatedAt: number = 0;
+  private feesCallInProgress: boolean = false;
+  private ardb: ArDB;
 
   /**
    * Before interacting with Community you need to have at least Arweave initialized.
    * @param arweave - Arweave instance
    * @param wallet - JWK wallet file data
-   * @param cacheRefreshInterval - Refresh interval in milliseconds for the cached state
+   * @param cacheTTL - Refresh interval in milliseconds for the cached state
    */
-  constructor(arweave: Arweave, wallet?: JWKInterface, cacheRefreshInterval = 1000 * 60 * 2) {
+  constructor(arweave: Arweave, wallet?: JWKInterface, cacheTTL = 1000 * 60 * 2) {
     this.arweave = arweave;
+    this.ardb = new ArDB(arweave, 2);
 
     if (wallet) {
       this.wallet = wallet;
@@ -58,8 +62,8 @@ export default class Community {
         .catch(console.log);
     }
 
-    if (cacheRefreshInterval) {
-      this.cacheRefreshInterval = cacheRefreshInterval;
+    if (cacheTTL) {
+      this.cacheTTL = cacheTTL;
     }
 
     this.getFees();
@@ -99,16 +103,12 @@ export default class Community {
       throw new Error('No community set. Use setCommunityTx to get your current state.');
     }
 
-    if (this.firstCall) {
-      this.firstCall = false;
-      return this.update(true);
+    // Check if cacheTTL has expired. If yes, return this.update() if not, return the previously saved state.
+    if (cached && this.state && this.stateUpdatedAt && this.stateUpdatedAt + this.cacheTTL > Date.now()) {
+      return this.state;
+    } else {
+      return this.update();
     }
-
-    if (!cached || !this.state) {
-      return this.update(false);
-    }
-
-    return this.state;
   }
 
   /**
@@ -335,17 +335,17 @@ export default class Community {
     inAr = false,
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
-    if (!this.updatedFees) {
+    if (!this.feesUpdatedAt) {
       await new Promise((resolve) => setTimeout(() => resolve(true), 100));
       return this.getCreateCost(inAr, options);
     }
 
-    const res = this.arweave.ar.arToWinston(this.createFee.toString());
+    const fee = this.createFee.toString();
     if (inAr) {
-      return this.arweave.ar.winstonToAr(res, options);
+      return fee;
     }
 
-    return res;
+    return this.arweave.ar.arToWinston(fee);
   }
 
   /**
@@ -357,17 +357,17 @@ export default class Community {
     inAr = false,
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
-    if (!this.updatedFees) {
+    if (!this.feesUpdatedAt) {
       await new Promise((resolve) => setTimeout(() => resolve(true), 100));
       return this.getActionCost(inAr, options);
     }
 
-    const res = this.arweave.ar.arToWinston(this.txFee.toString());
+    const fee = this.txFee.toString();
     if (inAr) {
-      return this.arweave.ar.winstonToAr(res, options);
+      return fee;
     }
 
-    return res;
+    return this.arweave.ar.arToWinston(fee);
   }
 
   /**
@@ -495,11 +495,39 @@ export default class Community {
    * @return {object} - The txFee and the createFee, both are numbers.
    */
   public async getFees(): Promise<{ txFee: number; createFee: number }> {
-    try {
-      const price = await redstone.getPrice('AR');
+    if (this.feesCallInProgress) {
+      return new Promise((resolve) => setTimeout(() => resolve(this.getFees()), 100));
+    }
+    this.feesCallInProgress = true;
 
-      const createdAt = price.timestamp;
-      const arPrice = price.value;
+    // Check if cacheTTL has expired. If yes, return the cached fees.
+    if (this.feesUpdatedAt && this.feesUpdatedAt + this.cacheTTL > Date.now()) {
+      return {
+        createFee: this.createFee,
+        txFee: this.txFee,
+      };
+    }
+
+    try {
+      const res = await this.ardb.search('transactions').tags([
+        { name: 'app', values: 'Redstone' },
+        { name: 'type', values: 'data' }
+      ]).findOne() as ArdbTransaction;
+
+      let createdAt: number;
+      let arPrice: number;
+
+      for (const tag of res.tags) {
+        if (tag.name === 'timestamp') {
+          createdAt = +tag.value;
+        } else if (tag.name === 'AR') {
+          arPrice = +tag.value;
+        }
+
+        if (createdAt && arPrice) {
+          break;
+        }
+      }
 
       if (createdAt && arPrice) {
         const deployTime = new Date().getTime() - createdAt;
@@ -515,7 +543,9 @@ export default class Community {
       console.warn('Was not able to update the fees, please try again later');
     }
 
-    this.updatedFees = true;
+    this.feesUpdatedAt = Date.now();
+    this.feesCallInProgress = false;
+
     return {
       createFee: this.createFee,
       txFee: this.txFee,
@@ -694,9 +724,8 @@ export default class Community {
         { name: 'Action', value: 'propose' },
         {
           name: 'Message',
-          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${
-            pCopy.key || pCopy.type
-          } vote, value: ${pCopy.value}.`,
+          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${pCopy.key || pCopy.type
+            } vote, value: ${pCopy.value}.`,
         },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
@@ -825,12 +854,7 @@ export default class Community {
    * Updates the current state used for a Community instance
    * @param recall Auto recall this function each cacheRefreshInterval ms
    */
-  private async update(recall = false): Promise<StateInterface> {
-    if (!this.communityContract.length) {
-      setTimeout(() => this.update(), this.cacheRefreshInterval);
-      return;
-    }
-
+  private async update(): Promise<StateInterface> {
     if (this.stateCallInProgress) {
       const getLastState = async (): Promise<StateInterface> => {
         if (this.stateCallInProgress) {
@@ -858,12 +882,9 @@ export default class Community {
 
     state.settings = new Map(state.settings);
     this.state = state;
+    this.stateUpdatedAt = Date.now();
 
     this.stateCallInProgress = false;
-
-    if (recall) {
-      setTimeout(() => this.update(true), this.cacheRefreshInterval);
-    }
     return this.state;
   }
 
@@ -915,9 +936,9 @@ export default class Community {
       typeof window !== 'undefined'
         ? window
         : {
-            removeEventListener: (evName: string) => {},
-            addEventListener: (evName: string, callback: (e: any) => {}) => {},
-          };
+          removeEventListener: (evName: string) => { },
+          addEventListener: (evName: string, callback: (e: any) => {}) => { },
+        };
 
     async function walletConnect() {
       this.walletAddress = await this.arweave.wallets.getAddress();
