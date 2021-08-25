@@ -8,9 +8,9 @@
 
 ### Properties
 
-- [balance](faces.resultinterface.md#balance)
-- [role](faces.resultinterface.md#role)
-- [target](faces.resultinterface.md#target)
+- [balance](faces.ResultInterface.md#balance)
+- [role](faces.ResultInterface.md#role)
+- [target](faces.ResultInterface.md#target)
 
 ## Properties
 

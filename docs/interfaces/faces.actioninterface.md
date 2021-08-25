@@ -8,8 +8,8 @@
 
 ### Properties
 
-- [caller](faces.actioninterface.md#caller)
-- [input](faces.actioninterface.md#input)
+- [caller](faces.ActionInterface.md#caller)
+- [input](faces.ActionInterface.md#input)
 
 ## Properties
 
@@ -21,4 +21,4 @@ ___
 
 ### input
 
-• **input**: [`InputInterface`](faces.inputinterface.md)
+• **input**: [`InputInterface`](faces.InputInterface.md)

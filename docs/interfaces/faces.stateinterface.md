@@ -8,19 +8,19 @@
 
 ### Properties
 
-- [balances](faces.stateinterface.md#balances)
-- [name](faces.stateinterface.md#name)
-- [roles](faces.stateinterface.md#roles)
-- [settings](faces.stateinterface.md#settings)
-- [ticker](faces.stateinterface.md#ticker)
-- [vault](faces.stateinterface.md#vault)
-- [votes](faces.stateinterface.md#votes)
+- [balances](faces.StateInterface.md#balances)
+- [name](faces.StateInterface.md#name)
+- [roles](faces.StateInterface.md#roles)
+- [settings](faces.StateInterface.md#settings)
+- [ticker](faces.StateInterface.md#ticker)
+- [vault](faces.StateInterface.md#vault)
+- [votes](faces.StateInterface.md#votes)
 
 ## Properties
 
 ### balances
 
-• **balances**: [`BalancesInterface`](faces.balancesinterface.md)
+• **balances**: [`BalancesInterface`](faces.BalancesInterface.md)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 ### roles
 
-• **roles**: [`RoleInterface`](faces.roleinterface.md)
+• **roles**: [`RoleInterface`](faces.RoleInterface.md)
 
 ___
 
@@ -50,10 +50,10 @@ ___
 
 ### vault
 
-• **vault**: [`VaultInterface`](faces.vaultinterface.md)
+• **vault**: [`VaultInterface`](faces.VaultInterface.md)
 
 ___
 
 ### votes
 
-• **votes**: [`VoteInterface`](faces.voteinterface.md)[]
+• **votes**: [`VoteInterface`](faces.VoteInterface.md)[]

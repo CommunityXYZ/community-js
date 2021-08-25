@@ -6,16 +6,16 @@
 
 ### Interfaces
 
-- [ActionInterface](../interfaces/faces.actioninterface.md)
-- [BalancesInterface](../interfaces/faces.balancesinterface.md)
-- [InputInterface](../interfaces/faces.inputinterface.md)
-- [ResultInterface](../interfaces/faces.resultinterface.md)
-- [RoleInterface](../interfaces/faces.roleinterface.md)
-- [StateInterface](../interfaces/faces.stateinterface.md)
-- [TagInterface](../interfaces/faces.taginterface.md)
-- [VaultInterface](../interfaces/faces.vaultinterface.md)
-- [VaultParamsInterface](../interfaces/faces.vaultparamsinterface.md)
-- [VoteInterface](../interfaces/faces.voteinterface.md)
+- [ActionInterface](../interfaces/faces.ActionInterface.md)
+- [BalancesInterface](../interfaces/faces.BalancesInterface.md)
+- [InputInterface](../interfaces/faces.InputInterface.md)
+- [ResultInterface](../interfaces/faces.ResultInterface.md)
+- [RoleInterface](../interfaces/faces.RoleInterface.md)
+- [StateInterface](../interfaces/faces.StateInterface.md)
+- [TagInterface](../interfaces/faces.TagInterface.md)
+- [VaultInterface](../interfaces/faces.VaultInterface.md)
+- [VaultParamsInterface](../interfaces/faces.VaultParamsInterface.md)
+- [VoteInterface](../interfaces/faces.VoteInterface.md)
 
 ### Type aliases
 

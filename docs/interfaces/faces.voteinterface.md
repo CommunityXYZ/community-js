@@ -8,27 +8,27 @@
 
 - **`VoteInterface`**
 
-  ↳ [`InputInterface`](faces.inputinterface.md)
+  ↳ [`InputInterface`](faces.InputInterface.md)
 
 ## Table of contents
 
 ### Properties
 
-- [id](faces.voteinterface.md#id)
-- [key](faces.voteinterface.md#key)
-- [lockLength](faces.voteinterface.md#locklength)
-- [nays](faces.voteinterface.md#nays)
-- [note](faces.voteinterface.md#note)
-- [qty](faces.voteinterface.md#qty)
-- [recipient](faces.voteinterface.md#recipient)
-- [start](faces.voteinterface.md#start)
-- [status](faces.voteinterface.md#status)
-- [target](faces.voteinterface.md#target)
-- [totalWeight](faces.voteinterface.md#totalweight)
-- [type](faces.voteinterface.md#type)
-- [value](faces.voteinterface.md#value)
-- [voted](faces.voteinterface.md#voted)
-- [yays](faces.voteinterface.md#yays)
+- [id](faces.VoteInterface.md#id)
+- [key](faces.VoteInterface.md#key)
+- [lockLength](faces.VoteInterface.md#locklength)
+- [nays](faces.VoteInterface.md#nays)
+- [note](faces.VoteInterface.md#note)
+- [qty](faces.VoteInterface.md#qty)
+- [recipient](faces.VoteInterface.md#recipient)
+- [start](faces.VoteInterface.md#start)
+- [status](faces.VoteInterface.md#status)
+- [target](faces.VoteInterface.md#target)
+- [totalWeight](faces.VoteInterface.md#totalweight)
+- [type](faces.VoteInterface.md#type)
+- [value](faces.VoteInterface.md#value)
+- [voted](faces.VoteInterface.md#voted)
+- [yays](faces.VoteInterface.md#yays)
 
 ## Properties
 

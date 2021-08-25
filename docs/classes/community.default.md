@@ -67,7 +67,7 @@ Create a new Community with the current, previously saved (with `setState`) stat
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -88,7 +88,7 @@ Finalize a vote, to run the desired vote details if approved, or reject it and c
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
 | `id` | `number` | `undefined` | The vote ID, this is the index of the vote in votes |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -100,7 +100,7 @@ ___
 
 ### get
 
-▸ **get**(`params?`): `Promise`<[`ResultInterface`](../interfaces/faces.resultinterface.md)\>
+▸ **get**(`params?`): `Promise`<[`ResultInterface`](../interfaces/faces.ResultInterface.md)\>
 
 Do a GET call to any function on the contract.
 
@@ -108,11 +108,11 @@ Do a GET call to any function on the contract.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params` | [`InputInterface`](../interfaces/faces.inputinterface.md) | InputInterface |
+| `params` | [`InputInterface`](../interfaces/faces.InputInterface.md) | InputInterface |
 
 #### Returns
 
-`Promise`<[`ResultInterface`](../interfaces/faces.resultinterface.md)\>
+`Promise`<[`ResultInterface`](../interfaces/faces.ResultInterface.md)\>
 
 ResultInterface
 
@@ -258,7 +258,7 @@ ___
 
 ### getState
 
-▸ **getState**(`cached?`): `Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
+▸ **getState**(`cached?`): `Promise`<[`StateInterface`](../interfaces/faces.StateInterface.md)\>
 
 Get the current Community state.
 
@@ -270,7 +270,7 @@ Get the current Community state.
 
 #### Returns
 
-`Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
+`Promise`<[`StateInterface`](../interfaces/faces.StateInterface.md)\>
 
 - The current state and sync afterwards if needed.
 
@@ -328,7 +328,7 @@ Increase the lock time (in blocks) of a vault.
 | :------ | :------ | :------ | :------ |
 | `vaultId` | `number` | `undefined` | The vault index position to increase |
 | `lockLength` | `number` | `undefined` | Length of the lock, in blocks |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -350,7 +350,7 @@ Lock your balances in a vault to earn voting weight.
 | :------ | :------ | :------ | :------ |
 | `qty` | `number` | `undefined` | Positive integer for the quantity to lock |
 | `lockLength` | `number` | `undefined` | Length of the lock, in blocks |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -370,8 +370,8 @@ Create a new vote
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `params` | [`VoteInterface`](../interfaces/faces.voteinterface.md) | `undefined` | VoteInterface without the "function" |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `params` | [`VoteInterface`](../interfaces/faces.VoteInterface.md) | `undefined` | VoteInterface without the "function" |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -391,8 +391,8 @@ Select one of your community holders based on their weighted total balance.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `balances` | [`BalancesInterface`](../interfaces/faces.balancesinterface.md) | State balances, optional. |
-| `vault` | [`VaultInterface`](../interfaces/faces.vaultinterface.md) | State vault, optional. |
+| `balances` | [`BalancesInterface`](../interfaces/faces.BalancesInterface.md) | State balances, optional. |
+| `vault` | [`VaultInterface`](../interfaces/faces.VaultInterface.md) | State vault, optional. |
 
 #### Returns
 
@@ -442,7 +442,7 @@ ___
 
 ### setState
 
-▸ **setState**(`name`, `ticker`, `balances`, `quorum?`, `support?`, `voteLength?`, `lockMinLength?`, `lockMaxLength?`, `vault?`, `votes?`, `roles?`, `extraSettings?`): `Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
+▸ **setState**(`name`, `ticker`, `balances`, `quorum?`, `support?`, `voteLength?`, `lockMinLength?`, `lockMaxLength?`, `vault?`, `votes?`, `roles?`, `extraSettings?`): `Promise`<[`StateInterface`](../interfaces/faces.StateInterface.md)\>
 
 Set the states for a new Community using the Community contract.
 
@@ -452,20 +452,20 @@ Set the states for a new Community using the Community contract.
 | :------ | :------ | :------ | :------ |
 | `name` | `string` | `undefined` | The Community name |
 | `ticker` | `string` | `undefined` | Currency ticker, ex: TICK |
-| `balances` | [`BalancesInterface`](../interfaces/faces.balancesinterface.md) | `undefined` | an object of wallet addresses and their token balances |
+| `balances` | [`BalancesInterface`](../interfaces/faces.BalancesInterface.md) | `undefined` | an object of wallet addresses and their token balances |
 | `quorum` | `number` | `50` | % of votes weight, for a proposal to be valid |
 | `support` | `number` | `50` | = % of votes as "yes", for a vote to be valid |
 | `voteLength` | `number` | `2000` | For how long (in blocks) should the vote be active |
 | `lockMinLength` | `number` | `720` | What is the minimum lock time (in blocks) |
 | `lockMaxLength` | `number` | `10000` | What is the maximum lock time (in blocks) |
-| `vault` | [`VaultInterface`](../interfaces/faces.vaultinterface.md) | `{}` | Vault object, optional |
-| `votes` | [`VoteInterface`](../interfaces/faces.voteinterface.md)[] | `[]` | Votes, optional |
-| `roles` | [`RoleInterface`](../interfaces/faces.roleinterface.md) | `{}` | Roles, optional |
+| `vault` | [`VaultInterface`](../interfaces/faces.VaultInterface.md) | `{}` | Vault object, optional |
+| `votes` | [`VoteInterface`](../interfaces/faces.VoteInterface.md)[] | `[]` | Votes, optional |
+| `roles` | [`RoleInterface`](../interfaces/faces.RoleInterface.md) | `{}` | Roles, optional |
 | `extraSettings` | [`string`, `any`][] | `[]` | Any custom extra settings can be sent here. @since v1.1.0 |
 
 #### Returns
 
-`Promise`<[`StateInterface`](../interfaces/faces.stateinterface.md)\>
+`Promise`<[`StateInterface`](../interfaces/faces.StateInterface.md)\>
 
 - The created state
 
@@ -503,7 +503,7 @@ Transfer token balances to another account.
 | :------ | :------ | :------ | :------ |
 | `target` | `string` | `undefined` | Target Wallet Address |
 | `qty` | `number` | `undefined` | Amount of the token to send |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -526,7 +526,7 @@ Transfer tokens to an account's vault.
 | `target` | `string` | `undefined` | Target Wallet Address |
 | `qty` | `number` | `undefined` | Amount of the token to send |
 | `lockLength` | `number` | `undefined` | For how many blocks to lock the tokens |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -546,7 +546,7 @@ Unlock all your locked balances that are over the lock period.
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 
@@ -568,7 +568,7 @@ Cast a vote on an existing, and active, vote proposal.
 | :------ | :------ | :------ | :------ |
 | `id` | `number` | `undefined` | The vote ID, this is the index of the vote in votes |
 | `cast` | ``"yay"`` \| ``"nay"`` | `undefined` | Cast your vote with 'yay' (for yes) or 'nay' (for no) |
-| `tags` | [`TagInterface`](../interfaces/faces.taginterface.md)[] | `[]` | optional: tags to be added to this transaction |
+| `tags` | [`TagInterface`](../interfaces/faces.TagInterface.md)[] | `[]` | optional: tags to be added to this transaction |
 
 #### Returns
 

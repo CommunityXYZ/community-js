@@ -8,9 +8,9 @@
 
 ### Properties
 
-- [balance](faces.vaultparamsinterface.md#balance)
-- [end](faces.vaultparamsinterface.md#end)
-- [start](faces.vaultparamsinterface.md#start)
+- [balance](faces.VaultParamsInterface.md#balance)
+- [end](faces.VaultParamsInterface.md#end)
+- [start](faces.VaultParamsInterface.md#start)
 
 ## Properties
 

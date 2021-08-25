@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-- [`VoteInterface`](faces.voteinterface.md)
+- [`VoteInterface`](faces.VoteInterface.md)
 
   ↳ **`InputInterface`**
 
@@ -14,23 +14,23 @@
 
 ### Properties
 
-- [cast](faces.inputinterface.md#cast)
-- [function](faces.inputinterface.md#function)
-- [id](faces.inputinterface.md#id)
-- [key](faces.inputinterface.md#key)
-- [lockLength](faces.inputinterface.md#locklength)
-- [nays](faces.inputinterface.md#nays)
-- [note](faces.inputinterface.md#note)
-- [qty](faces.inputinterface.md#qty)
-- [recipient](faces.inputinterface.md#recipient)
-- [start](faces.inputinterface.md#start)
-- [status](faces.inputinterface.md#status)
-- [target](faces.inputinterface.md#target)
-- [totalWeight](faces.inputinterface.md#totalweight)
-- [type](faces.inputinterface.md#type)
-- [value](faces.inputinterface.md#value)
-- [voted](faces.inputinterface.md#voted)
-- [yays](faces.inputinterface.md#yays)
+- [cast](faces.InputInterface.md#cast)
+- [function](faces.InputInterface.md#function)
+- [id](faces.InputInterface.md#id)
+- [key](faces.InputInterface.md#key)
+- [lockLength](faces.InputInterface.md#locklength)
+- [nays](faces.InputInterface.md#nays)
+- [note](faces.InputInterface.md#note)
+- [qty](faces.InputInterface.md#qty)
+- [recipient](faces.InputInterface.md#recipient)
+- [start](faces.InputInterface.md#start)
+- [status](faces.InputInterface.md#status)
+- [target](faces.InputInterface.md#target)
+- [totalWeight](faces.InputInterface.md#totalweight)
+- [type](faces.InputInterface.md#type)
+- [value](faces.InputInterface.md#value)
+- [voted](faces.InputInterface.md#voted)
+- [yays](faces.InputInterface.md#yays)
 
 ## Properties
 
@@ -52,7 +52,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[id](faces.voteinterface.md#id)
+[VoteInterface](faces.VoteInterface.md).[id](faces.VoteInterface.md#id)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[key](faces.voteinterface.md#key)
+[VoteInterface](faces.VoteInterface.md).[key](faces.VoteInterface.md#key)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[lockLength](faces.voteinterface.md#locklength)
+[VoteInterface](faces.VoteInterface.md).[lockLength](faces.VoteInterface.md#locklength)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[nays](faces.voteinterface.md#nays)
+[VoteInterface](faces.VoteInterface.md).[nays](faces.VoteInterface.md#nays)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[note](faces.voteinterface.md#note)
+[VoteInterface](faces.VoteInterface.md).[note](faces.VoteInterface.md#note)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[qty](faces.voteinterface.md#qty)
+[VoteInterface](faces.VoteInterface.md).[qty](faces.VoteInterface.md#qty)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[recipient](faces.voteinterface.md#recipient)
+[VoteInterface](faces.VoteInterface.md).[recipient](faces.VoteInterface.md#recipient)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[start](faces.voteinterface.md#start)
+[VoteInterface](faces.VoteInterface.md).[start](faces.VoteInterface.md#start)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[status](faces.voteinterface.md#status)
+[VoteInterface](faces.VoteInterface.md).[status](faces.VoteInterface.md#status)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[target](faces.voteinterface.md#target)
+[VoteInterface](faces.VoteInterface.md).[target](faces.VoteInterface.md#target)
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[totalWeight](faces.voteinterface.md#totalweight)
+[VoteInterface](faces.VoteInterface.md).[totalWeight](faces.VoteInterface.md#totalweight)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[type](faces.voteinterface.md#type)
+[VoteInterface](faces.VoteInterface.md).[type](faces.VoteInterface.md#type)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[value](faces.voteinterface.md#value)
+[VoteInterface](faces.VoteInterface.md).[value](faces.VoteInterface.md#value)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[voted](faces.voteinterface.md#voted)
+[VoteInterface](faces.VoteInterface.md).[voted](faces.VoteInterface.md#voted)
 
 ___
 
@@ -192,4 +192,4 @@ ___
 
 #### Inherited from
 
-[VoteInterface](faces.voteinterface.md).[yays](faces.voteinterface.md#yays)
+[VoteInterface](faces.VoteInterface.md).[yays](faces.VoteInterface.md#yays)

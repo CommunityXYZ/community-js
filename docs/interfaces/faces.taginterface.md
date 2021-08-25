@@ -8,8 +8,8 @@
 
 ### Properties
 
-- [name](faces.taginterface.md#name)
-- [value](faces.taginterface.md#value)
+- [name](faces.TagInterface.md#name)
+- [value](faces.TagInterface.md#value)
 
 ## Properties
 
