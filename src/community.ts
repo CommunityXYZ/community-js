@@ -541,7 +541,7 @@ export default class Community {
         this.createFee = +(this.createFeeUsd / arPrice).toFixed(5);
         this.txFee = +(this.txFeeUsd / arPrice).toFixed(5);
       }
-    } catch { }
+    } catch {}
 
     this.feesUpdatedAt = Date.now();
     this.feesCallInProgress = false;
@@ -724,8 +724,9 @@ export default class Community {
         { name: 'Action', value: 'propose' },
         {
           name: 'Message',
-          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${pCopy.key || pCopy.type
-            } vote, value: ${pCopy.value}.`,
+          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${
+            pCopy.key || pCopy.type
+          } vote, value: ${pCopy.value}.`,
         },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
@@ -936,9 +937,9 @@ export default class Community {
       typeof window !== 'undefined'
         ? window
         : {
-          removeEventListener: (evName: string) => { },
-          addEventListener: (evName: string, callback: (e: any) => {}) => { },
-        };
+            removeEventListener: (evName: string) => {},
+            addEventListener: (evName: string, callback: (e: any) => {}) => {},
+          };
 
     async function walletConnect() {
       this.walletAddress = await this.arweave.wallets.getAddress();
