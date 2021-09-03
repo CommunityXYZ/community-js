@@ -49,7 +49,7 @@
     "ardb": "^1.1.6",
     "arweave": "^1.10.16",
     "axios": "^0.21.1",
-    "smartweave": "^0.4.43",
+    "redstone-smartweave": "^0.3.10-alpha.1",
     "util": "^0.12.4"
   }
 }

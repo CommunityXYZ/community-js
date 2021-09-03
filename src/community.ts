@@ -1,7 +1,7 @@
 import Arweave from 'arweave';
 import axios from 'axios';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
+import { SmartWeaveNodeFactory, SmartWeave, Contract } from "redstone-smartweave";
 import ArDB from 'ardb';
 import {
   BalancesInterface,
@@ -18,10 +18,13 @@ import ArdbTransaction from 'ardb/lib/models/transaction';
 
 export default class Community {
   private readonly cacheServer: string = 'https://cache.community.xyz/';
-  private contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
-  private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
+  private contractSrcTxId: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
+  private readonly mainContractTxId: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
   private readonly txFeeUsd: number = 0.5;
   private readonly createFeeUsd: number = 3;
+  private smartweave: SmartWeave;
+  private mainContract: Contract; // Community Contract
+  private contract: Contract; // PSC contract
 
   private createFee: number = 0.83;
   private txFee: number = 0.21;
@@ -54,8 +57,12 @@ export default class Community {
     this.arweave = arweave;
     this.ardb = new ArDB(arweave, 2);
 
+    this.smartweave = SmartWeaveNodeFactory.memCached(arweave);
+    this.mainContract = this.smartweave.contract(this.mainContractTxId);
+
     if (wallet) {
       this.wallet = wallet;
+      this.mainContract.connect(wallet);
       arweave.wallets
         .jwkToAddress(wallet)
         .then((addy) => (this.walletAddress = addy))
@@ -75,7 +82,7 @@ export default class Community {
    * @returns {Promise<string>} The main contract ID.
    */
   public async getMainContractId(): Promise<string> {
-    return this.mainContract;
+    return this.mainContractTxId;
   }
 
   /**
@@ -83,7 +90,7 @@ export default class Community {
    * @returns {Promise<string>} The contract source ID.
    */
   public async getContractSourceId(): Promise<string> {
-    return this.contractSrc;
+    return this.contractSrcTxId;
   }
 
   /**
@@ -118,6 +125,7 @@ export default class Community {
    */
   public async setWallet(wallet: JWKInterface): Promise<string> {
     this.wallet = wallet;
+    this.mainContract.connect(wallet);
     this.walletAddress = await this.arweave.wallets.jwkToAddress(this.wallet);
 
     return this.walletAddress;
@@ -288,7 +296,7 @@ export default class Community {
     if (!Utils.isTxId(id)) {
       return false;
     }
-    this.contractSrc = id;
+    this.contractSrcTxId = id;
     return true;
   }
 
@@ -313,10 +321,10 @@ export default class Community {
       ],
     ];
 
-    const communityID = await createContractFromTx(
+    const communityID = await this.createContractFromTx(
       this.arweave,
       this.wallet,
-      this.contractSrc,
+      this.contractSrcTxId,
       JSON.stringify(toSubmit),
       tags,
       target,
@@ -402,7 +410,7 @@ export default class Community {
       this.dummyWallet = await this.arweave.wallets.generate();
     }
 
-    return interactRead(this.arweave, this.wallet || this.dummyWallet, this.communityContract, params);
+    return this.contract.connect(this.wallet || this.dummyWallet).viewState(params) as unknown as ResultInterface;
   }
 
   /**
@@ -541,7 +549,7 @@ export default class Community {
         this.createFee = +(this.createFeeUsd / arPrice).toFixed(5);
         this.txFee = +(this.txFeeUsd / arPrice).toFixed(5);
       }
-    } catch {}
+    } catch { }
 
     this.feesUpdatedAt = Date.now();
     this.feesCallInProgress = false;
@@ -724,9 +732,8 @@ export default class Community {
         { name: 'Action', value: 'propose' },
         {
           name: 'Message',
-          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${
-            pCopy.key || pCopy.type
-          } vote, value: ${pCopy.value}.`,
+          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${pCopy.key || pCopy.type
+            } vote, value: ${pCopy.value}.`,
         },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
@@ -787,10 +794,10 @@ export default class Community {
 
     let state: StateInterface;
     try {
-      state = (await axios(`${this.cacheServer}contract/${this.mainContract}`)).data;
+      state = (await axios(`${this.cacheServer}contract/${this.mainContractTxId}`)).data;
     } catch (e) {
       try {
-        state = await readContract(this.arweave, this.mainContract);
+        state = await (await this.mainContract.readState()).state as StateInterface;
       } catch (e) {
         console.log(e);
         return {
@@ -874,7 +881,7 @@ export default class Community {
       state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
     } catch (e) {
       try {
-        state = await readContract(this.arweave, this.communityContract);
+        state = await (await this.contract.readState()).state as StateInterface;
       } catch (e) {
         console.log(e);
         return;
@@ -904,28 +911,27 @@ export default class Community {
 
     tags.push({ name: 'Type', value: 'ArweaveActivity' });
 
-    const res = await interactWriteDryRun(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.communityContract,
+    // TODO: No way to use this with redstone-smartweave, for now.
+    // const res = await interactWriteDryRun(
+    //   this.arweave,
+    //   this.wallet || 'use_wallet',
+    //   this.communityContract,
+    //   input,
+    //   tags,
+    //   target,
+    //   winstonQty,
+    // );
+    // if (res.type === 'error') {
+    //   //  || res.type === 'exception'
+    //   throw new Error(res.result);
+    // }
+    return this.contract.connect(this.wallet).writeInteraction(
       input,
       tags,
-      target,
-      winstonQty,
-    );
-    if (res.type === 'error') {
-      //  || res.type === 'exception'
-      throw new Error(res.result);
-    }
-
-    return interactWrite(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.communityContract,
-      input,
-      tags,
-      target,
-      winstonQty,
+      {
+        target,
+        winstonQty,
+      }
     );
   }
 
@@ -937,9 +943,9 @@ export default class Community {
       typeof window !== 'undefined'
         ? window
         : {
-            removeEventListener: (evName: string) => {},
-            addEventListener: (evName: string, callback: (e: any) => {}) => {},
-          };
+          removeEventListener: (evName: string) => { },
+          addEventListener: (evName: string, callback: (e: any) => {}) => { },
+        };
 
     async function walletConnect() {
       this.walletAddress = await this.arweave.wallets.getAddress();
@@ -954,5 +960,61 @@ export default class Community {
     win.removeEventListener('walletSwitch', (e) => walletSwitch(e));
     win.addEventListener('arweaveWalletLoaded', () => walletConnect());
     win.addEventListener('walletSwitch', (e) => walletSwitch(e));
+  }
+
+  /**
+ * Create a new contract from an existing contract source tx, with an initial state.
+ * Returns the contract id.
+ *
+ * @param arweave   an Arweave client instance
+ * @param wallet    a wallet private or public key
+ * @param srcTxId   the contract source Tx id.
+ * @param state     the initial state, as a JSON string.
+ * @param tags          an array of tags with name/value as objects.
+ * @param target        if needed to send AR to an address, this is the target.
+ * @param winstonQty    amount of winston to send to the target, if needed.
+ */
+  async createContractFromTx(
+    arweave: Arweave,
+    wallet: JWKInterface | 'use_wallet',
+    srcTxId: string,
+    state: string,
+    tags: { name: string; value: string }[] = [],
+    target: string = '',
+    winstonQty: string = '',
+    reward?: string,
+  ) {
+    let contractTX = await arweave.createTransaction({ data: state, reward }, wallet);
+
+    if (target && winstonQty && target.length && +winstonQty > 0) {
+      contractTX = await arweave.createTransaction(
+        {
+          data: state,
+          target: target.toString(),
+          quantity: winstonQty.toString(),
+          reward,
+        },
+        wallet,
+      );
+    }
+
+    if (tags && tags.length) {
+      for (const tag of tags) {
+        contractTX.addTag(tag.name.toString(), tag.value.toString());
+      }
+    }
+    contractTX.addTag('App-Name', 'SmartWeaveContract');
+    contractTX.addTag('App-Version', '0.3.0');
+    contractTX.addTag('Contract-Src', srcTxId);
+    contractTX.addTag('Content-Type', 'application/json');
+
+    await arweave.transactions.sign(contractTX, wallet);
+
+    const response = await arweave.transactions.post(contractTX);
+    if (response.status === 200 || response.status === 208) {
+      return contractTX.id;
+    } else {
+      throw new Error('Unable to write Contract Initial State');
+    }
   }
 }
