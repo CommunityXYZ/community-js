@@ -13,7 +13,7 @@ const runBuild = async (doClean = false) => {
  
   // Build to browser js
   build({
-    entryPoints: ['./browser.ts'],
+    entryPoints: ['./lib/community.js'],
     minify: false,
     bundle: true,
     platform: 'browser',

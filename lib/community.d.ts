@@ -23,6 +23,7 @@ export default class Community {
     private feesUpdatedAt;
     private feesCallInProgress;
     private ardb;
+    private smartweave;
     /**
      * Before interacting with Community you need to have at least Arweave initialized.
      * @param arweave - Arweave instance

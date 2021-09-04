@@ -15,6 +15,7 @@ import {
 } from './faces';
 import Utils from './utils';
 import ArdbTransaction from 'ardb/lib/models/transaction';
+import { SmartWeave, SmartWeaveWebFactory } from 'redstone-smartweave';
 
 export default class Community {
   private readonly cacheServer: string = 'https://cache.community.xyz/';
@@ -44,6 +45,8 @@ export default class Community {
   private feesCallInProgress: boolean = false;
   private ardb: ArDB;
 
+  private smartweave: SmartWeave;
+
   /**
    * Before interacting with Community you need to have at least Arweave initialized.
    * @param arweave - Arweave instance
@@ -68,6 +71,7 @@ export default class Community {
 
     this.getFees();
     this.events();
+    this.smartweave = SmartWeaveWebFactory.memCached(arweave);
   }
 
   /**
