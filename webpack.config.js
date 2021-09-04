@@ -1,15 +1,14 @@
 const path = require('path');
-
 module.exports = {
   mode: 'production',
-  entry: './src/community.ts',
+  entry: './browser.ts',
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.ts$/,
+        use: ['ts-loader'],
         exclude: /node_modules/,
-      },
+      }
     ],
   },
   resolve: {
@@ -17,16 +16,16 @@ module.exports = {
     fallback: {
       os: false,
       path: false,
-      fs: false
+      fs: false,
+      crypto: false
     },
   },
   optimization: {
-    providedExports: true,
-    sideEffects: true,
     usedExports: true,
+    sideEffects: true,
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'community.js',
     path: path.resolve(__dirname, 'dist'),
   },
 };
