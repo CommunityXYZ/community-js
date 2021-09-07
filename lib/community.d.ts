@@ -1,6 +1,6 @@
 import Arweave from 'arweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface, TagInterface } from './faces';
+import { BalancesInterface, InputInterface, ResultInterface, RoleInterface, StateInterface, TagInterface, VaultInterface, VoteInterface } from './faces';
 export default class Community {
     private readonly cacheServer;
     private contractSrcTxId;
@@ -251,17 +251,17 @@ export default class Community {
      */
     private events;
     /**
-   * Create a new contract from an existing contract source tx, with an initial state.
-   * Returns the contract id.
-   *
-   * @param arweave   an Arweave client instance
-   * @param wallet    a wallet private or public key
-   * @param srcTxId   the contract source Tx id.
-   * @param state     the initial state, as a JSON string.
-   * @param tags          an array of tags with name/value as objects.
-   * @param target        if needed to send AR to an address, this is the target.
-   * @param winstonQty    amount of winston to send to the target, if needed.
-   */
+     * Create a new contract from an existing contract source tx, with an initial state.
+     * Returns the contract id.
+     *
+     * @param arweave   an Arweave client instance
+     * @param wallet    a wallet private or public key
+     * @param srcTxId   the contract source Tx id.
+     * @param state     the initial state, as a JSON string.
+     * @param tags          an array of tags with name/value as objects.
+     * @param target        if needed to send AR to an address, this is the target.
+     * @param winstonQty    amount of winston to send to the target, if needed.
+     */
     createContractFromTx(arweave: Arweave, wallet: JWKInterface | 'use_wallet', srcTxId: string, state: string, tags?: {
         name: string;
         value: string;

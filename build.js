@@ -14,6 +14,7 @@ const runBuild = async (doClean = false) => {
   // Build to browser js
   build({
     entryPoints: ['./browser.ts'],
+    external: ['fs', 'path'],
     minify: false,
     bundle: true,
     platform: 'browser',
@@ -33,6 +34,7 @@ const runBuild = async (doClean = false) => {
   // Minified version
   build({
     entryPoints: ['./browser.ts'],
+    external: ['fs', 'path'],
     minify: true,
     bundle: true,
     platform: 'browser',

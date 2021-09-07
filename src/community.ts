@@ -1,17 +1,17 @@
 import Arweave from 'arweave';
 import axios from 'axios';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { SmartWeaveNodeFactory, SmartWeave, Contract } from "redstone-smartweave";
+import { Contract, SmartWeave, SmartWeaveNodeFactory } from 'redstone-smartweave';
 import ArDB from 'ardb';
 import {
   BalancesInterface,
-  VaultInterface,
-  VoteInterface,
-  RoleInterface,
-  StateInterface,
   InputInterface,
   ResultInterface,
+  RoleInterface,
+  StateInterface,
   TagInterface,
+  VaultInterface,
+  VoteInterface,
 } from './faces';
 import Utils from './utils';
 import ArdbTransaction from 'ardb/lib/models/transaction';
@@ -963,17 +963,17 @@ export default class Community {
   }
 
   /**
- * Create a new contract from an existing contract source tx, with an initial state.
- * Returns the contract id.
- *
- * @param arweave   an Arweave client instance
- * @param wallet    a wallet private or public key
- * @param srcTxId   the contract source Tx id.
- * @param state     the initial state, as a JSON string.
- * @param tags          an array of tags with name/value as objects.
- * @param target        if needed to send AR to an address, this is the target.
- * @param winstonQty    amount of winston to send to the target, if needed.
- */
+   * Create a new contract from an existing contract source tx, with an initial state.
+   * Returns the contract id.
+   *
+   * @param arweave   an Arweave client instance
+   * @param wallet    a wallet private or public key
+   * @param srcTxId   the contract source Tx id.
+   * @param state     the initial state, as a JSON string.
+   * @param tags          an array of tags with name/value as objects.
+   * @param target        if needed to send AR to an address, this is the target.
+   * @param winstonQty    amount of winston to send to the target, if needed.
+   */
   async createContractFromTx(
     arweave: Arweave,
     wallet: JWKInterface | 'use_wallet',

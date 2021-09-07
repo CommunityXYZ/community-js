@@ -105,3 +105,6 @@ testwallet.ts
 pstdao.js
 /test.js
 .history/
+
+.yalc
+yalc.lock
