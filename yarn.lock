@@ -1668,15 +1668,15 @@ arconnect@^0.2.8, arconnect@^0.2.9:
   dependencies:
     arweave "^1.10.13"
 
-ardk@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/ardk/-/ardk-1.0.4.tgz#34ec79946f4aaf72d8ec7e6621d4e761ca5e6fa8"
-  integrity sha512-B0sY7Cwxw30a3tYXtm5yxOLWz8qpPrHf2rs2BMp2Toepx/QATV0Z2ZbkrBmL2zZF0nOlXmUWhrgIjRHE0vTM6w==
+ardk@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/ardk/-/ardk-1.0.6.tgz#ec58ce2426562e8a355131a5f4056a89196905ef"
+  integrity sha512-QHge7AgNq+dkcDqz9qXETr0SBNuqJd9oo2rC9+zgqJ2HgN5aXtsiVAk8v2C7fTqP3OQnk+pl23YvY7KMbizbJw==
   dependencies:
     arconnect "^0.2.9"
-    axios "^0.21.1"
+    axios "^0.21.4"
     bignumber.js "^9.0.1"
-    redstone-smartweave "^0.3.10-alpha.1"
+    redstone-smartweave "^0.3.10-alpha.3"
     util "^0.12.4"
 
 are-we-there-yet@~1.1.2:
@@ -1847,6 +1847,13 @@ axios@^0.21.1:
   version "0.21.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.2.tgz#21297d5084b2aeeb422f5d38e7be4fbb82239017"
   integrity sha512-87otirqUw3e8CzHTMO+/9kh/FSgXt/eVDvipijwDtEuwbkySWZ9SBm6VEubmJ/kLKEoLQV/POhxXFb66bfekfg==
+  dependencies:
+    follow-redirects "^1.14.0"
+
+axios@^0.21.4:
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
 
@@ -5703,19 +5710,6 @@ redstone-node@0.4.18:
     uuid "^8.3.2"
     yahoo-finance "^0.3.7"
     yargs "^16.2.0"
-
-redstone-smartweave@^0.3.10-alpha.1:
-  version "0.3.10-alpha.1"
-  resolved "https://registry.yarnpkg.com/redstone-smartweave/-/redstone-smartweave-0.3.10-alpha.1.tgz#034e2aa676ee76dd0faba63037541ea039f4aa03"
-  integrity sha512-Na3NAxXPzjYPMncETicsRCK+vFHeOgP137CapOz78vzOb9o42gt8Q0GLGLFKj7Gl6zWoXZ3hQmorE95KzkRvCw==
-  dependencies:
-    "@weavery/clarity" "^0.1.5"
-    arweave "^1.10.16"
-    arweave-multihost "^0.1.0"
-    bignumber.js "^9.0.1"
-    bson "^4.5.0"
-    json-beautify "^1.1.1"
-    tslog "^3.2.1"
 
 redstone-smartweave@^0.3.10-alpha.3:
   version "0.3.10-alpha.3"
