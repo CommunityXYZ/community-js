@@ -13,13 +13,14 @@ const runBuild = async (doClean = false) => {
  
   // Build to browser js
   build({
-    entryPoints: ['./browser.ts'],
+    external: ['fs', 'path', 'os'],
+    entryPoints: ['./lib/community.js'],
     minify: false,
     bundle: true,
     platform: 'browser',
     target: ['es2020','chrome58','firefox57','safari11'],
     outfile: './dist/community.js',
-    sourcemap: 'inline',
+    sourcemap: 'external',
     define: {
       'process.env.NODE_DEBUG': false,
       'process.env.NODE_ENV': 'production',
@@ -32,13 +33,14 @@ const runBuild = async (doClean = false) => {
 
   // Minified version
   build({
+    external: ['fs', 'path', 'os'],
     entryPoints: ['./browser.ts'],
     minify: true,
     bundle: true,
     platform: 'browser',
     target: ['es2020','chrome58','firefox57','safari11'],
     outfile: './dist/community.min.js',
-    sourcemap: 'inline',
+    sourcemap: 'external',
     define: {
       'process.env.NODE_DEBUG': false,
       'process.env.NODE_ENV': 'production',
