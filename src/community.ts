@@ -1,7 +1,7 @@
 import Ardk from 'ardk';
 import Arweave from 'arweave';
 import axios from 'axios';
-import { SmartWeaveWebFactory, SmartWeave, Contract } from "redstone-smartweave";
+import { SmartWeaveWebFactory, SmartWeave, Contract } from 'redstone-smartweave';
 import {
   BalancesInterface,
   VaultInterface,
@@ -14,7 +14,7 @@ import {
 } from './faces';
 import Utils from './utils';
 import { JWKInterface } from 'ardk/dist/faces/lib/wallet';
-import redstone from "redstone-api";
+import redstone from 'redstone-api';
 
 export default class Community {
   private readonly cacheServer: string = 'https://cache.community.xyz/';
@@ -531,7 +531,7 @@ export default class Community {
         this.createFee = +(this.createFeeUsd / arPrice).toFixed(5);
         this.txFee = +(this.txFeeUsd / arPrice).toFixed(5);
       }
-    } catch { }
+    } catch {}
 
     this.feesUpdatedAt = Date.now();
     this.feesCallInProgress = false;
@@ -714,8 +714,9 @@ export default class Community {
         { name: 'Action', value: 'propose' },
         {
           name: 'Message',
-          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${pCopy.key || pCopy.type
-            } vote, value: ${pCopy.value}.`,
+          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${
+            pCopy.key || pCopy.type
+          } vote, value: ${pCopy.value}.`,
         },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
@@ -779,7 +780,7 @@ export default class Community {
       state = (await axios(`${this.cacheServer}contract/${this.mainContractTxId}`)).data;
     } catch (e) {
       try {
-        state = await (await this.mainContract.readState()).state as StateInterface;
+        state = (await (await this.mainContract.readState()).state) as StateInterface;
       } catch (e) {
         console.log(e);
         return {
@@ -863,7 +864,7 @@ export default class Community {
       state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
     } catch (e) {
       try {
-        state = await (await this.contract.readState()).state as StateInterface;
+        state = (await (await this.contract.readState()).state) as StateInterface;
       } catch (e) {
         console.log(e);
         return;
@@ -907,14 +908,10 @@ export default class Community {
     //   //  || res.type === 'exception'
     //   throw new Error(res.result);
     // }
-    return this.contract.connect(this.wallet).writeInteraction(
-      input,
-      tags,
-      {
-        target,
-        winstonQty,
-      }
-    );
+    return this.contract.connect(this.wallet).writeInteraction(input, tags, {
+      target,
+      winstonQty,
+    });
   }
 
   /**
@@ -925,9 +922,9 @@ export default class Community {
       typeof window !== 'undefined'
         ? window
         : {
-          removeEventListener: (evName: string) => { },
-          addEventListener: (evName: string, callback: (e: any) => {}) => { },
-        };
+            removeEventListener: (evName: string) => {},
+            addEventListener: (evName: string, callback: (e: any) => {}) => {},
+          };
 
     async function walletConnect() {
       this.walletAddress = await this.arweave.wallets.getAddress();
