@@ -5717,6 +5717,19 @@ redstone-smartweave@^0.3.10-alpha.1:
     json-beautify "^1.1.1"
     tslog "^3.2.1"
 
+redstone-smartweave@^0.3.10-alpha.3:
+  version "0.3.10-alpha.3"
+  resolved "https://registry.yarnpkg.com/redstone-smartweave/-/redstone-smartweave-0.3.10-alpha.3.tgz#9dc00c90d399e9382963f7faef9b5a1fc6be0801"
+  integrity sha512-RXeN25Lxw+ON3a9EUq+0SBvuUI4FkcvJwQyTvLYdd0sLMze7YDObcoXcl1RXB/OzDYEmPATmIlrux5ZrbSej+w==
+  dependencies:
+    "@weavery/clarity" "^0.1.5"
+    arweave "^1.10.16"
+    arweave-multihost "^0.1.0"
+    bignumber.js "^9.0.1"
+    bson "^4.5.0"
+    json-beautify "^1.1.1"
+    tslog "^3.2.1"
+
 request-promise-core@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/request-promise-core/-/request-promise-core-1.1.4.tgz#3eedd4223208d419867b78ce815167d10593a22f"
