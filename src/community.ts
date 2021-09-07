@@ -1,8 +1,7 @@
+import Ardk from 'ardk';
 import Arweave from 'arweave';
 import axios from 'axios';
-import { JWKInterface } from 'arweave/node/lib/wallet';
-import { SmartWeaveNodeFactory, SmartWeave, Contract } from "redstone-smartweave";
-import ArDB from 'ardb';
+import { SmartWeaveWebFactory, SmartWeave, Contract } from "redstone-smartweave";
 import {
   BalancesInterface,
   VaultInterface,
@@ -14,8 +13,8 @@ import {
   TagInterface,
 } from './faces';
 import Utils from './utils';
-import ArdbTransaction from 'ardb/lib/models/transaction';
-import { SmartWeave, SmartWeaveWebFactory } from 'redstone-smartweave';
+import { JWKInterface } from 'ardk/dist/faces/lib/wallet';
+import redstone from "redstone-api";
 
 export default class Community {
   private readonly cacheServer: string = 'https://cache.community.xyz/';
@@ -30,7 +29,7 @@ export default class Community {
   private createFee: number = 0.83;
   private txFee: number = 0.21;
 
-  private arweave: Arweave;
+  private arweave: Ardk | Arweave;
   private wallet!: JWKInterface;
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
@@ -46,9 +45,6 @@ export default class Community {
   private readonly warnAfter: number = 60 * 60 * 24 * 1000; // 24 hours
   private feesUpdatedAt: number = 0;
   private feesCallInProgress: boolean = false;
-  private ardb: ArDB;
-
-  private smartweave: SmartWeave;
 
   /**
    * Before interacting with Community you need to have at least Arweave initialized.
@@ -56,11 +52,11 @@ export default class Community {
    * @param wallet - JWK wallet file data
    * @param cacheTTL - Refresh interval in milliseconds for the cached state
    */
-  constructor(arweave: Arweave, wallet?: JWKInterface, cacheTTL = 1000 * 60 * 2) {
+  constructor(arweave: Ardk | Arweave, wallet?: JWKInterface, cacheTTL = 1000 * 60 * 2) {
     this.arweave = arweave;
-    this.ardb = new ArDB(arweave, 2);
 
-    this.smartweave = SmartWeaveNodeFactory.memCached(arweave);
+    // @ts-ignore
+    this.smartweave = SmartWeaveWebFactory.memCached(arweave);
     this.mainContract = this.smartweave.contract(this.mainContractTxId);
 
     if (wallet) {
@@ -78,7 +74,6 @@ export default class Community {
 
     this.getFees();
     this.events();
-    this.smartweave = SmartWeaveWebFactory.memCached(arweave);
   }
 
   /**
@@ -391,6 +386,7 @@ export default class Community {
     // reset state
     this.state = null;
     this.communityContract = txId;
+    this.contract = this.smartweave.contract(txId);
 
     try {
       await this.getState(false);
@@ -521,28 +517,10 @@ export default class Community {
     }
 
     try {
-      const res = (await this.ardb
-        .search('transactions')
-        .tags([
-          { name: 'app', values: 'Redstone' },
-          { name: 'type', values: 'data' },
-        ])
-        .findOne()) as ArdbTransaction;
+      const res = await redstone.getPrice('AR');
 
-      let createdAt: number;
-      let arPrice: number;
-
-      for (const tag of res.tags) {
-        if (tag.name === 'timestamp') {
-          createdAt = +tag.value;
-        } else if (tag.name === 'AR') {
-          arPrice = +tag.value;
-        }
-
-        if (createdAt && arPrice) {
-          break;
-        }
-      }
+      const createdAt = res.timestamp;
+      const arPrice = res.value;
 
       if (createdAt && arPrice) {
         const deployTime = new Date().getTime() - createdAt;
@@ -967,19 +945,19 @@ export default class Community {
   }
 
   /**
- * Create a new contract from an existing contract source tx, with an initial state.
- * Returns the contract id.
- *
- * @param arweave   an Arweave client instance
- * @param wallet    a wallet private or public key
- * @param srcTxId   the contract source Tx id.
- * @param state     the initial state, as a JSON string.
- * @param tags          an array of tags with name/value as objects.
- * @param target        if needed to send AR to an address, this is the target.
- * @param winstonQty    amount of winston to send to the target, if needed.
- */
+   * Create a new contract from an existing contract source tx, with an initial state.
+   * Returns the contract id.
+   *
+   * @param arweave   an Arweave client instance
+   * @param wallet    a wallet private or public key
+   * @param srcTxId   the contract source Tx id.
+   * @param state     the initial state, as a JSON string.
+   * @param tags          an array of tags with name/value as objects.
+   * @param target        if needed to send AR to an address, this is the target.
+   * @param winstonQty    amount of winston to send to the target, if needed.
+   */
   async createContractFromTx(
-    arweave: Arweave,
+    arweave: Ardk | Arweave,
     wallet: JWKInterface | 'use_wallet',
     srcTxId: string,
     state: string,
@@ -1012,13 +990,28 @@ export default class Community {
     contractTX.addTag('Contract-Src', srcTxId);
     contractTX.addTag('Content-Type', 'application/json');
 
-    await arweave.transactions.sign(contractTX, wallet);
+    let response;
+    if (typeof contractTX.sign === 'function') {
+      response = await contractTX.signAndPost(0);
+    } else {
+      await arweave.transactions.sign(contractTX as any, wallet);
+      response = await arweave.transactions.post(contractTX);
+    }
 
-    const response = await arweave.transactions.post(contractTX);
     if (response.status === 200 || response.status === 208) {
       return contractTX.id;
     } else {
       throw new Error('Unable to write Contract Initial State');
     }
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.Community = Community;
+}
+
+declare global {
+  interface Window {
+    Community: typeof Community;
   }
 }
