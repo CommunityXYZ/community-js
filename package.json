@@ -52,7 +52,7 @@
     "axios": "^0.21.1",
     "esbuild-node-builtins": "^0.1.0",
     "redstone-api": "^0.4.6",
-    "redstone-smartweave": "^0.3.10-alpha.3",
+    "redstone-smartweave": "^0.3.10-alpha.6",
     "util": "^0.12.4"
   }
 }

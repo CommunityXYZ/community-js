@@ -13,6 +13,7 @@
 ### Methods
 
 - [create](community.default.md#create)
+- [createContractFromTx](community.default.md#createcontractfromtx)
 - [finalize](community.default.md#finalize)
 - [get](community.default.md#get)
 - [getActionCost](community.default.md#getactioncost)
@@ -51,7 +52,7 @@ Before interacting with Community you need to have at least Arweave initialized.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `arweave` | `default` | Arweave instance |
+| `arweave` | `default` \| `default` | Arweave instance |
 | `wallet?` | `JWKInterface` | JWK wallet file data |
 | `cacheTTL` | `number` | Refresh interval in milliseconds for the cached state |
 
@@ -74,6 +75,32 @@ Create a new Community with the current, previously saved (with `setState`) stat
 `Promise`<`string`\>
 
 The created community transaction ID.
+
+___
+
+### createContractFromTx
+
+▸ **createContractFromTx**(`arweave`, `wallet`, `srcTxId`, `state`, `tags?`, `target?`, `winstonQty?`, `reward?`): `Promise`<`string`\>
+
+Create a new contract from an existing contract source tx, with an initial state.
+Returns the contract id.
+
+#### Parameters
+
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `arweave` | `default` \| `default` | `undefined` | an Arweave client instance |
+| `wallet` | `JWKInterface` \| ``"use_wallet"`` | `undefined` | a wallet private or public key |
+| `srcTxId` | `string` | `undefined` | the contract source Tx id. |
+| `state` | `string` | `undefined` | the initial state, as a JSON string. |
+| `tags` | { `name`: `string` ; `value`: `string`  }[] | `[]` | an array of tags with name/value as objects. |
+| `target` | `string` | `''` | if needed to send AR to an address, this is the target. |
+| `winstonQty` | `string` | `''` | amount of winston to send to the target, if needed. |
+| `reward?` | `string` | `undefined` | - |
+
+#### Returns
+
+`Promise`<`string`\>
 
 ___
 
