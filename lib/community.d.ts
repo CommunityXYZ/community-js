@@ -1,7 +1,7 @@
-import Ardk from 'ardk';
+import Blockweave from 'blockweave';
 import Arweave from 'arweave';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface, TagInterface } from './faces';
-import { JWKInterface } from 'ardk/dist/faces/lib/wallet';
+import { JWKInterface } from 'blockweave/dist/faces/lib/wallet';
 export default class Community {
     private readonly cacheServer;
     private contractSrcTxId;
@@ -32,7 +32,7 @@ export default class Community {
      * @param wallet - JWK wallet file data
      * @param cacheTTL - Refresh interval in milliseconds for the cached state
      */
-    constructor(arweave: Ardk | Arweave, wallet?: JWKInterface, cacheTTL?: number);
+    constructor(arweave: Blockweave | Arweave, wallet?: JWKInterface, cacheTTL?: number);
     /**
      * Get the Main Community contract ID
      * @returns {Promise<string>} The main contract ID.
@@ -262,7 +262,7 @@ export default class Community {
      * @param target        if needed to send AR to an address, this is the target.
      * @param winstonQty    amount of winston to send to the target, if needed.
      */
-    createContractFromTx(arweave: Ardk | Arweave, wallet: JWKInterface | 'use_wallet', srcTxId: string, state: string, tags?: {
+    createContractFromTx(arweave: Blockweave | Arweave, wallet: JWKInterface | 'use_wallet', srcTxId: string, state: string, tags?: {
         name: string;
         value: string;
     }[], target?: string, winstonQty?: string, reward?: string): Promise<string>;

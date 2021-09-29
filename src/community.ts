@@ -1,4 +1,4 @@
-import Ardk from 'ardk';
+import Blockweave from 'blockweave';
 import Arweave from 'arweave';
 import axios from 'axios';
 import { SmartWeaveWebFactory, SmartWeave, Contract, LoggerFactory } from 'redstone-smartweave';
@@ -13,13 +13,13 @@ import {
   TagInterface,
 } from './faces';
 import Utils from './utils';
-import { JWKInterface } from 'ardk/dist/faces/lib/wallet';
+import { JWKInterface } from 'blockweave/dist/faces/lib/wallet';
 import redstone from 'redstone-api';
 
 export default class Community {
   private readonly cacheServer: string = 'https://cache.community.xyz/';
   private contractSrcTxId: string = '40tPvYdnGiSpwgnqrS2xJ2dqSvA6h8K11HjJxMs1cbI';
-  private readonly mainContractTxId: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
+  private readonly mainContractTxId: string = 'cEQLlWFkoeFuO7dIsdFbMhsGPvkmRI9cuBxv0mdn0xU';
   private readonly txFeeUsd: number = 0.5;
   private readonly createFeeUsd: number = 3;
   private smartweave: SmartWeave;
@@ -29,7 +29,7 @@ export default class Community {
   private createFee: number = 0.83;
   private txFee: number = 0.21;
 
-  private arweave: Ardk | Arweave;
+  private arweave: Blockweave | Arweave;
   private wallet!: JWKInterface;
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
@@ -52,7 +52,7 @@ export default class Community {
    * @param wallet - JWK wallet file data
    * @param cacheTTL - Refresh interval in milliseconds for the cached state
    */
-  constructor(arweave: Ardk | Arweave, wallet?: JWKInterface, cacheTTL = 1000 * 60 * 2) {
+  constructor(arweave: Blockweave | Arweave, wallet?: JWKInterface, cacheTTL = 1000 * 60 * 2) {
     this.arweave = arweave;
 
     LoggerFactory.INST.logLevel('fatal');
@@ -956,7 +956,7 @@ export default class Community {
    * @param winstonQty    amount of winston to send to the target, if needed.
    */
   async createContractFromTx(
-    arweave: Ardk | Arweave,
+    arweave: Blockweave | Arweave,
     wallet: JWKInterface | 'use_wallet',
     srcTxId: string,
     state: string,

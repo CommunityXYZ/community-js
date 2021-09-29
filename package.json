@@ -47,9 +47,9 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "ardk": "^1.0.6",
     "arweave": "^1.10.16",
     "axios": "^0.21.1",
+    "blockweave": "^1.0.16",
     "esbuild-node-builtins": "^0.1.0",
     "redstone-api": "^0.4.6",
     "redstone-smartweave": "^0.3.10-alpha.6",
