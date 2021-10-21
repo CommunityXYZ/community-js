@@ -117,9 +117,11 @@ export default class Community {
    * @returns The wallet address
    */
   public async setWallet(wallet: JWKInterface, address?: string): Promise<string> {
-    if (!wallet) {
+    if (!wallet && address) {
       this.walletAddress = address;
       return this.walletAddress;
+    } else if (!wallet) {
+      return;
     }
 
     this.wallet = wallet;
