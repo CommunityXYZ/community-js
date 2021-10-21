@@ -55,7 +55,7 @@ export default class Community {
      * @param wallet - JWK wallet file data
      * @returns The wallet address
      */
-    setWallet(wallet: JWKInterface): Promise<string>;
+    setWallet(wallet: JWKInterface, address?: string): Promise<string>;
     /**
      * Set the states for a new Community using the Community contract.
      * @param name - The Community name
