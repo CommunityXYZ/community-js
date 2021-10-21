@@ -116,7 +116,14 @@ export default class Community {
    * @param wallet - JWK wallet file data
    * @returns The wallet address
    */
-  public async setWallet(wallet: JWKInterface): Promise<string> {
+  public async setWallet(wallet: JWKInterface, address?: string): Promise<string> {
+    if (!wallet && address) {
+      this.walletAddress = address;
+      return this.walletAddress;
+    } else if (!wallet) {
+      return;
+    }
+
     this.wallet = wallet;
     this.walletAddress = await this.arweave.wallets.jwkToAddress(this.wallet);
 
