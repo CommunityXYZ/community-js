@@ -27,7 +27,7 @@ export default class Community {
   private txFee: number = 0.21;
 
   private arweave: Arweave;
-  private wallet!: JWKInterface | 'use_wallet';
+  private wallet!: JWKInterface; 
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
   private isWalletConnect: boolean = false;
