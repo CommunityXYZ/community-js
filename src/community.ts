@@ -27,7 +27,7 @@ export default class Community {
   private txFee: number = 0.21;
 
   private arweave: Arweave;
-  private wallet!: JWKInterface;
+  private wallet!: JWKInterface | 'use_wallet';
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
   private isWalletConnect: boolean = false;
@@ -948,11 +948,11 @@ export default class Community {
             addEventListener: (evName: string, callback: (e: any) => {}) => {},
           };
 
-    async function walletConnect() {
-      this.walletAddress = await this.arweave.wallets.getAddress();
+    const walletConnect = async () => {
+      this.walletAddress = await window.arweaveWallet.getActiveAddress();
       this.isWalletConnect = true;
     }
-    async function walletSwitch(e: any) {
+    const walletSwitch = async (e: any) => {
       this.walletAddress = await e.detail.address;
       this.isWalletConnect = true;
     }
