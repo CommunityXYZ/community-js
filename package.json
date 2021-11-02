@@ -46,7 +46,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "ardb": "^1.1.6",
+    "ardb": "^1.1.8",
     "arweave": "^1.10.16",
     "axios": "^0.21.1",
     "smartweave": "^0.4.43",
