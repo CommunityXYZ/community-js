@@ -948,18 +948,23 @@ export default class Community {
             addEventListener: (evName: string, callback: (e: any) => {}) => {},
           };
 
-    async function walletConnect() {
-      this.walletAddress = await this.arweave.wallets.getAddress();
-      this.isWalletConnect = true;
-    }
-    async function walletSwitch(e: any) {
-      this.walletAddress = await e.detail.address;
-      this.isWalletConnect = true;
+    async function walletConnect(_this: Community) {
+      try {
+        _this.walletAddress = await _this.arweave.wallets.getAddress();
+        _this.isWalletConnect = true;
+      } catch (e) {
+        console.log(e);
+      }
     }
 
-    win.removeEventListener('arweaveWalletLoaded', () => walletConnect());
-    win.removeEventListener('walletSwitch', (e) => walletSwitch(e));
-    win.addEventListener('arweaveWalletLoaded', () => walletConnect());
-    win.addEventListener('walletSwitch', (e) => walletSwitch(e));
+    async function walletSwitch(e: any, _this: Community) {
+      _this.walletAddress = await e.detail.address;
+      _this.isWalletConnect = true;
+    }
+
+    win.removeEventListener('arweaveWalletLoaded', () => walletConnect(this));
+    win.removeEventListener('walletSwitch', (e) => walletSwitch(e, this));
+    win.addEventListener('arweaveWalletLoaded', () => walletConnect(this));
+    win.addEventListener('walletSwitch', (e) => walletSwitch(e, this));
   }
 }
