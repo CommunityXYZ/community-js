@@ -27,7 +27,7 @@ export default class Community {
   private txFee: number = 0.21;
 
   private arweave: Arweave;
-  private wallet!: JWKInterface;
+  private wallet!: JWKInterface | 'use_wallet';
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
   private isWalletConnect: boolean = false;
@@ -50,11 +50,11 @@ export default class Community {
    * @param wallet - JWK wallet file data
    * @param cacheTTL - Refresh interval in milliseconds for the cached state
    */
-  constructor(arweave: Arweave, wallet?: JWKInterface, cacheTTL = 1000 * 60 * 2) {
+  constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet', cacheTTL = 1000 * 60 * 2) {
     this.arweave = arweave;
     this.ardb = new ArDB(arweave, 2);
 
-    if (wallet) {
+    if (wallet && wallet !== 'use_wallet') {
       this.wallet = wallet;
       arweave.wallets
         .jwkToAddress(wallet)
@@ -116,8 +116,8 @@ export default class Community {
    * @param wallet - JWK wallet file data
    * @returns The wallet address
    */
-  public async setWallet(wallet: JWKInterface, address?: string): Promise<string> {
-    if (!wallet && address) {
+  public async setWallet(wallet: JWKInterface | 'use_wallet', address?: string): Promise<string> {
+    if ((!wallet || wallet === 'use_wallet') && address) {
       this.walletAddress = address;
       return this.walletAddress;
     } else if (!wallet) {
@@ -322,7 +322,7 @@ export default class Community {
 
     const communityID = await createContractFromTx(
       this.arweave,
-      this.wallet,
+      this.wallet || 'use_wallet',
       this.contractSrc,
       JSON.stringify(toSubmit),
       tags,
@@ -548,7 +548,7 @@ export default class Community {
         this.createFee = +(this.createFeeUsd / arPrice).toFixed(5);
         this.txFee = +(this.txFeeUsd / arPrice).toFixed(5);
       }
-    } catch {}
+    } catch { }
 
     this.feesUpdatedAt = Date.now();
     this.feesCallInProgress = false;
@@ -731,9 +731,8 @@ export default class Community {
         { name: 'Action', value: 'propose' },
         {
           name: 'Message',
-          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${
-            pCopy.key || pCopy.type
-          } vote, value: ${pCopy.value}.`,
+          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${pCopy.key || pCopy.type
+            } vote, value: ${pCopy.value}.`,
         },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
@@ -944,9 +943,9 @@ export default class Community {
       typeof window !== 'undefined'
         ? window
         : {
-            removeEventListener: (evName: string) => {},
-            addEventListener: (evName: string, callback: (e: any) => {}) => {},
-          };
+          removeEventListener: (evName: string) => { },
+          addEventListener: (evName: string, callback: (e: any) => {}) => { },
+        };
 
     async function walletConnect(_this: Community) {
       try {
