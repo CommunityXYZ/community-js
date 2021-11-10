@@ -15,15 +15,13 @@ describe("inst.getFees", () => {
         });
         inst = new Community(arweave);
         await inst.setWallet(await arweave.wallets.generate());
-        await inst.setState('asdf', 'asdf', {'asdf': 0, 'asdf2': 1}, 20, 50, 2000, 720, 720*5, {'asdf': [{balance: 0, start: 423, end: 554}], 'asdf2': [{balance: 1, start: 123, end: 4565}, {balance: 5, start: 9282, end: 9999}]}, [], {});
+        await inst.setState('asdf', 'asdf', { 'asdf': 0, 'asdf2': 1 }, 20, 50, 2000, 720, 720 * 5, { 'asdf': [{ balance: 0, start: 423, end: 554 }], 'asdf2': [{ balance: 1, start: 123, end: 4565 }, { balance: 5, start: 9282, end: 9999 }] }, [], {});
     })
 
     test("0", async () => {
-        const fees = await inst.getFees();
-        expect(fees).toBeInstanceOf(Object);
-        expect(fees.txFee).toBeGreaterThan(0);
-        expect(fees.createFee).toBeGreaterThan(0);
-        expect(fees.createFee).toBeGreaterThan(fees.txFee);
+        const fee = await inst.getFee();
+        expect(typeof fee).toBe('string');
+        expect(+fee).toBeGreaterThan(0);
     })
 
     test('getActionCost', async () => {
