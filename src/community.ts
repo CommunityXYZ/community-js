@@ -2,7 +2,6 @@ import Arweave from 'arweave';
 import axios from 'axios';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
-import ArDB from 'ardb';
 import {
   BalancesInterface,
   VaultInterface,
@@ -14,23 +13,20 @@ import {
   TagInterface,
 } from './faces';
 import Utils from './utils';
-import ArdbTransaction from 'ardb/lib/models/transaction';
 
 export default class Community {
-  private readonly cacheServer: string = 'https://cache.community.xyz/';
+  private readonly cacheServer: string = 'https://arweave.cloud/';
   private contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
   private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
-  private readonly txFeeUsd: number = 0.5;
-  private readonly createFeeUsd: number = 3;
 
-  private createFee: number = 0.83;
-  private txFee: number = 0.21;
+  private feeBytes: number = 600000;
+  private feeWinston: string = '249005088';
+  private feeAr: string = '0.000249005088';
 
   private arweave: Arweave;
   private wallet!: JWKInterface | 'use_wallet';
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
-  private isWalletConnect: boolean = false;
 
   // Community specific variables
   private communityContract = '';
@@ -38,11 +34,6 @@ export default class Community {
   private cacheTTL: number = 1000 * 60 * 2; // 2 minutes
   private stateCallInProgress: boolean = false;
   private stateUpdatedAt: number = 0;
-
-  private readonly warnAfter: number = 60 * 60 * 24 * 1000; // 24 hours
-  private feesUpdatedAt: number = 0;
-  private feesCallInProgress: boolean = false;
-  private ardb: ArDB;
 
   /**
    * Before interacting with Community you need to have at least Arweave initialized.
@@ -52,10 +43,9 @@ export default class Community {
    */
   constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet', cacheTTL = 1000 * 60 * 2) {
     this.arweave = arweave;
-    this.ardb = new ArDB(arweave, 2);
 
+    this.wallet = wallet;
     if (wallet && wallet !== 'use_wallet') {
-      this.wallet = wallet;
       arweave.wallets
         .jwkToAddress(wallet)
         .then((addy) => (this.walletAddress = addy))
@@ -306,7 +296,7 @@ export default class Community {
    */
   public async create(tags: TagInterface[] = []): Promise<string> {
     // Create the new Community.
-    const { target, winstonQty } = await this.chargeFee(this.createFee);
+    const { target, winstonQty } = await this.chargeFee();
 
     const toSubmit: any = this.state;
     toSubmit.settings = Array.from(this.state.settings);
@@ -333,48 +323,38 @@ export default class Community {
     return communityID;
   }
 
+  public async getFee(inAr: boolean = false, options?: { formatted: boolean; decimal?: boolean; trim?: boolean }) {
+    if (inAr) {
+      return this.arweave.ar.winstonToAr(this.feeWinston, options);
+    }
+
+    return this.arweave.ar.arToWinston(this.feeAr, options);
+  }
+
   /**
    * Get the current create cost of a community.
    * @param inAr - Return in winston or AR
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
+   * @deprecated use getFee() instead.
    */
   public async getCreateCost(
     inAr = false,
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
-    if (!this.feesUpdatedAt) {
-      await new Promise((resolve) => setTimeout(() => resolve(true), 100));
-      return this.getCreateCost(inAr, options);
-    }
-
-    const fee = this.createFee.toString();
-    if (inAr) {
-      return fee;
-    }
-
-    return this.arweave.ar.arToWinston(fee);
+    return this.getFee(inAr, options);
   }
 
   /**
    * Get the current action (post interaction) cost of a community.
    * @param inAr - Return in winston or AR
    * @param options - If return inAr is set to true, these options are used to format the returned AR value.
+   * @deprecated use getFee() instead.
    */
   public async getActionCost(
     inAr = false,
     options?: { formatted: boolean; decimals: number; trim: boolean },
   ): Promise<string> {
-    if (!this.feesUpdatedAt) {
-      await new Promise((resolve) => setTimeout(() => resolve(true), 100));
-      return this.getActionCost(inAr, options);
-    }
-
-    const fee = this.txFee.toString();
-    if (inAr) {
-      return fee;
-    }
-
-    return this.arweave.ar.arToWinston(fee);
+    return this.getFee(inAr, options);
   }
 
   /**
@@ -418,6 +398,9 @@ export default class Community {
    * @returns Current target token balance
    */
   public async getBalance(target: string = this.walletAddress): Promise<number> {
+    if (!target) {
+      target = await this.getWalletAddress();
+    }
     const res = await this.get({ function: 'balance', target });
     return res.balance;
   }
@@ -428,6 +411,9 @@ export default class Community {
    * @returns Current target token balance
    */
   public async getUnlockedBalance(target: string = this.walletAddress): Promise<number> {
+    if (!target) {
+      target = await this.getWalletAddress();
+    }
     const res = await this.get({ function: 'unlockedBalance', target });
     return res.balance;
   }
@@ -438,6 +424,9 @@ export default class Community {
    * @returns Current target token balance
    */
   public async getVaultBalance(target: string = this.walletAddress): Promise<number> {
+    if (!target) {
+      target = await this.getWalletAddress();
+    }
     const res = await this.get({ function: 'vaultBalance', target });
     return res.balance;
   }
@@ -448,6 +437,9 @@ export default class Community {
    * @returns Current target role
    */
   public async getRole(target: string = this.walletAddress): Promise<string> {
+    if (!target) {
+      target = await this.getWalletAddress();
+    }
     const res = await this.get({ function: 'role', target });
     return res.role;
   }
@@ -495,68 +487,6 @@ export default class Community {
     }
 
     return null;
-  }
-
-  /**
-   * Get the current fee charged for actions on Community.
-   * @return {object} - The txFee and the createFee, both are numbers.
-   */
-  public async getFees(): Promise<{ txFee: number; createFee: number }> {
-    if (this.feesCallInProgress) {
-      return new Promise((resolve) => setTimeout(() => resolve(this.getFees()), 100));
-    }
-    this.feesCallInProgress = true;
-
-    // Check if cacheTTL has expired. If yes, return the cached fees.
-    if (this.feesUpdatedAt && this.feesUpdatedAt + this.cacheTTL > Date.now()) {
-      return {
-        createFee: this.createFee,
-        txFee: this.txFee,
-      };
-    }
-
-    try {
-      const res = (await this.ardb
-        .search('transactions')
-        .tags([
-          { name: 'app', values: 'Redstone' },
-          { name: 'type', values: 'data' },
-        ])
-        .findOne()) as ArdbTransaction;
-
-      let createdAt: number;
-      let arPrice: number;
-
-      for (const tag of res.tags) {
-        if (tag.name === 'timestamp') {
-          createdAt = +tag.value;
-        } else if (tag.name === 'AR') {
-          arPrice = +tag.value;
-        }
-
-        if (createdAt && arPrice) {
-          break;
-        }
-      }
-
-      if (createdAt && arPrice) {
-        const deployTime = new Date().getTime() - createdAt;
-        if (deployTime > this.warnAfter) {
-          console.warn("Price hasn't been updated over a day ago!");
-        }
-
-        this.createFee = +(this.createFeeUsd / arPrice).toFixed(5);
-        this.txFee = +(this.txFeeUsd / arPrice).toFixed(5);
-      }
-    } catch {}
-
-    this.feesUpdatedAt = Date.now();
-    this.feesCallInProgress = false;
-
-    return {
-      createFee: this.createFee,
-      txFee: this.txFee,
-    };
   }
 
   // Setters
@@ -782,13 +712,43 @@ export default class Community {
   }
 
   /**
+   * Get the current wallet address.
+   * @returns Promise<string> Wallet address
+   */
+  public async getWalletAddress(): Promise<string> {
+    if (!this.wallet || this.wallet === 'use_wallet') {
+      this.walletAddress = await window.arweaveWallet.getActiveAddress();
+    } else {
+      this.walletAddress = await this.arweave.wallets.jwkToAddress(this.wallet);
+    }
+
+    return this.walletAddress;
+  }
+
+  /**
+   * Get the current fee charged for actions on Community.
+   * @return {object} - The feeWinston and the feeAr are both strings.
+   */
+  private async getFees(): Promise<{ feeWinston: string; feeAr: string }> {
+    const res = await this.arweave.api.get(`price/${this.feeBytes}`);
+    this.feeWinston = res.data;
+    this.feeAr = this.arweave.ar.winstonToAr(this.feeWinston);
+
+    return {
+      feeWinston: this.feeWinston,
+      feeAr: this.feeAr,
+    };
+  }
+
+  /**
    * Charge a fee for each Community's interactions.
    * @param fee - which fee to charge
    */
-  private async chargeFee(fee: number = this.txFee): Promise<{ target: string; winstonQty: string }> {
+  private async chargeFee(): Promise<{ target: string; winstonQty: string }> {
+    await this.getWalletAddress();
     const balance = await this.arweave.wallets.getBalance(this.walletAddress);
 
-    if (+balance < +fee) {
+    if (+balance < +this.feeWinston) {
       throw new Error('Not enough balance.');
     }
 
@@ -817,7 +777,7 @@ export default class Community {
 
     return {
       target,
-      winstonQty: this.arweave.ar.arToWinston(fee.toString()),
+      winstonQty: this.feeWinston,
     };
   }
 
@@ -825,7 +785,7 @@ export default class Community {
    * Function used to check if the user is already logged in
    */
   private async checkWallet(): Promise<void> {
-    if (!this.wallet && !this.isWalletConnect) {
+    if (!this.wallet) {
       throw new Error(
         'You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).',
       );
@@ -902,12 +862,8 @@ export default class Community {
    * @param tags - Array of tags as an object with name and value as strings
    * @param fee - Transaction fee
    */
-  private async interact(
-    input: InputInterface,
-    tags: { name: string; value: string }[],
-    fee: number = this.txFee,
-  ): Promise<string> {
-    const { target, winstonQty } = await this.chargeFee(fee);
+  private async interact(input: InputInterface, tags: { name: string; value: string }[] = []): Promise<string> {
+    const { target, winstonQty } = await this.chargeFee();
 
     tags.push({ name: 'Type', value: 'ArweaveActivity' });
 
@@ -948,23 +904,11 @@ export default class Community {
             addEventListener: (evName: string, callback: (e: any) => {}) => {},
           };
 
-    async function walletConnect(_this: Community) {
-      try {
-        _this.walletAddress = await _this.arweave.wallets.getAddress();
-        _this.isWalletConnect = true;
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
     async function walletSwitch(e: any, _this: Community) {
       _this.walletAddress = await e.detail.address;
-      _this.isWalletConnect = true;
     }
 
-    win.removeEventListener('arweaveWalletLoaded', () => walletConnect(this));
     win.removeEventListener('walletSwitch', (e) => walletSwitch(e, this));
-    win.addEventListener('arweaveWalletLoaded', () => walletConnect(this));
     win.addEventListener('walletSwitch', (e) => walletSwitch(e, this));
   }
 }

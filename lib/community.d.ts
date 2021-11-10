@@ -5,31 +5,25 @@ export default class Community {
     private readonly cacheServer;
     private contractSrc;
     private readonly mainContract;
-    private readonly txFeeUsd;
-    private readonly createFeeUsd;
-    private createFee;
-    private txFee;
+    private feeBytes;
+    private feeWinston;
+    private feeAr;
     private arweave;
     private wallet;
     private walletAddress;
     private dummyWallet;
-    private isWalletConnect;
     private communityContract;
     private state;
     private cacheTTL;
     private stateCallInProgress;
     private stateUpdatedAt;
-    private readonly warnAfter;
-    private feesUpdatedAt;
-    private feesCallInProgress;
-    private ardb;
     /**
      * Before interacting with Community you need to have at least Arweave initialized.
      * @param arweave - Arweave instance
      * @param wallet - JWK wallet file data
      * @param cacheTTL - Refresh interval in milliseconds for the cached state
      */
-    constructor(arweave: Arweave, wallet?: JWKInterface, cacheTTL?: number);
+    constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet', cacheTTL?: number);
     /**
      * Get the Main Community contract ID
      * @returns {Promise<string>} The main contract ID.
@@ -55,7 +49,7 @@ export default class Community {
      * @param wallet - JWK wallet file data
      * @returns The wallet address
      */
-    setWallet(wallet: JWKInterface, address?: string): Promise<string>;
+    setWallet(wallet: JWKInterface | 'use_wallet', address?: string): Promise<string>;
     /**
      * Set the states for a new Community using the Community contract.
      * @param name - The Community name
@@ -86,10 +80,16 @@ export default class Community {
      * @returns The created community transaction ID.
      */
     create(tags?: TagInterface[]): Promise<string>;
+    getFee(inAr?: boolean, options?: {
+        formatted: boolean;
+        decimal?: boolean;
+        trim?: boolean;
+    }): Promise<string>;
     /**
      * Get the current create cost of a community.
      * @param inAr - Return in winston or AR
      * @param options - If return inAr is set to true, these options are used to format the returned AR value.
+     * @deprecated use getFee() instead.
      */
     getCreateCost(inAr?: boolean, options?: {
         formatted: boolean;
@@ -100,6 +100,7 @@ export default class Community {
      * Get the current action (post interaction) cost of a community.
      * @param inAr - Return in winston or AR
      * @param options - If return inAr is set to true, these options are used to format the returned AR value.
+     * @deprecated use getFee() instead.
      */
     getActionCost(inAr?: boolean, options?: {
         formatted: boolean;
@@ -148,14 +149,6 @@ export default class Community {
      * @param vault - State vault, optional.
      */
     selectWeightedHolder(balances?: BalancesInterface, vault?: VaultInterface): Promise<string>;
-    /**
-     * Get the current fee charged for actions on Community.
-     * @return {object} - The txFee and the createFee, both are numbers.
-     */
-    getFees(): Promise<{
-        txFee: number;
-        createFee: number;
-    }>;
     /**
      * Transfer token balances to another account.
      * @param target - Target Wallet Address
@@ -217,6 +210,16 @@ export default class Community {
      * @returns The transaction ID for this action
      */
     finalize(id: number, tags?: TagInterface[]): Promise<string>;
+    /**
+     * Get the current wallet address.
+     * @returns Promise<string> Wallet address
+     */
+    getWalletAddress(): Promise<string>;
+    /**
+     * Get the current fee charged for actions on Community.
+     * @return {object} - The feeWinston and the feeAr are both strings.
+     */
+    private getFees;
     /**
      * Charge a fee for each Community's interactions.
      * @param fee - which fee to charge

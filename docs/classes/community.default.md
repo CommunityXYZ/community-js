@@ -20,12 +20,13 @@
 - [getCommunityContract](community.default.md#getcommunitycontract)
 - [getContractSourceId](community.default.md#getcontractsourceid)
 - [getCreateCost](community.default.md#getcreatecost)
-- [getFees](community.default.md#getfees)
+- [getFee](community.default.md#getfee)
 - [getMainContractId](community.default.md#getmaincontractid)
 - [getRole](community.default.md#getrole)
 - [getState](community.default.md#getstate)
 - [getUnlockedBalance](community.default.md#getunlockedbalance)
 - [getVaultBalance](community.default.md#getvaultbalance)
+- [getWalletAddress](community.default.md#getwalletaddress)
 - [increaseVault](community.default.md#increasevault)
 - [lockBalance](community.default.md#lockbalance)
 - [proposeVote](community.default.md#proposevote)
@@ -52,7 +53,7 @@ Before interacting with Community you need to have at least Arweave initialized.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arweave` | `default` | Arweave instance |
-| `wallet?` | `JWKInterface` | JWK wallet file data |
+| `wallet?` | `JWKInterface` \| ``"use_wallet"`` | JWK wallet file data |
 | `cacheTTL` | `number` | Refresh interval in milliseconds for the cached state |
 
 ## Methods
@@ -124,6 +125,8 @@ ___
 
 Get the current action (post interaction) cost of a community.
 
+**`deprecated`** use getFee() instead.
+
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -192,6 +195,8 @@ ___
 
 Get the current create cost of a community.
 
+**`deprecated`** use getFee() instead.
+
 #### Parameters
 
 | Name | Type | Default value | Description |
@@ -208,17 +213,23 @@ Get the current create cost of a community.
 
 ___
 
-### getFees
+### getFee
 
-▸ **getFees**(): `Promise`<`Object`\>
+▸ **getFee**(`inAr?`, `options?`): `Promise`<`string`\>
 
-Get the current fee charged for actions on Community.
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `inAr` | `boolean` | `false` |
+| `options?` | `Object` | `undefined` |
+| `options.decimal?` | `boolean` | `undefined` |
+| `options.formatted` | `boolean` | `undefined` |
+| `options.trim?` | `boolean` | `undefined` |
 
 #### Returns
 
-`Promise`<`Object`\>
-
-- The txFee and the createFee, both are numbers.
+`Promise`<`string`\>
 
 ___
 
@@ -313,6 +324,20 @@ Get the target or current wallet vault balance
 `Promise`<`number`\>
 
 Current target token balance
+
+___
+
+### getWalletAddress
+
+▸ **getWalletAddress**(): `Promise`<`string`\>
+
+Get the current wallet address.
+
+#### Returns
+
+`Promise`<`string`\>
+
+Promise<string> Wallet address
 
 ___
 
@@ -473,7 +498,7 @@ ___
 
 ### setWallet
 
-▸ **setWallet**(`wallet`): `Promise`<`string`\>
+▸ **setWallet**(`wallet`, `address?`): `Promise`<`string`\>
 
 Set the user wallet data.
 
@@ -481,7 +506,8 @@ Set the user wallet data.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `wallet` | `JWKInterface` | JWK wallet file data |
+| `wallet` | `JWKInterface` \| ``"use_wallet"`` | JWK wallet file data |
+| `address?` | `string` | - |
 
 #### Returns
 
