@@ -761,7 +761,6 @@ export default class Community {
         winstonQty: '0',
       };
     }
-    
 
     const target = await this.selectWeightedHolder(state.balances, state.vault);
     if (target === this.walletAddress) {
@@ -833,14 +832,13 @@ export default class Community {
     this.stateCallInProgress = true;
 
     let state: StateInterface;
-    
+
     try {
       state = await readContract(this.arweave, this.communityContract);
     } catch (e) {
       console.log(e);
       return;
     }
-    
 
     state.settings = new Map(state.settings);
     this.state = state;
