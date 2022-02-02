@@ -2,7 +2,6 @@ import Arweave from 'arweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface, TagInterface } from './faces';
 export default class Community {
-    private readonly cacheServer;
     private contractSrc;
     private readonly mainContract;
     private feeBytes;
