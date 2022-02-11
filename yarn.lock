@@ -1395,6 +1395,13 @@ axios@^0.21.4:
   dependencies:
     follow-redirects "^1.14.0"
 
+axios@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.23.0.tgz#b0fa5d0948a8d1d75e3d5635238b6c4625b05149"
+  integrity sha512-NmvAE4i0YAv5cKq8zlDoPd1VLKAqX5oLuZKs8xkJa4qi6RGn0uhCYFjWtHHC9EM/MwOwYWOs53W+V0aqEXq1sg==
+  dependencies:
+    follow-redirects "^1.14.4"
+
 babel-jest@^27.0.6:
   version "27.0.6"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.0.6.tgz#e99c6e0577da2655118e3608b68761a5a69bd0d8"
@@ -2394,6 +2401,11 @@ follow-redirects@^1.14.0:
   version "1.14.5"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.5.tgz#f09a5848981d3c772b5392309778523f8d85c381"
   integrity sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==
+
+follow-redirects@^1.14.4:
+  version "1.14.8"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
+  integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
 
 for-each@^0.3.3:
   version "0.3.3"
@@ -5388,6 +5400,13 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+verto-cache-interface@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/verto-cache-interface/-/verto-cache-interface-1.1.1.tgz#cea2bd20e5d940091e87fa50080e5a240a7b921d"
+  integrity sha512-oOu3KIwW2+mNoySUsslcCV9/j6qd4mXcddhQLe2AKz9zpmuU7dbN4y262HGnWbOWIegJRiiUFFFfNFE1ib19CQ==
+  dependencies:
+    axios "^0.23.0"
 
 vscode-textmate@5.2.0:
   version "5.2.0"

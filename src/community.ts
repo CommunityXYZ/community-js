@@ -1,6 +1,7 @@
 import Arweave from 'arweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
+import { interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
+import { fetchContract } from 'verto-cache-interface';
 import {
   BalancesInterface,
   VaultInterface,
@@ -753,7 +754,8 @@ export default class Community {
     let state: StateInterface;
 
     try {
-      state = await readContract(this.arweave, this.mainContract);
+      const contract = await fetchContract(this.mainContract);
+      state = contract.state;
     } catch (e) {
       console.log(e);
       return {
@@ -834,7 +836,8 @@ export default class Community {
     let state: StateInterface;
 
     try {
-      state = await readContract(this.arweave, this.communityContract);
+      const contract = await fetchContract(this.communityContract);
+      state = contract.state;
     } catch (e) {
       console.log(e);
       return;

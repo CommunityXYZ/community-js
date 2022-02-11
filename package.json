@@ -50,6 +50,7 @@
     "arweave": "^1.10.16",
     "axios": "^0.21.1",
     "smartweave": "^0.4.43",
-    "util": "^0.12.4"
+    "util": "^0.12.4",
+    "verto-cache-interface": "^1.1.1"
   }
 }
