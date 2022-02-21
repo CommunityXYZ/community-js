@@ -744,6 +744,7 @@ export default class Community {
       const res = await nodeFetch(`${this.cacheServer}contract/${this.mainContract}`);
       state = (await res.json()) as StateInterface;
     } catch (e) {
+      console.log(e);
       try {
         state = await readContract(this.arweave, this.mainContract);
       } catch (e) {
@@ -816,6 +817,7 @@ export default class Community {
       const res = await nodeFetch(`${this.cacheServer}contract/${this.communityContract}`);
       state = (await res.json()) as StateInterface;
     } catch (e) {
+      console.log(e);
       try {
         state = await readContract(this.arweave, this.communityContract);
       } catch (e) {
