@@ -813,7 +813,7 @@ export default class Community {
   private async update(): Promise<StateInterface> {
     let state: StateInterface;
     try {
-      const res = await nodeFetch(`${this.cacheServer}contract/${this.mainContract}`);
+      const res = await nodeFetch(`${this.cacheServer}contract/${this.communityContract}`);
       state = (await res.json()) as StateInterface;
     } catch (e) {
       try {
