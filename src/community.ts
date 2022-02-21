@@ -1,5 +1,5 @@
 import Arweave from 'arweave';
-import axios from 'axios';
+import nodeFetch from 'node-fetch';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
 import {
@@ -741,8 +741,10 @@ export default class Community {
 
     let state: StateInterface;
     try {
-      state = (await axios(`${this.cacheServer}contract/${this.mainContract}`)).data;
+      const res = await nodeFetch(`${this.cacheServer}contract/${this.mainContract}`);
+      state = (await res.json()) as StateInterface;
     } catch (e) {
+      console.log(e);
       try {
         state = await readContract(this.arweave, this.mainContract);
       } catch (e) {
@@ -812,8 +814,10 @@ export default class Community {
   private async update(): Promise<StateInterface> {
     let state: StateInterface;
     try {
-      state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
+      const res = await nodeFetch(`${this.cacheServer}contract/${this.communityContract}`);
+      state = (await res.json()) as StateInterface;
     } catch (e) {
+      console.log(e);
       try {
         state = await readContract(this.arweave, this.communityContract);
       } catch (e) {
