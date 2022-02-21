@@ -2,6 +2,7 @@ import Arweave from 'arweave';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { BalancesInterface, VaultInterface, VoteInterface, RoleInterface, StateInterface, InputInterface, ResultInterface, TagInterface } from './faces';
 export default class Community {
+    private readonly cacheServer;
     private contractSrc;
     private readonly mainContract;
     private feeBytes;
@@ -13,16 +14,12 @@ export default class Community {
     private dummyWallet;
     private communityContract;
     private state;
-    private cacheTTL;
-    private stateCallInProgress;
-    private stateUpdatedAt;
     /**
      * Before interacting with Community you need to have at least Arweave initialized.
      * @param arweave - Arweave instance
      * @param wallet - JWK wallet file data
-     * @param cacheTTL - Refresh interval in milliseconds for the cached state
      */
-    constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet', cacheTTL?: number);
+    constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet');
     /**
      * Get the Main Community contract ID
      * @returns {Promise<string>} The main contract ID.
@@ -42,7 +39,7 @@ export default class Community {
      * @param cached - Wether to return the cached version or reload
      * @returns - The current state and sync afterwards if needed.
      */
-    getState(cached?: boolean): Promise<StateInterface>;
+    getState(): Promise<StateInterface>;
     /**
      * Set the user wallet data.
      * @param wallet - JWK wallet file data
