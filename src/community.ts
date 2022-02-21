@@ -31,17 +31,13 @@ export default class Community {
   // Community specific variables
   private communityContract = '';
   private state!: StateInterface;
-  private cacheTTL: number = 1000 * 60 * 2; // 2 minutes
-  private stateCallInProgress: boolean = false;
-  private stateUpdatedAt: number = 0;
 
   /**
    * Before interacting with Community you need to have at least Arweave initialized.
    * @param arweave - Arweave instance
    * @param wallet - JWK wallet file data
-   * @param cacheTTL - Refresh interval in milliseconds for the cached state
    */
-  constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet', cacheTTL = 1000 * 60 * 2) {
+  constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet') {
     this.arweave = arweave;
 
     this.wallet = wallet;
@@ -50,10 +46,6 @@ export default class Community {
         .jwkToAddress(wallet)
         .then((addy) => (this.walletAddress = addy))
         .catch(console.log);
-    }
-
-    if (cacheTTL) {
-      this.cacheTTL = cacheTTL;
     }
 
     this.getFees();
@@ -88,17 +80,12 @@ export default class Community {
    * @param cached - Wether to return the cached version or reload
    * @returns - The current state and sync afterwards if needed.
    */
-  public async getState(cached = true): Promise<StateInterface> {
+  public async getState(): Promise<StateInterface> {
     if (!this.communityContract.length) {
       throw new Error('No community set. Use setCommunityTx to get your current state.');
     }
 
-    // Check if cacheTTL has expired. If yes, return this.update() if not, return the previously saved state.
-    if (cached && this.state && this.stateUpdatedAt && this.stateUpdatedAt + this.cacheTTL > Date.now()) {
-      return this.state;
-    } else {
-      return this.update();
-    }
+    return this.update();
   }
 
   /**
@@ -368,7 +355,7 @@ export default class Community {
     this.communityContract = txId;
 
     try {
-      await this.getState(false);
+      await this.getState();
     } catch (e) {
       this.state = null;
       this.communityContract = null;
@@ -823,19 +810,6 @@ export default class Community {
    * @param recall Auto recall this function each cacheRefreshInterval ms
    */
   private async update(): Promise<StateInterface> {
-    if (this.stateCallInProgress) {
-      const getLastState = async (): Promise<StateInterface> => {
-        if (this.stateCallInProgress) {
-          return new Promise((resolve) => setTimeout(() => resolve(getLastState()), 1000));
-        }
-
-        return this.state;
-      };
-      return getLastState();
-    }
-
-    this.stateCallInProgress = true;
-
     let state: StateInterface;
     try {
       state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
@@ -850,9 +824,7 @@ export default class Community {
 
     state.settings = new Map(state.settings);
     this.state = state;
-    this.stateUpdatedAt = Date.now();
 
-    this.stateCallInProgress = false;
     return this.state;
   }
 
