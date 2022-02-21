@@ -1,4 +1,5 @@
 import Arweave from 'arweave';
+import axios from 'axios';
 import { JWKInterface } from 'arweave/node/lib/wallet';
 import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
 import {
@@ -14,6 +15,7 @@ import {
 import Utils from './utils';
 
 export default class Community {
+  private readonly cacheServer: string = 'https://arweave.cloud/';
   private contractSrc: string = 'ngMml4jmlxu0umpiQCsHgPX2pb_Yz6YDB8f7G6j-tpI';
   private readonly mainContract: string = 'mzvUgNc8YFk0w5K5H7c8pyT-FC5Y_ba0r7_8766Kx74';
 
@@ -751,15 +753,18 @@ export default class Community {
     }
 
     let state: StateInterface;
-
     try {
-      state = await readContract(this.arweave, this.mainContract);
+      state = (await axios(`${this.cacheServer}contract/${this.mainContract}`)).data;
     } catch (e) {
-      console.log(e);
-      return {
-        target: '',
-        winstonQty: '0',
-      };
+      try {
+        state = await readContract(this.arweave, this.mainContract);
+      } catch (e) {
+        console.log(e);
+        return {
+          target: '',
+          winstonQty: '0',
+        };
+      }
     }
 
     const target = await this.selectWeightedHolder(state.balances, state.vault);
@@ -832,12 +837,15 @@ export default class Community {
     this.stateCallInProgress = true;
 
     let state: StateInterface;
-
     try {
-      state = await readContract(this.arweave, this.communityContract);
+      state = (await axios(`${this.cacheServer}contract/${this.communityContract}`)).data;
     } catch (e) {
-      console.log(e);
-      return;
+      try {
+        state = await readContract(this.arweave, this.communityContract);
+      } catch (e) {
+        console.log(e);
+        return;
+      }
     }
 
     state.settings = new Map(state.settings);
