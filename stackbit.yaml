@@ -1,0 +1,10 @@
+stackbitVersion: ~0.3.0
+pagesDir: docs
+ssgName: jekyll
+cmsName: git
+models:
+  doc:
+    type: page
+    label: Doc
+    match: '**/*'
+    fields: []
