@@ -648,9 +648,8 @@ export default class Community {
         { name: 'Action', value: 'propose' },
         {
           name: 'Message',
-          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${
-            pCopy.key || pCopy.type
-          } vote, value: ${pCopy.value}.`,
+          value: `Proposed ${pCopy.type === 'indicative' || pCopy.key === 'other' ? 'an' : 'a'} ${pCopy.key || pCopy.type
+            } vote, value: ${pCopy.value}.`,
         },
         { name: 'Community-ID', value: this.communityContract },
         { name: 'Service', value: 'CommunityXYZ' },
@@ -775,9 +774,17 @@ export default class Community {
    */
   private async checkWallet(): Promise<void> {
     if (!this.wallet) {
-      throw new Error(
-        'You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).',
-      );
+
+      try {
+        this.wallet = 'use_wallet'
+        this.walletAddress = await window.arweaveWallet.getActiveAddress();
+      } catch (e) {
+        console.log(e)
+
+        throw new Error(
+          'You first need to set the user wallet, you can do this while on new Community(..., wallet) or using setWallet(wallet).',
+        );
+      }
     }
   }
 
@@ -876,9 +883,9 @@ export default class Community {
       typeof window !== 'undefined'
         ? window
         : {
-            removeEventListener: (evName: string) => {},
-            addEventListener: (evName: string, callback: (e: any) => {}) => {},
-          };
+          removeEventListener: (evName: string) => { },
+          addEventListener: (evName: string, callback: (e: any) => {}) => { },
+        };
 
     async function walletSwitch(e: any, _this: Community) {
       _this.walletAddress = await e.detail.address;
