@@ -458,7 +458,7 @@ export default class Community {
     vault: VaultInterface = this.state.vault,
   ) {
     if (!this.state) {
-      throw new Error('Need to initilate the state and worker.');
+      throw new Error('Need to initiate the state and worker.');
     }
 
     let totalTokens = 0;
