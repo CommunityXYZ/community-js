@@ -1,7 +1,11 @@
 import Arweave from 'arweave';
 import nodeFetch from 'node-fetch';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
+import { 
+  Warp,
+  WarpWebFactory,
+  WarpNodeFactory
+} from "warp-contracts";
 import {
   BalancesInterface,
   VaultInterface,
@@ -24,6 +28,7 @@ export default class Community {
   private feeAr: string = '0.000249005088';
 
   private arweave: Arweave;
+  private warp: Warp;
   private wallet!: JWKInterface | 'use_wallet';
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
@@ -46,6 +51,13 @@ export default class Community {
         .jwkToAddress(wallet)
         .then((addy) => (this.walletAddress = addy))
         .catch(console.log);
+    }
+
+    // load warp
+    if (typeof window !== "object") {
+      this.warp = WarpNodeFactory.memCached(this.arweave);
+    } else {
+      this.warp = WarpWebFactory.memCached(this.arweave);
     }
 
     this.getFees();
@@ -297,15 +309,16 @@ export default class Community {
       ],
     ];
 
-    const communityID = await createContractFromTx(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.contractSrc,
-      JSON.stringify(toSubmit),
+    const { contractTxId: communityID } = await this.warp.createContract.deployFromSourceTx({
+      initState: JSON.stringify(toSubmit),
+      srcTxId: this.contractSrc,
+      wallet: this.wallet || 'use_wallet',
       tags,
-      target,
-      winstonQty,
-    );
+      transfer: {
+        target,
+        winstonQty
+      }
+    });
     this.communityContract = communityID;
     return communityID;
   }
@@ -376,7 +389,11 @@ export default class Community {
       this.dummyWallet = await this.arweave.wallets.generate();
     }
 
-    return interactRead(this.arweave, this.wallet || this.dummyWallet, this.communityContract, params);
+    const res = await this.warp
+      .contract(this.communityContract)
+      .connect(this.wallet || this.dummyWallet)
+      .viewState<InputInterface, ResultInterface>(params);
+    return res.result;
   }
 
   /**
@@ -746,7 +763,9 @@ export default class Community {
     } catch (e) {
       console.log(e);
       try {
-        state = await readContract(this.arweave, this.mainContract);
+        ({ state } = await this.warp
+          .contract<StateInterface>(this.mainContract)
+          .readState());
       } catch (e) {
         console.log(e);
         return {
@@ -826,7 +845,9 @@ export default class Community {
     } catch (e) {
       console.log(e);
       try {
-        state = await readContract(this.arweave, this.communityContract);
+        ({ state } = await this.warp
+          .contract<StateInterface>(this.communityContract)
+          .readState());
       } catch (e) {
         console.log(e);
         return;
@@ -850,29 +871,34 @@ export default class Community {
 
     tags.push({ name: 'Type', value: 'ArweaveActivity' });
 
-    const res = await interactWriteDryRun(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.communityContract,
-      input,
-      tags,
-      target,
-      winstonQty,
-    );
+    const res = await this.warp
+      .contract<StateInterface>(this.communityContract)
+      .connect(this.wallet || 'use_wallet')
+      .dryWrite<InputInterface>(
+        input,
+        undefined,
+        tags,
+        {
+          target,
+          winstonQty
+        }
+      );
     if (res.type === 'error') {
       //  || res.type === 'exception'
-      throw new Error(res.result);
+      throw new Error(res.errorMessage);
     }
 
-    return interactWrite(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.communityContract,
-      input,
-      tags,
-      target,
-      winstonQty,
-    );
+    return await this.warp
+      .contract<StateInterface>(this.communityContract)
+      .connect(this.wallet || 'use_wallet')
+      .writeInteraction<InputInterface>(
+        input,
+        tags,
+        {
+          target,
+          winstonQty
+        }
+      );
   }
 
   /**
