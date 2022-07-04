@@ -316,7 +316,7 @@ export default class Community {
       tags,
       transfer: {
         target,
-        winstonQty
+        winstonQty: `${winstonQty}` // has to be string - or arweave.net would reject
       }
     });
     this.communityContract = communityID;
