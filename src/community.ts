@@ -55,9 +55,9 @@ export default class Community {
 
     // load warp
     if (typeof window !== "object") {
-      this.warp = WarpNodeFactory.memCached(this.arweave);
+      this.warp = WarpNodeFactory.memCachedBased(this.arweave).build();
     } else {
-      this.warp = WarpWebFactory.memCached(this.arweave);
+      this.warp = WarpWebFactory.memCachedBased(this.arweave).build();
     }
 
     this.getFees();
