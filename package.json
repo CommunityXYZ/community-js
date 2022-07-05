@@ -20,7 +20,7 @@
     "watch": "node watch.js",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "test": "jest",
+    "test": "jest --detectOpenHandles --forceExit",
     "docs": "rimraf ./docs && typedoc --plugin typedoc-plugin-markdown --disableSources --readme none --excludePrivate --out ./docs ./src",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
@@ -33,6 +33,8 @@
   ],
   "devDependencies": {
     "@types/jest": "^27.0.1",
+    "arlocal": "1.1.42",
+    "arlocal-sweets": "^1.0.2",
     "esbuild": "^0.12.22",
     "esbuild-node-builtins": "^0.1.0",
     "jest": "^27.0.6",
