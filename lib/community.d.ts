@@ -9,6 +9,7 @@ export default class Community {
     private feeWinston;
     private feeAr;
     private arweave;
+    private warp;
     private wallet;
     private walletAddress;
     private dummyWallet;
