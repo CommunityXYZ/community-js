@@ -1,7 +1,11 @@
 import Arweave from 'arweave';
 import nodeFetch from 'node-fetch';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { readContract, interactWriteDryRun, interactWrite, createContractFromTx, interactRead } from 'smartweave';
+import { 
+  Warp,
+  WarpWebFactory,
+  WarpNodeFactory
+} from "warp-contracts";
 import {
   BalancesInterface,
   VaultInterface,
@@ -24,6 +28,8 @@ export default class Community {
   private feeAr: string = '0.000249005088';
 
   private arweave: Arweave;
+  private $arweave: Arweave; 
+  private warp: Warp;
   private wallet!: JWKInterface | 'use_wallet';
   private walletAddress!: string;
   private dummyWallet: JWKInterface;
@@ -48,6 +54,19 @@ export default class Community {
         .catch(console.log);
     }
 
+    // load warp
+    if (typeof window !== "object") {
+      this.warp = WarpNodeFactory.memCachedBased(this.arweave).build();
+    } else {
+      this.warp = WarpWebFactory.memCachedBased(this.arweave).build();
+    }
+
+    // clone arweave from original config
+    // because warp-contracts changes implementation of arweave.wallets.getBalance
+    // ending up throwing an error about active tx.
+    this.$arweave = Arweave.init({
+      ...this.arweave.getConfig().api
+    });
     this.getFees();
     this.events();
   }
@@ -297,15 +316,16 @@ export default class Community {
       ],
     ];
 
-    const communityID = await createContractFromTx(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.contractSrc,
-      JSON.stringify(toSubmit),
+    const { contractTxId: communityID } = await this.warp.createContract.deployFromSourceTx({
+      initState: JSON.stringify(toSubmit),
+      srcTxId: this.contractSrc,
+      wallet: this.wallet || 'use_wallet',
       tags,
-      target,
-      winstonQty,
-    );
+      transfer: {
+        target,
+        winstonQty: `${winstonQty}` // has to be string - or arweave.net would reject
+      }
+    });
     this.communityContract = communityID;
     return communityID;
   }
@@ -376,7 +396,11 @@ export default class Community {
       this.dummyWallet = await this.arweave.wallets.generate();
     }
 
-    return interactRead(this.arweave, this.wallet || this.dummyWallet, this.communityContract, params);
+    const res = await this.warp
+      .contract(this.communityContract)
+      .connect(this.wallet || this.dummyWallet)
+      .viewState<InputInterface, ResultInterface>(params);
+    return res.result;
   }
 
   /**
@@ -441,7 +465,7 @@ export default class Community {
     vault: VaultInterface = this.state.vault,
   ) {
     if (!this.state) {
-      throw new Error('Need to initilate the state and worker.');
+      throw new Error('Need to initiate the state and worker.');
     }
 
     let totalTokens = 0;
@@ -733,7 +757,7 @@ export default class Community {
    */
   private async chargeFee(): Promise<{ target: string; winstonQty: string }> {
     await this.getWalletAddress();
-    const balance = await this.arweave.wallets.getBalance(this.walletAddress);
+    const balance = await this.$arweave.wallets.getBalance(this.walletAddress);
 
     if (+balance < +this.feeWinston) {
       throw new Error('Not enough balance.');
@@ -746,7 +770,9 @@ export default class Community {
     } catch (e) {
       console.log(e);
       try {
-        state = await readContract(this.arweave, this.mainContract);
+        ({ state } = await this.warp
+          .contract<StateInterface>(this.mainContract)
+          .readState());
       } catch (e) {
         console.log(e);
         return {
@@ -826,7 +852,9 @@ export default class Community {
     } catch (e) {
       console.log(e);
       try {
-        state = await readContract(this.arweave, this.communityContract);
+        ({ state } = await this.warp
+          .contract<StateInterface>(this.communityContract)
+          .readState());
       } catch (e) {
         console.log(e);
         return;
@@ -850,29 +878,34 @@ export default class Community {
 
     tags.push({ name: 'Type', value: 'ArweaveActivity' });
 
-    const res = await interactWriteDryRun(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.communityContract,
-      input,
-      tags,
-      target,
-      winstonQty,
-    );
+    const res = await this.warp
+      .contract<StateInterface>(this.communityContract)
+      .connect(this.wallet || 'use_wallet')
+      .dryWrite<InputInterface>(
+        input,
+        undefined,
+        tags,
+        {
+          target,
+          winstonQty
+        }
+      );
     if (res.type === 'error') {
       //  || res.type === 'exception'
-      throw new Error(res.result);
+      throw new Error(res.errorMessage);
     }
 
-    return interactWrite(
-      this.arweave,
-      this.wallet || 'use_wallet',
-      this.communityContract,
-      input,
-      tags,
-      target,
-      winstonQty,
-    );
+    return await this.warp
+      .contract<StateInterface>(this.communityContract)
+      .connect(this.wallet || 'use_wallet')
+      .writeInteraction<InputInterface>(
+        input,
+        tags,
+        {
+          target,
+          winstonQty
+        }
+      );
   }
 
   /**
