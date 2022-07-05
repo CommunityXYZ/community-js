@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "esbuild": "^0.12.22",
+    "esbuild-node-builtins": "^0.1.0",
     "jest": "^27.0.6",
     "node-watch": "^0.7.1",
     "prettier": "^2.3.2",
