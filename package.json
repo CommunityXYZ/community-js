@@ -50,6 +50,6 @@
     "arweave": "1.11.4",
     "node-fetch": "2",
     "util": "^0.12.4",
-    "warp-contracts": "^1.1.6"
+    "warp-contracts": "^1.1.7"
   }
 }

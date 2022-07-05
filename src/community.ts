@@ -28,7 +28,6 @@ export default class Community {
   private feeAr: string = '0.000249005088';
 
   private arweave: Arweave;
-  private $arweave: Arweave; 
   private warp: Warp;
   private wallet!: JWKInterface | 'use_wallet';
   private walletAddress!: string;
@@ -61,12 +60,6 @@ export default class Community {
       this.warp = WarpWebFactory.memCachedBased(this.arweave).build();
     }
 
-    // clone arweave from original config
-    // because warp-contracts changes implementation of arweave.wallets.getBalance
-    // ending up throwing an error about active tx.
-    this.$arweave = Arweave.init({
-      ...this.arweave.getConfig().api
-    });
     this.getFees();
     this.events();
   }
@@ -757,7 +750,7 @@ export default class Community {
    */
   private async chargeFee(): Promise<{ target: string; winstonQty: string }> {
     await this.getWalletAddress();
-    const balance = await this.$arweave.wallets.getBalance(this.walletAddress);
+    const balance = await this.arweave.wallets.getBalance(this.walletAddress);
 
     if (+balance < +this.feeWinston) {
       throw new Error('Not enough balance.');
