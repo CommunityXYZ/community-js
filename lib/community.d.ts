@@ -20,7 +20,7 @@ export default class Community {
      * @param arweave - Arweave instance
      * @param wallet - JWK wallet file data
      */
-    constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet');
+    constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet', useArweaveGw?: boolean);
     /**
      * Get the Main Community contract ID
      * @returns {Promise<string>} The main contract ID.
