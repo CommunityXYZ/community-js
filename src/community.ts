@@ -1,11 +1,7 @@
 import Arweave from 'arweave';
 import nodeFetch from 'node-fetch';
 import { JWKInterface } from 'arweave/node/lib/wallet';
-import { 
-  Warp,
-  WarpWebFactory,
-  WarpNodeFactory
-} from "warp-contracts";
+import { Warp, WarpWebFactory, WarpNodeFactory } from 'warp-contracts';
 import {
   BalancesInterface,
   VaultInterface,
@@ -42,7 +38,7 @@ export default class Community {
    * @param arweave - Arweave instance
    * @param wallet - JWK wallet file data
    */
-  constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet') {
+  constructor(arweave: Arweave, wallet?: JWKInterface | 'use_wallet', useArweaveGw: boolean = false) {
     this.arweave = arweave;
 
     this.wallet = wallet;
@@ -54,10 +50,20 @@ export default class Community {
     }
 
     // load warp
-    if (typeof window !== "object") {
-      this.warp = WarpNodeFactory.memCachedBased(this.arweave).build();
+    if (typeof window !== 'object') {
+      if (useArweaveGw) {
+        // support for arlocal & unit tests (warp gateway uses mainnet)
+        this.warp = WarpNodeFactory.memCachedBased(this.arweave).useArweaveGateway().build();
+      } else {
+        this.warp = WarpNodeFactory.memCachedBased(this.arweave).build();
+      }
     } else {
-      this.warp = WarpWebFactory.memCachedBased(this.arweave).build();
+      if (useArweaveGw) {
+        // support for arlocal & unit tests (warp gateway uses mainnet)
+        this.warp = WarpNodeFactory.memCachedBased(this.arweave).useArweaveGateway().build();
+      } else {
+        this.warp = WarpWebFactory.memCachedBased(this.arweave).build();
+      }
     }
 
     this.getFees();
@@ -316,8 +322,8 @@ export default class Community {
       tags,
       transfer: {
         target,
-        winstonQty: `${winstonQty}` // has to be string - or arweave.net would reject
-      }
+        winstonQty: `${winstonQty}`, // has to be string - or arweave.net would reject
+      },
     });
     this.communityContract = communityID;
     return communityID;
@@ -763,9 +769,7 @@ export default class Community {
     } catch (e) {
       console.log(e);
       try {
-        ({ state } = await this.warp
-          .contract<StateInterface>(this.mainContract)
-          .readState());
+        ({ state } = await this.warp.contract<StateInterface>(this.mainContract).readState());
       } catch (e) {
         console.log(e);
         return {
@@ -845,9 +849,7 @@ export default class Community {
     } catch (e) {
       console.log(e);
       try {
-        ({ state } = await this.warp
-          .contract<StateInterface>(this.communityContract)
-          .readState());
+        ({ state } = await this.warp.contract<StateInterface>(this.communityContract).readState());
       } catch (e) {
         console.log(e);
         return;
@@ -874,15 +876,10 @@ export default class Community {
     const res = await this.warp
       .contract<StateInterface>(this.communityContract)
       .connect(this.wallet || 'use_wallet')
-      .dryWrite<InputInterface>(
-        input,
-        undefined,
-        tags,
-        {
-          target,
-          winstonQty
-        }
-      );
+      .dryWrite<InputInterface>(input, undefined, tags, {
+        target,
+        winstonQty,
+      });
     if (res.type === 'error') {
       //  || res.type === 'exception'
       throw new Error(res.errorMessage);
@@ -891,14 +888,10 @@ export default class Community {
     return await this.warp
       .contract<StateInterface>(this.communityContract)
       .connect(this.wallet || 'use_wallet')
-      .writeInteraction<InputInterface>(
-        input,
-        tags,
-        {
-          target,
-          winstonQty
-        }
-      );
+      .writeInteraction<InputInterface>(input, tags, {
+        target,
+        winstonQty,
+      });
   }
 
   /**
